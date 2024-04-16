@@ -23,10 +23,10 @@
                 <p class="orange-color mx-5 fs-5"><i class="fab fa-whatsapp me-1"></i>+54 9 2664 344614</p>
             </div>
             <div class="bot-nav d-flex justify-content-around align-items-center">
-                <a class="links fw-bold text-uppercase" href="#">Inicio</a>
-                <a class="links fw-bold text-uppercase" href="#">Propiedades</a>
-                <a class="links fw-bold text-uppercase" href="#">Nosotros</a>
-                <a class="links fw-bold text-uppercase" href="#">Contacto y tasacion</a>
+                <a class="links fw-bold fs-5" href="#">Inicio</a>
+                <a class="links fw-bold fs-5" href="#">Propiedades</a>
+                <a class="links fw-bold fs-5" href="#">Nosotros</a>
+                <a class="links fw-bold fs-5" href="#">Contacto y tasacion</a>
             </div>
         </div>
     </nav>
@@ -167,8 +167,25 @@
     </section>
 
     <section class="py-2 bg-gray my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 d-flex justify-content-center py-5">
+                <img class="img-body" src="assets/img/contrato.jpg" alt="" style="max-width: 100%; height: auto;">
+            </div>
+            <div class="col-md-8 d-flex flex-column justify-content-center px-5">
+                <div>
+                    <p class="fs-3 text-white">
+                        Nuestra Misión: brindar un servicio de asesoramiento e intermediación en la compra-venta y alquiler de inmuebles, escuchando e identificando las necesidades de cada cliente y aportando valor a las inversiones.
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <a class="btn-body bg-orange-color py-2 px-4" href="#">Contáctenos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    </section>
 
     <div class="container footer">
         <footer class="row py-5" id="footer">
@@ -179,17 +196,17 @@
                 <p><i class="fab fa-whatsapp"></i> +54 9 2664 344614</p>
             </div>
             <div class="col-md-4 text-center pt-3 pt-md-0 d-flex justify-content-center align-items-center">
-                <a href="https://www.instagram.com/productorauno/" target="_blank" class="mx-3 coral-color"><i class="fab fa-instagram fa-4x footer-icon "></i></a>
-                <a href="https://www.facebook.com/aleciorivera.ph" target="_blank" class="mx-3 coral-color"><i class="fab fa-facebook fa-4x footer-icon"></i></a>
-                <a href="https://wa.me/5492664344614" target="_blank" class="mx-3 coral-color"><i class="fab fa-whatsapp fa-4x footer-icon"></i></a>
+                <a href="https://www.instagram.com/productorauno/" target="_blank" class="mx-3 orange-color"><i class="fab fa-instagram fa-4x footer-icon "></i></a>
+                <a href="https://www.facebook.com/aleciorivera.ph" target="_blank" class="mx-3 orange-color"><i class="fab fa-facebook fa-4x footer-icon"></i></a>
+                <a href="https://wa.me/5492664344614" target="_blank" class="mx-3 orange-color"><i class="fab fa-whatsapp fa-4x footer-icon"></i></a>
             </div>
             <div class="col-md-4 d-flex justify-content-center align-items-center">
 
-                <ul class="text-white fw-bold">
-                    <li>Inicio</li>
-                    <li>Propiedades</li>
-                    <li>Nosotros</li>
-                    <li>Contacto</li>
+                <ul class=" text-white fw-bold fs-4 ms-5">
+                    <a class="footer-links" href=""><li>Inicio</li></a>
+                    <a class="footer-links" href=""><li>Propiedades</li></a>
+                    <a class="footer-links" href=""><li>Nosotros</li></a>
+                    <a class="footer-links" href=""><li>Contacto</li></a>
                 </ul>
             </div>
         </footer>
