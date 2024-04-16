@@ -19,8 +19,8 @@
         </div>
         <div class="double-navbar">
             <div class="top-nav d-flex justify-content-end align-items-center ">
-                <p class="color-primary mx-5 fs-5"><i class="fas fa-envelope me-1"></i>ayfinmobiliaria@gmail.com</p>
-                <p class="color-primary mx-5 fs-5"><i class="fab fa-whatsapp me-1"></i>+54 9 2664 344614</p>
+                <p class="orange-color mx-5 fs-5"><i class="fas fa-envelope me-1"></i>ayfinmobiliaria@gmail.com</p>
+                <p class="orange-color mx-5 fs-5"><i class="fab fa-whatsapp me-1"></i>+54 9 2664 344614</p>
             </div>
             <div class="bot-nav d-flex justify-content-around align-items-center">
                 <a class="links fw-bold text-uppercase" href="#">Inicio</a>
@@ -62,8 +62,147 @@
         <div class="img-container">
             <img class="img-main" src="assets/img/main.jpg" alt="">
             <div class="overlay-text">La oportunidad de disfrutar de la tranquilidad y la belleza de</div>
+            <div class="location-tag fw-bold bg-coral-color">Merlo</div>
+            <div class="search-bar py-3">
+                <form class="search-form" action="">
+                    <input class="bg-dark mx-3 my-2 my-md-1" type="text" name="search" placeholder="Localidad">
+                    <input class="bg-dark mx-3 my-2 my-md-1" type="text" name="search" placeholder="Zona">
+                    <button class="fw-bold fs-5" type="submit">Buscar</button>
+                </form>
+            </div>
         </div>
     </section>
+
+    <section class="featured bg-main">
+        <div class="bg-gray row mt-4 py-4">
+            <div class="featured-box bg-coral-color col-2 offset-5 text-center">
+                <h2 class="text-white my-auto py-2 fw-bold">Destacadas</h2>
+            </div>
+        </div>
+
+        <div class="container-fluid mt-5">
+            <div class="row ">
+                <div class="col-12 col-md-3 d-flex justify-content-center">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/img/casa1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body text-white px-0 pb-0">
+                            <h5 class="card-title bg-coral-color text-center fw-bold py-1">Venta</h5>
+                            <p class="card-text ps-3">Casa céntrica inmejorable ubicación</p>
+                            <div class="card-footer text-white">
+                                <div class="row align-items-center">
+                                    <div class="col-6">
+                                        <p class="mt-3">USD 70,000</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="#" class="btn btn-primary mx-auto">Ver más</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-3 d-flex justify-content-center">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/img/casa1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body text-white px-0 pb-0">
+                            <h5 class="card-title bg-coral-color text-center fw-bold py-1">Venta</h5>
+                            <p class="card-text ps-3">Casa céntrica inmejorable ubicación</p>
+                            <div class="card-footer text-white">
+                                <div class="row align-items-center">
+                                    <div class="col-6">
+                                        <p class="mt-3">USD 70,000</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="#" class="btn btn-primary mx-auto">Ver más</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-3 d-flex justify-content-center">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/img/casa1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body text-white px-0 pb-0">
+                            <h5 class="card-title bg-coral-color text-center fw-bold py-1">Venta</h5>
+                            <p class="card-text ps-3">Casa céntrica inmejorable ubicación</p>
+                            <div class="card-footer text-white">
+                                <div class="row align-items-center">
+                                    <div class="col-6">
+                                        <p class="mt-3">USD 70,000</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="#" class="btn btn-primary mx-auto">Ver más</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-3 d-flex justify-content-center">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/img/casa1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body text-white px-0 pb-0">
+                            <h5 class="card-title bg-coral-color text-center fw-bold py-1">Venta</h5>
+                            <p class="card-text ps-3">Casa céntrica inmejorable ubicación</p>
+                            <div class="card-footer text-white">
+                                <div class="row align-items-center">
+                                    <div class="col-6">
+                                        <p class="mt-3">USD 70,000</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="#" class="btn btn-primary mx-auto">Ver más</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="py-2 bg-gray my-5">
+
+    </section>
+
+    <div class="container footer">
+        <footer class="row py-5" id="footer">
+            <div class="col-md-4 text-md-start col-12 text-center text-white">
+                <h3 class="fw-bold">Contacto</h3>
+                <p><i class="fas fa-phone pt-3"></i> +54 9 2664 544173</p>
+                <p><i class="fas fa-envelope"></i> ayfinmobiliaria@gmail.com</p>
+                <p><i class="fab fa-whatsapp"></i> +54 9 2664 344614</p>
+            </div>
+            <div class="col-md-4 text-center pt-3 pt-md-0 d-flex justify-content-center align-items-center">
+                <a href="https://www.instagram.com/productorauno/" target="_blank" class="mx-3 coral-color"><i class="fab fa-instagram fa-4x footer-icon "></i></a>
+                <a href="https://www.facebook.com/aleciorivera.ph" target="_blank" class="mx-3 coral-color"><i class="fab fa-facebook fa-4x footer-icon"></i></a>
+                <a href="https://wa.me/5492664344614" target="_blank" class="mx-3 coral-color"><i class="fab fa-whatsapp fa-4x footer-icon"></i></a>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+
+                <ul class="text-white fw-bold">
+                    <li>Inicio</li>
+                    <li>Propiedades</li>
+                    <li>Nosotros</li>
+                    <li>Contacto</li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <div class="py-2 bg-gray w-100">
+        <p class="text-white text-center border-bottom border-dark-subtle py-2">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor optio alias tenetur soluta deleniti ex cupiditate debitis dignissimos, ducimus aperiam adipisci velit ea praesentium sunt eveniet necessitatibus qui, sit reiciendis?
+        </p>
+        <p class="text-white text-center py-1">
+            © 2024 A & F Desarrollos Inmobiliarios -  Merlo San Luis.
+        </p>
+    </div>
 
 
     <script src="assets/js/main.js?ver=<?php echo $date; ?>"></script>
