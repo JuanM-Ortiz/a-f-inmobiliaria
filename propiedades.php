@@ -60,25 +60,10 @@
         </div>
     </nav>
 
-    <section>
-        <div class="img-container">
-            <img class="img-main" src="assets/img/main.jpg" alt="">
-            <div class="overlay-text">La oportunidad de disfrutar de la tranquilidad y la belleza de</div>
-            <div class="location-tag fw-bold bg-coral-color">Merlo</div>
-            <div class="search-bar py-3">
-                <form class="search-form" action="">
-                    <input class="bg-dark mx-3 my-2 my-md-1" type="text" name="search" placeholder="Localidad">
-                    <input class="bg-dark mx-3 my-2 my-md-1" type="text" name="search" placeholder="Zona">
-                    <button class="fw-bold fs-5" type="submit">Buscar</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
     <section class="featured bg-main">
         <div class="bg-gray row mt-4 py-4">
             <div class="featured-box bg-coral-color col-md-2 col-6 offset-md-5 offset-3 text-center">
-                <h2 class="featured text-white my-auto py-2 fw-bold">Destacadas</h2>
+                <h2 class="featured text-white my-auto py-2 fw-bold">Propiedades</h2>
             </div>
         </div>
 
@@ -168,25 +153,6 @@
 
     </section>
 
-    <section class="py-2 bg-gray my-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-4 col-lg-6 d-flex justify-content-center py-5">
-                    <img class="img-body" src="assets/img/contrato.jpg" alt="" style="max-width: 100%; height: auto;">
-                </div>
-                <div class="col-xl-8 col-lg-6 d-flex flex-column justify-content-center px-5">
-                    <div>
-                        <p class="fs-3 text-white">
-                            Nuestra Misión: brindar un servicio de asesoramiento e intermediación en la compra-venta y alquiler de inmuebles, escuchando e identificando las necesidades de cada cliente y aportando valor a las inversiones.
-                        </p>
-                        <div class="d-flex justify-content-center">
-                            <a class="btn-body bg-orange-color py-2 px-4" href="contacto.php">Contáctenos</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 
     <div class="container footer">
@@ -235,5 +201,3 @@
     <script src="assets/js/main.js?ver=<?php echo $date; ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
-
-</html>
