@@ -73,7 +73,7 @@
 
                     <div class="col-md-6 text-white fw-bold fs-5 px-5">
                         <h3 class="text-center fw-bold">Contacto</h3>
-                        <p class="text-white fs-5 fw-bold">El formulario que presentamos a continuación ha sido diseñado para asegurar un vínculo efectivo con nuestros clientes. Nuestro equipo de soporte al cliente se encargará de procesar sus consultas o requerimientos de forma diligente. Por favor, llene los siguientes campos con su información. Apreciamos mucho su colaboración.</p>
+                        <p class="text-white fs-5 fw-bold">El formulario que presentamos ha sido diseñado para asegurar un vínculo efectivo con nuestros clientes. Nuestro equipo de soporte al cliente se encargará de procesar sus consultas o requerimientos de forma diligente. Por favor, llene los siguientes campos con su información. Apreciamos mucho su colaboración.</p>
                     </div>
                 </div>
             </div>
