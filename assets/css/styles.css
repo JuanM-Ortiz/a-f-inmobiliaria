@@ -34,8 +34,6 @@
     color: var(--terciary-coral-color) !important;
 }
 
-
-
 body {
     margin: 0;
     background-color: var(--main-gray-color) !important;
@@ -271,6 +269,26 @@ body {
 .footer-links {
     text-decoration: none;
     color: var(--secondary-gray-color);
+}
+
+.contact-form button {
+    background-color: var(--orange-color) !important;
+    border-radius: 2px !important;
+}
+
+.contact-form input, textarea {
+    border-color: var(--orange-color) !important;
+    border-width: 0.1px;
+}
+
+.contact-form input::placeholder, textarea::placeholder {
+    font-weight: bold !important;
+    color: #818181 !important;
+}
+
+.contact-img img{
+    filter: grayscale(100%) !important;
+    border-radius: 2px;
 }
 
 @media (max-width: 1440px) {
