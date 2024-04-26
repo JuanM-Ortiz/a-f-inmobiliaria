@@ -6,13 +6,13 @@ if (!$_SESSION['user']) {
 }
 
 include_once '../src/db/conn.php';
-include_once '../src/models/comodidades.php';
+include_once '../src/models/localidades.php';
 
 $conexion = Conexion::conectar();
 
-$comodidadesModel = new Comodidades($conexion);
+$localidadesModel = new Localidades($conexion);
 
-$comodidades = $comodidadesModel->getComodidades(true);
+$localidades = $localidadesModel->getLocalidades(true);
 
 
 ?>
@@ -45,8 +45,8 @@ $comodidades = $comodidadesModel->getComodidades(true);
 
   <div class="container vh-100 mt-5">
     <div class="d-flex mt-5 justify-content-between mb-3">
-      <h5>Comodidades</h5>
-      <button class="btn btn-success fw-bold" id="agregarComodidad"><i class="fa fa-plus"></i> Nueva</button>
+      <h5>Localidades</h5>
+      <button class="btn btn-success fw-bold" id="agregarLocalidad"><i class="fa fa-plus"></i> Nueva</button>
     </div>
 
     <table class="table table-primary">
@@ -58,24 +58,24 @@ $comodidades = $comodidadesModel->getComodidades(true);
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($comodidades as $comodidad) :
+        <?php foreach ($localidades as $localidad) :
           echo '<tr>
-                  <td class="text-center">' . $comodidad['id'] . '</th>
-                  <td class="text-center">' . $comodidad['descripcion'] . '</th>';
+                  <td class="text-center">' . $localidad['id'] . '</th>
+                  <td class="text-center">' . $localidad['descripcion'] . '</th>';
 
-          if ($comodidad['deleted_at'] == null) {
+          if ($localidad['deleted_at'] == null) {
             echo '
                   <td class="text-center">
-                    <button class="btn btn-warning" title="Editar" type="button" id="editarComodidad">
+                    <button class="btn btn-warning" title="Editar" type="button" id="editarLocalidad">
                       <i class="fa fa-pencil"></i>
                     </button>
-                    <button class="btn btn-danger" title="Eliminar" type="button" onclick="borrarComodidad(' . $comodidad['id'] . ')">
+                    <button class="btn btn-danger" title="Eliminar" type="button" onclick="borrarLocalidad(' . $localidad['id'] . ')">
                       <i class="fa fa-trash"></i>
                     </button>
                   </td>';
           } else {
             echo '<td class="text-center">
-                    <button class="btn btn-success" title="Reactivar" type="button" onclick="restaurarComodidad(' . $comodidad['id'] . ')">
+                    <button class="btn btn-success" title="Reactivar" type="button" onclick="restaurarLocalidad(' . $localidad['id'] . ')">
                       <i class="fa fa-undo"></i>
                     </button>
                   </td>';
@@ -86,64 +86,63 @@ $comodidades = $comodidadesModel->getComodidades(true);
       </tbody>
     </table>
   </div>
-  <?php include_once 'modales/abm-comodidades.html'; ?>
+  <?php include_once 'modales/abm-localidades.html'; ?>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="../assets/js/jquery.min.js"></script>
 
 <script>
-  function borrarComodidad(idComodidad) {
-    $.post("controllers/comodidad.php", {
-      eliminar: idComodidad
+  function borrarLocalidad(idLocalidad) {
+    $.post("controllers/localidad.php", {
+      eliminar: idLocalidad
     }, function(result) {
       if (!result) {
         window.alert('Ocurrio un error.');
         return;
       }
       if (result) {
-        window.alert('Comodidad eliminada correctamente!');
+        window.alert('Localidad eliminada correctamente!');
         window.location.reload();
       }
     });
   }
 
-  function restaurarComodidad(idComodidad) {
-    $.post("controllers/comodidad.php", {
-      restaurar: idComodidad
+  function restaurarLocalidad(idLocalidad) {
+    $.post("controllers/localidad.php", {
+      restaurar: idLocalidad
     }, function(result) {
       if (!result) {
         window.alert('Ocurrio un error.');
         return;
       }
       if (result) {
-        window.alert('Comodidad restaurada correctamente!');
+        window.alert('Localidad restaurada correctamente!');
         window.location.reload();
       }
     });
   }
 
   $(document).ready(function() {
-    $(document).on("click", "#agregarComodidad", function() {
-      $("#comodidadesModal").modal("show");
-      $("#formComodidades").trigger("reset");
+    $(document).on("click", "#agregarLocalidad", function() {
+      $("#localidadesModal").modal("show");
+      $("#formLocalidades").trigger("reset");
     })
 
-    $(document).on("click", "#guardarComodidad", function() {
+    $(document).on("click", "#guardarLocalidad", function() {
       var fd = new FormData();
-
-      let comodidadId = $("#comodidadId").val() ?? null;
+      let localidadId = $("#localidadId").val() ?? null;
       let descripcion = $("#descripcion").val();
 
       if (!descripcion) {
         alert("Complete todos los campos...");
         return;
       }
-      fd.append('comodidadId', comodidadId);
+      fd.append('localidadId', localidadId);
       fd.append('descripcion', descripcion);
 
       $.ajax({
-        url: 'controllers/comodidad.php',
+        url: 'controllers/localidad.php',
         type: 'post',
         data: fd,
         contentType: false,
@@ -154,19 +153,20 @@ $comodidades = $comodidadesModel->getComodidades(true);
             return;
           }
           if (response) {
-            window.alert('Comodidad guardada correctamente!');
+            window.alert('Localidad guardada correctamente!');
             window.location.reload();
           }
         },
       });
     })
 
-    $(document).on("click", "#editarComodidad", function() {
-      $("#comodidadesModal").modal("show");
+    $(document).on("click", "#editarLocalidad", function() {
+      $("#localidadesModal").modal("show");
       let row = $(this).closest("tr");
-      let comodidadId = row.find("td:nth-child(1)").text().trim();
+      let localidadId = row.find("td:nth-child(1)").text().trim();
+      console.log(localidadId);
       let descripcion = row.find("td:nth-child(2)").text();
-      $("#comodidadId").val(comodidadId);
+      $("#localidadId").val(localidadId);
       $("#descripcion").val(descripcion.trim());
     })
   })
