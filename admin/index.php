@@ -27,7 +27,7 @@ if ($_POST['userName'] && $_POST['password']) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A&F Inmobiliaria - Admin</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="../assets/css/styles.css">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -37,15 +37,15 @@ if ($_POST['userName'] && $_POST['password']) {
 
 <body>
   <div class="vh-100 d-flex align-items-center justify-content-center bg-dark">
-    <div class="card p-4 bg-gray">
+    <div class="card p-4 bg-gray border-0">
       <div class="card-body">
         <form class="form-login" action="index.php" method="POST">
           <div class="mb-3">
-            <label for="userName" class="form-label text-white">Nombre de usuario</label>
+            <label for="userName" class="form-label">Nombre de usuario</label>
             <input type="text" class="form-control label" name="userName" id="userName" aria-describedby="userName">
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label label text-white">Contraseña</label>
+            <label for="password" class="form-label label">Contraseña</label>
             <input type="password" name="password" class="form-control label" id="password">
           </div>
           <?php if ($_GET['e'] == 1) : ?>

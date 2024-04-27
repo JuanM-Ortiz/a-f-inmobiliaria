@@ -39,6 +39,10 @@ $comodidades = $comodidadesModel->getComodidades(true);
   textarea {
     color: black !important;
   }
+
+  .form-control {
+    border: var(--bs-border-width) solid var(--bs-border-color) !important;
+  }
 </style>
 
 <body class="bg-light">
