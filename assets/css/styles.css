@@ -6,6 +6,10 @@
     --orange-color: #E38241;
 }
 
+.bg-grays-color {
+    background-color: #ACACAC !important;
+}
+
 .color-primary {
     color: var(--secondary-coral-color) !important;
 }

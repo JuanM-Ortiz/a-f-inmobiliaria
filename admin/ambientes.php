@@ -12,7 +12,7 @@ $conexion = Conexion::conectar();
 
 $ambientesModel = new Ambientes($conexion);
 
-$ambientes = $ambientesModel->getAmbientes(true);
+$ambientes = $ambientesModel->getAmbientes(false);
 
 
 ?>
@@ -45,7 +45,7 @@ $ambientes = $ambientesModel->getAmbientes(true);
   }
 </style>
 
-<body class="bg-light">
+<body class="bg-grays-color">
 
   <div class="container vh-100 mt-5">
     <div class="d-flex mt-5 justify-content-between mb-3">

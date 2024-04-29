@@ -37,15 +37,15 @@ if ($_POST['userName'] && $_POST['password']) {
 
 <body>
   <div class="vh-100 d-flex align-items-center justify-content-center bg-dark">
-    <div class="card p-4 bg-gray border-0">
+    <div class="card p-4 bg-gray border-0 ">
       <div class="card-body">
-        <form class="form-login" action="index.php" method="POST">
+        <form class="form-login " action="index.php" method="POST">
           <div class="mb-3">
-            <label for="userName" class="form-label">Nombre de usuario</label>
-            <input type="text" class="form-control label" name="userName" id="userName" aria-describedby="userName">
+            <label for="userName" class="form-label fs-5">Nombre de usuario</label>
+            <input type="text" class="form-control label bg-light" name="userName" id="userName" aria-describedby="userName">
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label label">Contraseña</label>
+            <label for="password" class="form-label label fs-5">Contraseña</label>
             <input type="password" name="password" class="form-control label" id="password">
           </div>
           <?php if ($_GET['e'] == 1) : ?>

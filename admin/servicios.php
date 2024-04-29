@@ -6,13 +6,13 @@ if (!$_SESSION['user']) {
 }
 
 include_once '../src/db/conn.php';
-include_once '../src/models/comodidades.php';
+include_once '../src/models/servicios.php';
 
 $conexion = Conexion::conectar();
 
-$comodidadesModel = new Comodidades($conexion);
+$serviciosModel = new Servicios($conexion);
 
-$comodidades = $comodidadesModel->getComodidades(false);
+$servicios = $serviciosModel->getServicios(false);
 
 
 ?>
@@ -49,8 +49,8 @@ $comodidades = $comodidadesModel->getComodidades(false);
 
   <div class="container vh-100 mt-5">
     <div class="d-flex mt-5 justify-content-between mb-3">
-      <h5>Comodidades</h5>
-      <button class="btn btn-success fw-bold" id="agregarComodidad"><i class="fa fa-plus"></i> Nueva</button>
+      <h5>Servicios</h5>
+      <button class="btn btn-success fw-bold" id="agregarServicio"><i class="fa fa-plus"></i> Nueva</button>
     </div>
 
     <table class="table table-primary">
@@ -62,24 +62,24 @@ $comodidades = $comodidadesModel->getComodidades(false);
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($comodidades as $comodidad) :
+        <?php foreach ($servicios as $servicio) :
           echo '<tr>
-                  <td class="text-center">' . $comodidad['id'] . '</th>
-                  <td class="text-center">' . $comodidad['descripcion'] . '</th>';
+                  <td class="text-center">' . $servicio['id'] . '</th>
+                  <td class="text-center">' . $servicio['descripcion'] . '</th>';
 
-          if ($comodidad['deleted_at'] == null) {
+          if ($servicio['deleted_at'] == null) {
             echo '
                   <td class="text-center">
-                    <button class="btn btn-warning" title="Editar" type="button" id="editarComodidad">
+                    <button class="btn btn-warning" title="Editar" type="button" id="editarServicio">
                       <i class="fa fa-pencil"></i>
                     </button>
-                    <button class="btn btn-danger" title="Eliminar" type="button" onclick="borrarComodidad(' . $comodidad['id'] . ')">
+                    <button class="btn btn-danger" title="Eliminar" type="button" onclick="borrarServicio(' . $servicio['id'] . ')">
                       <i class="fa fa-trash"></i>
                     </button>
                   </td>';
           } else {
             echo '<td class="text-center">
-                    <button class="btn btn-success" title="Reactivar" type="button" onclick="restaurarComodidad(' . $comodidad['id'] . ')">
+                    <button class="btn btn-success" title="Reactivar" type="button" onclick="restaurarServicio(' . $servicio['id'] . ')">
                       <i class="fa fa-undo"></i>
                     </button>
                   </td>';
@@ -90,64 +90,64 @@ $comodidades = $comodidadesModel->getComodidades(false);
       </tbody>
     </table>
   </div>
-  <?php include_once 'modales/abm-comodidades.html'; ?>
+  <?php include_once 'modales/abm-servicios.html'; ?>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="../assets/js/jquery.min.js"></script>
 
 <script>
-  function borrarComodidad(idComodidad) {
-    $.post("controllers/comodidad.php", {
-      eliminar: idComodidad
+  function borrarServicio(idServicio) {
+    $.post("controllers/servicio.php", {
+      eliminar: idServicio
     }, function(result) {
       if (!result) {
         window.alert('Ocurrio un error.');
         return;
       }
       if (result) {
-        window.alert('Comodidad eliminada correctamente!');
+        window.alert('servicio eliminado correctamente!');
         window.location.reload();
       }
     });
   }
 
-  function restaurarComodidad(idComodidad) {
-    $.post("controllers/comodidad.php", {
-      restaurar: idComodidad
+  function restaurarServicio(idServicio) {
+    $.post("controllers/servicio.php", {
+      restaurar: idServicio
     }, function(result) {
       if (!result) {
         window.alert('Ocurrio un error.');
         return;
       }
       if (result) {
-        window.alert('Comodidad restaurada correctamente!');
+        window.alert('servicio restaurado correctamente!');
         window.location.reload();
       }
     });
   }
 
   $(document).ready(function() {
-    $(document).on("click", "#agregarComodidad", function() {
-      $("#comodidadesModal").modal("show");
-      $("#formComodidades").trigger("reset");
+    $(document).on("click", "#agregarServicio", function() {
+      $("#serviciosModal").modal("show");
+      $("#formServicios").trigger("reset");
     })
 
-    $(document).on("click", "#guardarComodidad", function() {
+    $(document).on("click", "#guardarServicio", function() {
       var fd = new FormData();
 
-      let comodidadId = $("#comodidadId").val() ?? null;
+      let servicioId = $("#servicioId").val() ?? null;
       let descripcion = $("#descripcion").val();
 
       if (!descripcion) {
         alert("Complete todos los campos...");
         return;
       }
-      fd.append('comodidadId', comodidadId);
+      fd.append('servicioId', servicioId);
       fd.append('descripcion', descripcion);
 
       $.ajax({
-        url: 'controllers/comodidad.php',
+        url: 'controllers/servicio.php',
         type: 'post',
         data: fd,
         contentType: false,
@@ -158,19 +158,19 @@ $comodidades = $comodidadesModel->getComodidades(false);
             return;
           }
           if (response) {
-            window.alert('Comodidad guardada correctamente!');
+            window.alert('servicio guardado correctamente!');
             window.location.reload();
           }
         },
       });
     })
 
-    $(document).on("click", "#editarComodidad", function() {
-      $("#comodidadesModal").modal("show");
+    $(document).on("click", "#editarServicio", function() {
+      $("#serviciosModal").modal("show");
       let row = $(this).closest("tr");
-      let comodidadId = row.find("td:nth-child(1)").text().trim();
+      let servicioId = row.find("td:nth-child(1)").text().trim();
       let descripcion = row.find("td:nth-child(2)").text();
-      $("#comodidadId").val(comodidadId);
+      $("#servicioId").val(servicioId);
       $("#descripcion").val(descripcion.trim());
     })
   })

@@ -12,7 +12,7 @@ $conexion = Conexion::conectar();
 
 $localidadesModel = new Localidades($conexion);
 
-$localidades = $localidadesModel->getLocalidades(true);
+$localidades = $localidadesModel->getLocalidades(false);
 
 
 ?>

@@ -12,7 +12,7 @@ $conexion = Conexion::conectar();
 
 $zonasModel = new Zonas($conexion);
 
-$zonas = $zonasModel->getZonas(true);
+$zonas = $zonasModel->getZonas(false);
 
 
 ?>
