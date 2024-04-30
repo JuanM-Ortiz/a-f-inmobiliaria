@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-04-2024 a las 19:26:35
+-- Tiempo de generación: 01-05-2024 a las 01:30:23
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -33,6 +33,18 @@ CREATE TABLE `ambientes` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `ambientes`
+--
+
+INSERT INTO `ambientes` (`id`, `descripcion`, `deleted_at`) VALUES
+(2, 'Cocina', NULL),
+(3, 'Baño', NULL),
+(4, 'Balcón', NULL),
+(5, 'Cochera', NULL),
+(6, 'Lavadero', NULL),
+(7, 'Living comedor', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -50,7 +62,9 @@ CREATE TABLE `comodidades` (
 --
 
 INSERT INTO `comodidades` (`id`, `descripcion`, `deleted_at`) VALUES
-(1, 'test', NULL);
+(1, 'Piscina', NULL),
+(2, 'Parrila', NULL),
+(3, 'Aire Acondicionado', NULL);
 
 -- --------------------------------------------------------
 
@@ -81,9 +95,7 @@ CREATE TABLE `propiedades` (
   `id` int(11) NOT NULL,
   `titulo` varchar(255) DEFAULT NULL,
   `id_tipo_propiedad` int(11) DEFAULT NULL,
-  `descripcion` varchar(255) DEFAULT NULL,
-  `id_tipo_moneda` int(11) DEFAULT NULL,
-  `precio` float DEFAULT NULL,
+  `descripcion` text DEFAULT NULL,
   `superficie_cubierta` int(11) DEFAULT NULL,
   `superficie` int(11) DEFAULT NULL,
   `pisos` int(11) DEFAULT NULL,
@@ -94,6 +106,8 @@ CREATE TABLE `propiedades` (
   `disponible` tinyint(1) DEFAULT NULL,
   `maps_url` varchar(255) DEFAULT NULL,
   `codigo` varchar(255) DEFAULT NULL,
+  `imagen_portada` varchar(300) DEFAULT NULL,
+  `es_destacada` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -157,7 +171,9 @@ CREATE TABLE `propiedades_servicios` (
 CREATE TABLE `propiedades_tipo_publicaciones` (
   `id` int(11) NOT NULL,
   `id_propiedad` int(11) DEFAULT NULL,
-  `id_tipo_publicacion` int(11) DEFAULT NULL
+  `id_tipo_publicacion` int(11) DEFAULT NULL,
+  `precio` float NOT NULL,
+  `moneda` tinyint(3) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1 = peso\r\n2 = dolar'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -172,6 +188,18 @@ CREATE TABLE `servicios` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `servicios`
+--
+
+INSERT INTO `servicios` (`id`, `descripcion`, `deleted_at`) VALUES
+(1, 'Gas', NULL),
+(2, 'Electricidad', NULL),
+(3, 'Agua corriente', NULL),
+(4, 'Internet', NULL),
+(5, 'Cable TV', NULL),
+(6, 'Tv Satelital', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -184,17 +212,17 @@ CREATE TABLE `tipos_propiedad` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `tipo_monedas`
+-- Volcado de datos para la tabla `tipos_propiedad`
 --
 
-CREATE TABLE `tipo_monedas` (
-  `id` int(11) NOT NULL,
-  `descripcion` varchar(255) DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `tipos_propiedad` (`id`, `descripcion`, `deleted_at`) VALUES
+(1, 'Chacra', '2024-04-30 22:32:01'),
+(2, 'Casa', NULL),
+(3, 'Campo', NULL),
+(4, 'Lote', NULL),
+(5, 'Quinta', NULL),
+(6, 'Depto', NULL);
 
 -- --------------------------------------------------------
 
@@ -207,6 +235,14 @@ CREATE TABLE `tipo_publicaciones` (
   `descripcion` varchar(255) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_publicaciones`
+--
+
+INSERT INTO `tipo_publicaciones` (`id`, `descripcion`, `deleted_at`) VALUES
+(1, 'alquiler', NULL),
+(2, 'venta', NULL);
 
 -- --------------------------------------------------------
 
@@ -239,6 +275,13 @@ CREATE TABLE `zonas` (
   `descripcion` varchar(255) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `zonas`
+--
+
+INSERT INTO `zonas` (`id`, `descripcion`, `deleted_at`) VALUES
+(1, 'test zona 2', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -311,12 +354,6 @@ ALTER TABLE `tipos_propiedad`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `tipo_monedas`
---
-ALTER TABLE `tipo_monedas`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `tipo_publicaciones`
 --
 ALTER TABLE `tipo_publicaciones`
@@ -339,10 +376,16 @@ ALTER TABLE `zonas`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `ambientes`
+--
+ALTER TABLE `ambientes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT de la tabla `comodidades`
 --
 ALTER TABLE `comodidades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `localidades`
@@ -390,25 +433,19 @@ ALTER TABLE `propiedades_tipo_publicaciones`
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_propiedad`
 --
 ALTER TABLE `tipos_propiedad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `tipo_monedas`
---
-ALTER TABLE `tipo_monedas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_publicaciones`
 --
 ALTER TABLE `tipo_publicaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -420,7 +457,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `zonas`
 --
 ALTER TABLE `zonas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

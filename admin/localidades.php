@@ -45,7 +45,7 @@ $localidades = $localidadesModel->getLocalidades(false);
   }
 </style>
 
-<body class="bg-light">
+<body class="bg-grays-color">
 
   <div class="container vh-100 mt-5">
     <div class="d-flex mt-5 justify-content-between mb-3">

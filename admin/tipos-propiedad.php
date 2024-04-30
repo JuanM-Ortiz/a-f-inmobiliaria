@@ -6,13 +6,13 @@ if (!$_SESSION['user']) {
 }
 
 include_once '../src/db/conn.php';
-include_once '../src/models/zonas.php';
+include_once '../src/models/tiposPropiedad.php';
 
 $conexion = Conexion::conectar();
 
-$zonasModel = new Zonas($conexion);
+$tiposPropiedadModel = new TiposPropiedad($conexion);
 
-$zonas = $zonasModel->getZonas(false);
+$tiposPropiedad = $tiposPropiedadModel->getTiposPropiedad(false);
 
 
 ?>
@@ -49,8 +49,8 @@ $zonas = $zonasModel->getZonas(false);
 
   <div class="container vh-100 mt-5">
     <div class="d-flex mt-5 justify-content-between mb-3">
-      <h5>Zonas</h5>
-      <button class="btn btn-success fw-bold" id="agregarZona"><i class="fa fa-plus"></i> Nueva</button>
+      <h5>Tipos de Propiedades</h5>
+      <button class="btn btn-success fw-bold" id="agregarTiposPropiedad"><i class="fa fa-plus"></i> Nueva</button>
     </div>
 
     <table class="table table-primary">
@@ -62,24 +62,24 @@ $zonas = $zonasModel->getZonas(false);
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($zonas as $zona) :
+        <?php foreach ($tiposPropiedad as $tiposPropiedad) :
           echo '<tr>
-                  <td class="text-center">' . $zona['id'] . '</th>
-                  <td class="text-center">' . $zona['descripcion'] . '</th>';
+                  <td class="text-center">' . $tiposPropiedad['id'] . '</th>
+                  <td class="text-center">' . $tiposPropiedad['descripcion'] . '</th>';
 
-          if ($zona['deleted_at'] == null) {
+          if ($tiposPropiedad['deleted_at'] == null) {
             echo '
                   <td class="text-center">
-                    <button class="btn btn-warning" title="Editar" type="button" id="editarZona">
+                    <button class="btn btn-warning" title="Editar" type="button" id="editarTiposPropiedad">
                       <i class="fa fa-pencil"></i>
                     </button>
-                    <button class="btn btn-danger" title="Eliminar" type="button" onclick="borrarZona(' . $zona['id'] . ')">
+                    <button class="btn btn-danger" title="Eliminar" type="button" onclick="borrarTiposPropiedad(' . $tiposPropiedad['id'] . ')">
                       <i class="fa fa-trash"></i>
                     </button>
                   </td>';
           } else {
             echo '<td class="text-center">
-                    <button class="btn btn-success" title="Reactivar" type="button" onclick="restaurarZona(' . $zona['id'] . ')">
+                    <button class="btn btn-success" title="Reactivar" type="button" onclick="restaurarTiposPropiedad(' . $tiposPropiedad['id'] . ')">
                       <i class="fa fa-undo"></i>
                     </button>
                   </td>';
@@ -90,64 +90,64 @@ $zonas = $zonasModel->getZonas(false);
       </tbody>
     </table>
   </div>
-  <?php include_once 'modales/abm-zonas.html'; ?>
+  <?php include_once 'modales/abm-tiposPropiedad.html'; ?>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="../assets/js/jquery.min.js"></script>
 
 <script>
-  function borrarZona(idZona) {
-    $.post("controllers/zona.php", {
-      eliminar: idZona
+  function borrarTiposPropiedad(idTiposPropiedad) {
+    $.post("controllers/tiposPropiedad.php", {
+      eliminar: idTiposPropiedad
     }, function(result) {
       if (!result) {
         window.alert('Ocurrio un error.');
         return;
       }
       if (result) {
-        window.alert('Zona eliminada correctamente!');
+        window.alert('Tipo de Propiedad eliminado correctamente!');
         window.location.reload();
       }
     });
   }
 
-  function restaurarZona(idZona) {
-    $.post("controllers/zona.php", {
-      restaurar: idZona
+  function restaurarTiposPropiedad(idTiposPropiedad) {
+    $.post("controllers/tiposPropiedad.php", {
+      restaurar: idTiposPropiedad
     }, function(result) {
       if (!result) {
         window.alert('Ocurrio un error.');
         return;
       }
       if (result) {
-        window.alert('Zona restaurada correctamente!');
+        window.alert('Tipo de Propiedad restaurado correctamente!');
         window.location.reload();
       }
     });
   }
 
   $(document).ready(function() {
-    $(document).on("click", "#agregarZona", function() {
-      $("#zonasModal").modal("show");
-      $("#formZonas").trigger("reset");
+    $(document).on("click", "#agregarTiposPropiedad", function() {
+      $("#tiposPropiedadModal").modal("show");
+      $("#formTiposPropiedad").trigger("reset");
     })
 
-    $(document).on("click", "#guardarZona", function() {
+    $(document).on("click", "#guardarTiposPropiedad", function() {
       var fd = new FormData();
 
-      let zonaId = $("#zonaId").val() ?? null;
+      let tiposPropiedadId = $("#tiposPropiedadId").val() ?? null;
       let descripcion = $("#descripcion").val();
 
       if (!descripcion) {
         alert("Complete todos los campos...");
         return;
       }
-      fd.append('zonaId', zonaId);
+      fd.append('tiposPropiedadId', tiposPropiedadId);
       fd.append('descripcion', descripcion);
 
       $.ajax({
-        url: 'controllers/zona.php',
+        url: 'controllers/tiposPropiedad.php',
         type: 'post',
         data: fd,
         contentType: false,
@@ -158,19 +158,19 @@ $zonas = $zonasModel->getZonas(false);
             return;
           }
           if (response) {
-            window.alert('Zona guardada correctamente!');
+            window.alert('Tipo de Propiedad guardado correctamente!');
             window.location.reload();
           }
         },
       });
     })
 
-    $(document).on("click", "#editarZona", function() {
-      $("#zonasModal").modal("show");
+    $(document).on("click", "#editarTiposPropiedad", function() {
+      $("#tiposPropiedadModal").modal("show");
       let row = $(this).closest("tr");
-      let zonaId = row.find("td:nth-child(1)").text().trim();
+      let tiposPropiedadId = row.find("td:nth-child(1)").text().trim();
       let descripcion = row.find("td:nth-child(2)").text();
-      $("#zonaId").val(zonaId);
+      $("#tiposPropiedadId").val(tiposPropiedadId);
       $("#descripcion").val(descripcion.trim());
     })
   })
