@@ -8,15 +8,6 @@ if ($_POST['crear'] && $_POST['crear'] == 1) {
 
   $propiedadesModel = new Propiedades($conexion);
 
-  if ($_FILES['imgPortada']['name'] && !empty($_FILES['imgPortada']['name'])) {
-    $hora = date("YmdHis");
-    $filename = $hora . $_FILES['imgPortada']['name'];
-    $location = "../../assets/img/" . $filename;
-    if (!move_uploaded_file($_FILES['imgPortada']['tmp_name'], $location)) {
-      return false;
-    }
-    $link = $filename;
-  }
   $params = [
     'titulo' => $_POST['titulo'],
     'id_tipo_propiedad' => $_POST['tipoPropiedad'],
@@ -29,12 +20,27 @@ if ($_POST['crear'] && $_POST['crear'] == 1) {
     'id_localidad' => $_POST['localidad'],
     'id_zona' => $_POST['zona'],
     'maps_url' => $_POST['mapsUrl'],
-    'imagen_portada' => $link,
     'es_destacada' => $_POST['destacada'],
   ];
-  echo $_POST['mapsUrl'];
+
   $idPropiedad = $propiedadesModel->crear($params);
+
   if ($idPropiedad) {
+
+    if ($_FILES['imgPortada']['name'] && !empty($_FILES['imgPortada']['name'])) {
+      $hora = date("YmdHis");
+      $filename = $hora . $_FILES['imgPortada']['name'];
+      $currentDir = __DIR__;
+      $targetDir = dirname(dirname($currentDir)) . "/assets/img/propiedades/" . $idPropiedad;
+      mkdir($targetDir, 0777, true);
+      $location = $targetDir . "/" . $filename;
+      if (!move_uploaded_file($_FILES['imgPortada']['tmp_name'], $location)) {
+        return false;
+      }
+      $link = $filename;
+      $propiedadesModel->asignarPortada($idPropiedad, $link);
+    }
+
     $ambientes = json_decode($_POST['ambientes']);
     $servicios = json_decode($_POST['servicios']);
     $comodidades = json_decode($_POST['comodidades']);

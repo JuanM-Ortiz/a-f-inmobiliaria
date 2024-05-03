@@ -64,6 +64,13 @@ class Propiedades
     $resultado->execute();
     return true;
   }
+  public function asignarPortada($idPropiedad, $img)
+  {
+    $query = "UPDATE propiedades SET imagen_portada = '{$img}' WHERE id = $idPropiedad";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    return true;
+  }
 
   public function crear($params)
   {
@@ -72,12 +79,12 @@ class Propiedades
     descripcion, superficie_cubierta, superficie,
     pisos, dormitorios, 
     baños, id_localidad, id_zona, maps_url,
-    codigo,imagen_portada,es_destacada)
+    codigo,es_destacada)
      VALUES ('{$params['titulo']}', '{$params['id_tipo_propiedad']}', '{$params['descripcion']}',
      '{$params['superficie_cubierta']}', '{$params['superficie']}',
      '{$params['pisos']}', '{$params['dormitorios']}', 
      '{$params['baños']}', '{$params['id_localidad']}',
-     '{$params['id_zona']}','{$params['maps_url']}', '{$codigo}','{$params['imagen_portada']}', '{$params['es_destacada']}')";
+     '{$params['id_zona']}','{$params['maps_url']}', '{$codigo}', '{$params['es_destacada']}')";
     $resultado = $this->conexion->prepare($query);
     $resultado->execute();
     return $this->conexion->lastInsertId();
