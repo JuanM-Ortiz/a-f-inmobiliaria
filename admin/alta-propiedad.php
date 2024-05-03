@@ -123,8 +123,8 @@ $comodidades = $comodidadesModel->getComodidades(false);
           </select>
         </div>
         <div class="mb-3 col-4">
-          <label for="localidad" class="form-label">Zona</label>
-          <select class="form-select" id="localidad" aria-label="localidad">
+          <label for="zona" class="form-label">Zona</label>
+          <select class="form-select" id="zona" aria-label="zona">
             <option selected disabled>Seleccione la zona...</option>
             <?php foreach ($zonas as $zona) : ?>
               <option value="<?php echo $zona['id']; ?>"><?php echo $zona['descripcion']; ?></option>
@@ -132,19 +132,31 @@ $comodidades = $comodidadesModel->getComodidades(false);
           </select>
         </div>
         <div class="mb-3 col-4">
+          <label for="mapsUrl" class="form-label">URL Google Maps</label>
+          <input type="text" class="form-control" id="mapsUrl">
+        </div>
+        <div class="mb-3 col-4">
           <label for="tipoPublicacion" class="form-label d-block">Tipo de publicación</label>
           <div class="form-check form-check-inline mt-1">
-            <input class="form-check-input" type="checkbox" value="venta" id="ventaCheck">
+            <input class="form-check-input" type="checkbox" name="tipoPublicacion" value="venta" id="ventaCheck">
             <label class="form-check-label" for="flexCheckDefault">
               Venta
             </label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" value="alquiler" id="alquilerCheck">
+            <input class="form-check-input" type="checkbox" name="tipoPublicacion" value="alquiler" id="alquilerCheck">
             <label class="form-check-label" for="flexCheckDefault">
               Alquiler
             </label>
           </div>
+        </div>
+        <div class="mb-3 col-2 d-none" id="precioVentaDiv">
+          <label for="precioVenta" class="form-label">Precio de venta</label>
+          <input type="number" min="0" class="form-control" id="precioVenta">
+        </div>
+        <div class="mb-3 col-2 d-none" id="precioAlquilerDiv">
+          <label for="precioAlquiler" class="form-label">Precio de alquiler</label>
+          <input type="number" min="0" class="form-control" id="precioAlquiler">
         </div>
       </div>
       <hr>
@@ -153,8 +165,8 @@ $comodidades = $comodidadesModel->getComodidades(false);
           <h5>Ambientes</h5>
           <?php foreach ($ambientes as $ambiente) : ?>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="<?php echo $ambiente['id'] ?>" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" name="ambientes" value="<?php echo $ambiente['id']; ?>" id="<?php echo 'ambiente' . $ambiente['id']; ?>">
+              <label class="form-check-label" for="<?php echo 'ambiente' . $ambiente['id'] ?>">
                 <?php echo $ambiente['descripcion']; ?>
               </label>
             </div>
@@ -164,8 +176,8 @@ $comodidades = $comodidadesModel->getComodidades(false);
           <h5>Servicios</h5>
           <?php foreach ($servicios as $servicio) : ?>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="<?php echo $servicio['id'] ?>" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" name="servicios" value="<?php echo $servicio['id']; ?>" id="<?php echo 'servicio' . $servicio['id']; ?>">
+              <label class="form-check-label" for="<?php echo 'servicio' . $servicio['id'] ?>">
                 <?php echo $servicio['descripcion']; ?>
               </label>
             </div>
@@ -175,8 +187,8 @@ $comodidades = $comodidadesModel->getComodidades(false);
           <h5>Comodidades</h5>
           <?php foreach ($comodidades as $comodidad) : ?>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="<?php echo $comodidad['id'] ?>" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" name="comodidades" value="<?php echo $comodidad['id']; ?>" id="<?php echo 'comodidad' . $comodidad['id']; ?>">
+              <label class="form-check-label" for="<?php echo 'comodidad' . $comodidad['id']; ?>">
                 <?php echo $comodidad['descripcion']; ?>
               </label>
             </div>
@@ -205,5 +217,85 @@ $comodidades = $comodidadesModel->getComodidades(false);
         previsualizacion.src = URL.createObjectURL(file)
       }
     }
-  })
+
+    $("#ventaCheck").change(function() {
+      $("#precioVentaDiv").toggleClass("d-none");
+    });
+
+    $("#alquilerCheck").change(function() {
+      $("#precioAlquilerDiv").toggleClass("d-none");
+    });
+
+    //alta de propiedad
+    $("#guardarPropiedad").on("click", function() {
+      var fd = new FormData();
+      let titulo = $('#titulo').val();
+      let descripcion = $('#descripcion').val();
+      let tipoPropiedad = $('#tipoPropiedad').val();
+      let superficie = $('#superficie').val();
+      let superficieCubierta = $('#superficieCubierta').val();
+      let pisos = $('#pisos').val();
+      let dormitorios = $('#dormitorios').val();
+      let baños = $('#baños').val();
+      let zona = $('#zona').val();
+      let mapsUrl = $('#mapsUrl').val();
+      let localidad = $('#localidad').val();
+      let precioVenta = $('#precioVenta').val();
+      let precioAlquiler = $('#precioAlquiler').val();
+      let imgPortada = $('#imgPortada')[0].files[0];
+      let ambientes = $('input[name="ambientes"]:checked').map(function() {
+        return this.value;
+      }).get();
+      let servicios = $('input[name="servicios"]:checked').map(function() {
+        return this.value;
+      }).get();
+      let comodidades = $('input[name="comodidades"]:checked').map(function() {
+        return this.value;
+      }).get();
+      let tipoPublicacion = $('input[name="tipoPublicacion"]:checked').map(function() {
+        return this.value;
+      }).get();
+      ambientes = JSON.stringify(ambientes);
+      servicios = JSON.stringify(servicios);
+      comodidades = JSON.stringify(comodidades);
+      tipoPublicacion = JSON.stringify(tipoPublicacion);
+      fd.append('crear', 1);
+      fd.append('titulo', titulo);
+      fd.append('descripcion', descripcion);
+      fd.append('tipoPropiedad', tipoPropiedad);
+      fd.append('superficie', superficie);
+      fd.append('superficieCubierta', superficieCubierta);
+      fd.append('pisos', pisos);
+      fd.append('dormitorios', dormitorios);
+      fd.append('localidad', localidad);
+      fd.append('zona', zona);
+      fd.append('mapsUrl', mapsUrl);
+      fd.append('imgPortada', imgPortada);
+      fd.append('ambientes', ambientes);
+      fd.append('servicios', servicios);
+      fd.append('comodidades', comodidades);
+      fd.append('tipoPublicacion', tipoPublicacion);
+      fd.append('precioVenta', precioVenta ?? null);
+      fd.append('precioAlquiler', precioAlquiler ?? null);
+
+      $.ajax({
+        url: 'controllers/propiedad.php',
+        type: 'post',
+        data: fd,
+        contentType: false,
+        processData: false,
+        success: function(result) {
+          if (!result) {
+            window.alert('Ocurrio un error.');
+            return;
+          }
+          if (result) {
+            window.alert('Propiedad guardada correctamente!');
+            window.location.reload();
+          }
+        },
+      });
+
+    });
+  });
 </script>

@@ -98,8 +98,8 @@
             <div class="row">
 
                 <div class="col-md-6 mt-5 px-5">
-                    <p class="text-white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                        Incidunt animi provident modi porro soluta odio totam qui suscipit laboriosam, optio, 
+                    <p class="text-white">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                        Incidunt animi provident modi porro soluta odio totam qui suscipit laboriosam, optio,
                         dolore vero asperiores accusamus tenetur architecto facere error deleniti sed?</p>
                 </div>
 
