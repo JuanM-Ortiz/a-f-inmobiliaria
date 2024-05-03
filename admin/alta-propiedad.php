@@ -267,6 +267,7 @@ $comodidades = $comodidadesModel->getComodidades(false);
       fd.append('superficieCubierta', superficieCubierta);
       fd.append('pisos', pisos);
       fd.append('dormitorios', dormitorios);
+      fd.append('baños', baños);
       fd.append('localidad', localidad);
       fd.append('zona', zona);
       fd.append('mapsUrl', mapsUrl);
@@ -285,14 +286,14 @@ $comodidades = $comodidadesModel->getComodidades(false);
         contentType: false,
         processData: false,
         success: function(result) {
-          if (!result) {
+         /*  if (!result) {
             window.alert('Ocurrio un error.');
             return;
           }
           if (result) {
             window.alert('Propiedad guardada correctamente!');
             window.location.reload();
-          }
+          } */
         },
       });
 

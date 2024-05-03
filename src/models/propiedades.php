@@ -74,20 +74,25 @@ class Propiedades
 
   public function crear($params)
   {
-    $codigo = 'AYF' . random_int(1, 99999);
-    $query = "INSERT INTO propiedades (titulo, id_tipo_propiedad, 
-    descripcion, superficie_cubierta, superficie,
-    pisos, dormitorios, 
-    baños, id_localidad, id_zona, maps_url,
-    codigo,es_destacada)
-     VALUES ('{$params['titulo']}', '{$params['id_tipo_propiedad']}', '{$params['descripcion']}',
-     '{$params['superficie_cubierta']}', '{$params['superficie']}',
-     '{$params['pisos']}', '{$params['dormitorios']}', 
-     '{$params['baños']}', '{$params['id_localidad']}',
-     '{$params['id_zona']}','{$params['maps_url']}', '{$codigo}', '{$params['es_destacada']}')";
-    $resultado = $this->conexion->prepare($query);
-    $resultado->execute();
-    return $this->conexion->lastInsertId();
+    try {
+      $codigo = 'AYF' . random_int(1, 99999);
+      $query = "INSERT INTO propiedades (titulo, id_tipo_propiedad, 
+      descripcion, superficie_cubierta, superficie,
+      pisos, dormitorios, 
+      baños, id_localidad, id_zona, maps_url,
+      codigo,es_destacada)
+       VALUES ('{$params['titulo']}', '{$params['id_tipo_propiedad']}', '{$params['descripcion']}',
+       {$params['superficie_cubierta']}, {$params['superficie']},
+       {$params['pisos']}, {$params['dormitorios']}, 
+       {$params['baños']}, {$params['id_localidad']},
+       {$params['id_zona']},'{$params['maps_url']}', '{$codigo}', '{$params['es_destacada']}')";
+      $resultado = $this->conexion->prepare($query);
+      $resultado->execute();
+      return $this->conexion->lastInsertId();
+    } catch (\Throwable $th) {
+      echo $th->getMessage();
+    }
+    
   }
 
   public function crearAmbientesByPropiedadId($idPropiedad, $ambientes)

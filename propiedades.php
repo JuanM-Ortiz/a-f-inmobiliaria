@@ -1,3 +1,15 @@
+<?php
+
+include_once 'src/db/conn.php';
+include_once 'src/models/propiedades.php';
+
+$conexion = Conexion::conectar();
+$modeloPropiedad = New Propiedades($conexion);
+$propiedades = $modeloPropiedad->getPropiedades();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 

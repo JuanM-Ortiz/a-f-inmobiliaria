@@ -12,18 +12,19 @@ if ($_POST['crear'] && $_POST['crear'] == 1) {
     'titulo' => $_POST['titulo'],
     'id_tipo_propiedad' => $_POST['tipoPropiedad'],
     'descripcion' => $_POST['descripcion'],
-    'superficie_cubierta' => $_POST['superficieCubierta'],
-    'superficie' => $_POST['superficie'],
-    'pisos' => $_POST['pisos'] ?? null,
-    'dormitorios' => $_POST['dormitorios'] ?? null,
-    'baños' => $_POST['baños'] ?? null,
+    'superficie_cubierta' => !empty($_POST['superficie']) ?$_POST['superficie']:0,
+    'superficie' => !empty($_POST['superficie']) ?$_POST['superficie']:0,
+    'pisos' => !empty($_POST['pisos']) ?$_POST['pisos']:0,
+    'dormitorios' =>!empty($_POST['dormitorios']) ?$_POST['dormitorios']:0,
+    'baños' =>!empty($_POST['baños']) ?$_POST['baños']:0,
     'id_localidad' => $_POST['localidad'],
     'id_zona' => $_POST['zona'],
     'maps_url' => $_POST['mapsUrl'],
-    'es_destacada' => $_POST['destacada'],
+    'es_destacada' => $_POST['destacada'] ?? 0,
   ];
 
-  $idPropiedad = $propiedadesModel->crear($params);
+$idPropiedad = $propiedadesModel->crear($params);
+
 
   if ($idPropiedad) {
 
