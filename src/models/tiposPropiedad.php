@@ -60,4 +60,5 @@ class TiposPropiedad
     $resultado->execute();
     return true;
   }
+
 }

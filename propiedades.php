@@ -4,8 +4,9 @@ include_once 'src/db/conn.php';
 include_once 'src/models/propiedades.php';
 
 $conexion = Conexion::conectar();
-$modeloPropiedad = New Propiedades($conexion);
-$propiedades = $modeloPropiedad->getPropiedades();
+$modeloPropiedad = new Propiedades($conexion);
+/* $propiedades = $modeloPropiedad->getPropiedades(); */
+$propiedades = $modeloPropiedad->getPropiedadesConPrecio();
 
 ?>
 
@@ -37,88 +38,45 @@ $propiedades = $modeloPropiedad->getPropiedades();
         </div>
 
         <div class="container-fluid mt-5">
-            <div class="row ">
-                <div class="col-12 col-lg-3 col-md-6 d-flex justify-content-center mb-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="assets/img/casa1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body text-white px-0 pb-0">
-                            <h5 class="card-title bg-coral-color text-center fw-bold py-1">Venta</h5>
-                            <p class="card-text ps-3 fs-5">Casa céntrica inmejorable ubicación</p>
-                            <div class="card-footer text-white">
-                                <div class="row align-items-center">
-                                    <div class="col-6">
-                                        <p class="mt-3 fs-5">USD 70,000</p>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="#" class="btn btn-primary mx-auto">Ver más</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="row">
 
-                <div class="col-12 col-lg-3 col-md-6 d-flex justify-content-center mb-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="assets/img/casa1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body text-white px-0 pb-0">
-                            <h5 class="card-title bg-coral-color text-center fw-bold py-1">Venta</h5>
-                            <p class="card-text ps-3 fs-5">Casa céntrica inmejorable ubicación</p>
-                            <div class="card-footer text-white">
-                                <div class="row align-items-center">
-                                    <div class="col-6">
-                                        <p class="mt-3 fs-5">USD 70,000</p>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="#" class="btn btn-primary mx-auto">Ver más</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                foreach ($propiedades as $propiedad) :
+                    $src = $propiedad['imagen_portada'];
+                    $carpetaId = $propiedad['id'];
+                    $imagePath = "assets/img/propiedades/" . $carpetaId . '/' . $src;
 
-                <div class="col-12 col-lg-3 col-md-6 d-flex justify-content-center mb-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="assets/img/casa1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body text-white px-0 pb-0">
-                            <h5 class="card-title bg-coral-color text-center fw-bold py-1">Venta</h5>
-                            <p class="card-text ps-3 fs-5">Casa céntrica inmejorable ubicación</p>
-                            <div class="card-footer text-white">
-                                <div class="row align-items-center">
-                                    <div class="col-6">
-                                        <p class="mt-3 fs-5">USD 70,000</p>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="#" class="btn btn-primary mx-auto">Ver más</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    $moneda = $propiedad['moneda'] == 2 ? 'USD' : '$';
 
-                <div class="col-12 col-lg-3 col-md-6 d-flex justify-content-center mb-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="assets/img/casa1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body text-white px-0 pb-0">
-                            <h5 class="card-title bg-coral-color text-center fw-bold py-1">Venta</h5>
-                            <p class="card-text ps-3 fs-5">Casa céntrica inmejorable ubicación</p>
-                            <div class="card-footer text-white">
-                                <div class="row align-items-center">
-                                    <div class="col-6">
-                                        <p class="mt-3 fs-5">USD 70,000</p>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="#" class="btn btn-primary mx-auto">Ver más</a>
+                    echo '
+                
+                        <div class="col-12 col-lg-3 col-md-6 d-flex justify-content-center mb-4">
+                            <div class="card" style="width: 18rem;">
+                            <img src="'. $imagePath . '" class="card-img-top" alt="...">
+
+                                <div class="card-body text-white px-0 pb-0">
+                                    <h5 class="card-title bg-coral-color text-center fw-bold py-1">' . strtoupper($propiedad['tipo_publicacion']) . '</h5>
+                                    <p class="card-text ps-3 fs-5">' . $propiedad['descripcion'] . '</p>
+                                    <div class="card-footer text-white">
+                                        <div class="row align-items-center">
+                                            <div class="col-6">
+                                                <p class="mt-3 fs-5">'. $moneda .' ' . number_format($propiedad['precio']) . '</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <a href="detalle-propiedad.php?id=' . $propiedad['id'] . '" class="btn btn-primary mx-auto">Ver más</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </div>';
+
+                endforeach;
+                ?>
             </div>
         </div>
+
+
 
     </section>
 

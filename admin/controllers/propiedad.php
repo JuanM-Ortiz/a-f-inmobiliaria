@@ -39,7 +39,8 @@ $idPropiedad = $propiedadesModel->crear($params);
         return false;
       }
       $link = $filename;
-      $propiedadesModel->asignarPortada($idPropiedad, $link);
+      $propiedadesModel->asignarPortada($idPropiedad, $link); 
+
     }
 
     $ambientes = json_decode($_POST['ambientes']);
