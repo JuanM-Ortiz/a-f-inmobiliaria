@@ -12,18 +12,18 @@ if ($_POST['crear'] && $_POST['crear'] == 1) {
     'titulo' => $_POST['titulo'],
     'id_tipo_propiedad' => $_POST['tipoPropiedad'],
     'descripcion' => $_POST['descripcion'],
-    'superficie_cubierta' => !empty($_POST['superficie']) ?$_POST['superficie']:0,
-    'superficie' => !empty($_POST['superficie']) ?$_POST['superficie']:0,
-    'pisos' => !empty($_POST['pisos']) ?$_POST['pisos']:0,
-    'dormitorios' =>!empty($_POST['dormitorios']) ?$_POST['dormitorios']:0,
-    'baños' =>!empty($_POST['baños']) ?$_POST['baños']:0,
+    'superficie_cubierta' => !empty($_POST['superficie']) ? $_POST['superficie'] : 0,
+    'superficie' => !empty($_POST['superficie']) ? $_POST['superficie'] : 0,
+    'pisos' => !empty($_POST['pisos']) ? $_POST['pisos'] : 0,
+    'dormitorios' => !empty($_POST['dormitorios']) ? $_POST['dormitorios'] : 0,
+    'baños' => !empty($_POST['baños']) ? $_POST['baños'] : 0,
     'id_localidad' => $_POST['localidad'],
     'id_zona' => $_POST['zona'],
     'maps_url' => $_POST['mapsUrl'],
     'es_destacada' => $_POST['destacada'] ?? 0,
   ];
 
-$idPropiedad = $propiedadesModel->crear($params);
+  $idPropiedad = $propiedadesModel->crear($params);
 
 
   if ($idPropiedad) {
@@ -39,8 +39,7 @@ $idPropiedad = $propiedadesModel->crear($params);
         return false;
       }
       $link = $filename;
-      $propiedadesModel->asignarPortada($idPropiedad, $link); 
-
+      $propiedadesModel->asignarPortada($idPropiedad, $link);
     }
 
     $ambientes = json_decode($_POST['ambientes']);
@@ -71,5 +70,13 @@ $idPropiedad = $propiedadesModel->crear($params);
 
     echo 1;
   }
+  $conexion = null;
+}
+
+if ($_POST['loadDatatable'] == 1) {
+  $conexion = Conexion::conectar();
+  $propiedadesModel = new Propiedades($conexion);
+  $propiedades = $propiedadesModel->getPropiedades(true);
+  echo json_encode($propiedades);
   $conexion = null;
 }

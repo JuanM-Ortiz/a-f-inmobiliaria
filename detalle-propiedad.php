@@ -2,12 +2,20 @@
 
 include_once 'src/db/conn.php';
 include_once 'src/models/propiedades.php';
+include_once 'src/models/ambientes.php';
+include_once 'src/models/servicios.php';
+include_once 'src/models/comodidades.php';
 
 $conexion = Conexion::conectar();
 $modeloPropiedad = new Propiedades($conexion);
+$ambientesModelo = new Ambientes($conexion);
+$serviciosModelo = new Servicios($conexion);
+$comodidadesModelo = new Comodidades($conexion);
 $idPropiedad = $_GET['id'];
 $propiedades = $modeloPropiedad->getFrontDataById($idPropiedad);
-
+$ambientesPropiedad = $ambientesModelo->getAmbientesByPropiedadId($idPropiedad);
+$serviciosPropiedad = $serviciosModelo->getServiciosByPropiedadId($idPropiedad);
+$comodidadesPropiedad = $comodidadesModelo->getComodidadesByPropiedadId($idPropiedad);
 ?>
 
 
@@ -29,7 +37,23 @@ $propiedades = $modeloPropiedad->getFrontDataById($idPropiedad);
     <?php include_once 'modules/navbar.html'; ?>
 
     <?php include_once 'modules/mobile-navbar.html'; ?>
-
+    <div class="container-fluid vh-100">
+        <ul class="text-white">
+            <?php foreach ($comodidadesPropiedad as $comodidad) {
+                echo '<li class="text-white">' . $comodidad['descripcion'] . '</li>';
+            } ?>
+        </ul>
+        <ul class="text-white">
+            <?php foreach ($serviciosPropiedad as $servicio) {
+                echo '<li class="text-white">' . $servicio['descripcion'] . '</li>';
+            } ?>
+        </ul>
+        <ul class="text-white">
+            <?php foreach ($ambientesPropiedad as $ambiente) {
+                echo '<li class="text-white">' . $ambiente['descripcion'] . '</li>';
+            } ?>
+        </ul>
+    </div>
     <section>
         <div class="bg-gray row mt-4 py-4">
             <h2 class="text-center text-white">CONTACTO</h2>
