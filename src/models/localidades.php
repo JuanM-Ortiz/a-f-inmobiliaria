@@ -28,6 +28,16 @@ class Localidades
     return $resultado->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  public function getLocalidadByPropiedadId($id) {
+    $query = "SELECT p.*, l.descripcion AS localidad_descripcion
+    FROM propiedades p
+    JOIN localidades l ON p.id_localidad = l.id
+    WHERE p.id = $id";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    return $resultado->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function eliminarPorId($idLocalidad)
   {
     $query = "UPDATE localidades SET deleted_at = now() WHERE id = $idLocalidad";
