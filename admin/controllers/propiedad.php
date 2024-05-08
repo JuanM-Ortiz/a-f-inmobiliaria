@@ -4,6 +4,9 @@ include_once '../../src/db/conn.php';
 include_once '../../src/models/propiedades.php';
 
 if ($_POST['crear'] && $_POST['crear'] == 1) {
+
+
+
   $conexion = Conexion::conectar();
 
   $propiedadesModel = new Propiedades($conexion);
@@ -56,6 +59,7 @@ if ($_POST['crear'] && $_POST['crear'] == 1) {
     if ($comodidades) {
       $propiedadesModel->crearComodidadesByPropiedadId($idPropiedad, $comodidades);
     }
+
     foreach ($tipoPublicacion as $tipo) {
       if ($tipo == 'venta') {
         $propiedadesModel->crearVentaPropiedad($idPropiedad, $_POST['precioVenta']);
@@ -67,6 +71,32 @@ if ($_POST['crear'] && $_POST['crear'] == 1) {
       }
     }
 
+    if ($_FILES['imagenes']) {
+      $imagenes = [];
+      $currentDir = __DIR__;
+      $targetDir = dirname(dirname($currentDir)) . "/assets/img/propiedades/" . $idPropiedad;
+      mkdir($targetDir, 0777, true);
+      $c = 0;
+      foreach ($_FILES['imagenes']['name'] as $file) {
+        $imagenes[$c]['name'] = $file;
+        $c++;
+      }
+      $c = 0;
+      foreach ($_FILES['imagenes']['tmp_name'] as $file) {
+        $imagenes[$c]['tmp_name'] = $file;
+        $c++;
+      }
+
+      foreach ($imagenes as $imagen) {
+        $filename = $hora . $imagen['name'];
+        $location = $targetDir . "/" . $filename;
+        if (!move_uploaded_file($imagen['tmp_name'], $location)) {
+          return false;
+        }
+        $link = $filename;
+        $propiedadesModel->asignarImagen($idPropiedad, $link);
+      }
+    }
 
     echo 1;
   }

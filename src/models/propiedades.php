@@ -64,7 +64,7 @@ class Propiedades
     $resultado->execute();
     return true;
   }
-  
+
   public function asignarPortada($idPropiedad, $img)
   {
     $query = "UPDATE propiedades SET imagen_portada = '{$img}' WHERE id = $idPropiedad";
@@ -93,7 +93,6 @@ class Propiedades
     } catch (\Throwable $th) {
       echo $th->getMessage();
     }
-    
   }
 
   public function crearAmbientesByPropiedadId($idPropiedad, $ambientes)
@@ -152,7 +151,8 @@ class Propiedades
     return true;
   }
 
-  public function getPropiedadesConPrecio() {
+  public function getPropiedadesConPrecio()
+  {
     $query = "SELECT p.*, pt.precio, pt.moneda, tp.descripcion AS 'tipo_publicacion'
               FROM propiedades p
               JOIN propiedades_tipo_publicaciones pt ON p.id = pt.id_propiedad
@@ -161,5 +161,13 @@ class Propiedades
     $resultado = $this->conexion->prepare($query);
     $resultado->execute();
     return $resultado->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function asignarImagen($idPropiedad, $imagen)
+  {
+    $query = "INSERT INTO propiedades_imagenes(id_propiedad, imagen)
+    VALUES ($idPropiedad, '$imagen')";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
   }
 }

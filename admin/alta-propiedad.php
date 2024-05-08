@@ -66,143 +66,183 @@ $comodidades = $comodidadesModel->getComodidades(false);
     <div class="d-flex mt-5 justify-content-between mb-3">
       <h5>Crear nueva propiedad</h5>
     </div>
-    <form>
-      <div class="row">
-        <div class="mb-3 col-4">
-          <label for="titulo" class="form-label">Título</label>
-          <input type="text" class="form-control" id="titulo">
-        </div>
-        <div class="mb-3 col-4 d-none" id="previsualizacionPortadaDiv">
-          <label for="imgPortada" class="form-label">Previsualizacion...</label>
-          <img src="" id="previsualizacion" alt="" class="img-fluid">
-        </div>
-        <div class="mb-3 col-4">
-          <label for="imgPortada" class="form-label">Imagen de portada</label>
-          <input class="form-control" accept="image/*" type="file" id="imgPortada">
-        </div>
-        <div class="mb-3 col-12">
-          <label for="descripcion" class="form-label">Información general</label>
-          <textarea class="form-control" id="descripcion" rows="3" maxlength="3000"></textarea>
-        </div>
-        <div class="mb-3 col-4">
-          <label for="descripcion" class="form-label">Tipo de propiedad</label>
-          <select class="form-select" id="tipoPropiedad" aria-label="Default select example">
-            <option selected disabled>Seleccione un tipo de propiedad...</option>
-            <?php foreach ($tiposPropiedad as $tipoPropiedad) : ?>
-              <option value="<?php echo $tipoPropiedad['id']; ?>"><?php echo $tipoPropiedad['descripcion']; ?></option>
-            <?php endforeach; ?>
-          </select>
-        </div>
-        <div class="mb-3 col-4">
-          <label for="superficie" class="form-label">Superficie (m2)</label>
-          <input type="number" placeholder="0" class="form-control" id="superficie" min="0" step="1">
-        </div>
-        <div class="mb-3 col-4">
-          <label for="superficieCubierta" class="form-label">Superficie cubierta (m2)</label>
-          <input type="number" placeholder="0" class="form-control" id="superficieCubierta" min="0" step="1">
-        </div>
-        <div class="mb-3 col-4">
-          <label for="pisos" class="form-label">Pisos</label>
-          <input type="number" placeholder="0" class="form-control" id="pisos" min="0" step="1">
-        </div>
-        <div class="mb-3 col-4">
-          <label for="dormitorios" class="form-label">Dormitorios</label>
-          <input type="number" placeholder="0" class="form-control" id="dormitorios" min="0" step="1">
-        </div>
-        <div class="mb-3 col-4">
-          <label for="baños" class="form-label">Baños</label>
-          <input type="number" placeholder="0" class="form-control" id="baños" min="0" step="1">
-        </div>
-        <div class="mb-3 col-4">
-          <label for="localidad" class="form-label">Localidad</label>
-          <select class="form-select" id="localidad" aria-label="localidad">
-            <option selected disabled>Seleccione la localidad...</option>
-            <?php foreach ($localidades as $localidad) : ?>
-              <option value="<?php echo $localidad['id']; ?>"><?php echo $localidad['descripcion']; ?></option>
-            <?php endforeach; ?>
-          </select>
-        </div>
-        <div class="mb-3 col-4">
-          <label for="zona" class="form-label">Zona</label>
-          <select class="form-select" id="zona" aria-label="zona">
-            <option selected disabled>Seleccione la zona...</option>
-            <?php foreach ($zonas as $zona) : ?>
-              <option value="<?php echo $zona['id']; ?>"><?php echo $zona['descripcion']; ?></option>
-            <?php endforeach; ?>
-          </select>
-        </div>
-        <div class="mb-3 col-4">
-          <label for="mapsUrl" class="form-label">URL Google Maps</label>
-          <input type="text" class="form-control" id="mapsUrl">
-        </div>
-        <div class="mb-3 col-4">
-          <label for="tipoPublicacion" class="form-label d-block">Tipo de publicación</label>
-          <div class="form-check form-check-inline mt-1">
-            <input class="form-check-input" type="checkbox" name="tipoPublicacion" value="venta" id="ventaCheck">
-            <label class="form-check-label" for="flexCheckDefault">
-              Venta
-            </label>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#datosProductoAccordion" aria-expanded="true" aria-controls="collapseOne">
+            Datos de la propiedad
+          </button>
+        </h2>
+        <div id="datosProductoAccordion" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="row">
+              <div class="mb-3 col-4">
+                <label for="titulo" class="form-label">Título</label>
+                <input type="text" class="form-control" id="titulo">
+              </div>
+              <div class="mb-3 col-4 d-none" id="previsualizacionPortadaDiv">
+                <label for="imgPortada" class="form-label">Previsualizacion...</label>
+                <img src="" id="previsualizacion" alt="" class="img-fluid">
+              </div>
+              <div class="mb-3 col-4">
+                <label for="imgPortada" class="form-label">Imagen de portada</label>
+                <input class="form-control" accept="image/*" type="file" id="imgPortada">
+              </div>
+              <div class="mb-3 col-12">
+                <label for="descripcion" class="form-label">Información general</label>
+                <textarea class="form-control" id="descripcion" rows="3" maxlength="3000"></textarea>
+              </div>
+              <div class="mb-3 col-4">
+                <label for="descripcion" class="form-label">Tipo de propiedad</label>
+                <select class="form-select" id="tipoPropiedad" aria-label="Default select example">
+                  <option selected disabled>Seleccione un tipo de propiedad...</option>
+                  <?php foreach ($tiposPropiedad as $tipoPropiedad) : ?>
+                    <option value="<?php echo $tipoPropiedad['id']; ?>"><?php echo $tipoPropiedad['descripcion']; ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+              <div class="mb-3 col-4">
+                <label for="superficie" class="form-label">Superficie (m2)</label>
+                <input type="number" placeholder="0" class="form-control" id="superficie" min="0" step="1">
+              </div>
+              <div class="mb-3 col-4">
+                <label for="superficieCubierta" class="form-label">Superficie cubierta (m2)</label>
+                <input type="number" placeholder="0" class="form-control" id="superficieCubierta" min="0" step="1">
+              </div>
+              <div class="mb-3 col-4">
+                <label for="pisos" class="form-label">Pisos</label>
+                <input type="number" placeholder="0" class="form-control" id="pisos" min="0" step="1">
+              </div>
+              <div class="mb-3 col-4">
+                <label for="dormitorios" class="form-label">Dormitorios</label>
+                <input type="number" placeholder="0" class="form-control" id="dormitorios" min="0" step="1">
+              </div>
+              <div class="mb-3 col-4">
+                <label for="baños" class="form-label">Baños</label>
+                <input type="number" placeholder="0" class="form-control" id="baños" min="0" step="1">
+              </div>
+              <div class="mb-3 col-4">
+                <label for="localidad" class="form-label">Localidad</label>
+                <select class="form-select" id="localidad" aria-label="localidad">
+                  <option selected disabled>Seleccione la localidad...</option>
+                  <?php foreach ($localidades as $localidad) : ?>
+                    <option value="<?php echo $localidad['id']; ?>"><?php echo $localidad['descripcion']; ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+              <div class="mb-3 col-4">
+                <label for="zona" class="form-label">Zona</label>
+                <select class="form-select" id="zona" aria-label="zona">
+                  <option selected disabled>Seleccione la zona...</option>
+                  <?php foreach ($zonas as $zona) : ?>
+                    <option value="<?php echo $zona['id']; ?>"><?php echo $zona['descripcion']; ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+              <div class="mb-3 col-4">
+                <label for="mapsUrl" class="form-label">URL Google Maps</label>
+                <input type="text" class="form-control" id="mapsUrl">
+              </div>
+              <div class="mb-3 col-4">
+                <label for="tipoPublicacion" class="form-label d-block">Tipo de publicación</label>
+                <div class="form-check form-check-inline mt-1">
+                  <input class="form-check-input" type="checkbox" name="tipoPublicacion" value="venta" id="ventaCheck">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Venta
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="tipoPublicacion" value="alquiler" id="alquilerCheck">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Alquiler
+                  </label>
+                </div>
+              </div>
+              <div class="mb-3 col-2 d-none" id="precioVentaDiv">
+                <label for="precioVenta" class="form-label">Precio de venta</label>
+                <input type="number" min="0" class="form-control" id="precioVenta">
+              </div>
+              <div class="mb-3 col-2 d-none" id="precioAlquilerDiv">
+                <label for="precioAlquiler" class="form-label">Precio de alquiler</label>
+                <input type="number" min="0" class="form-control" id="precioAlquiler">
+              </div>
+              <div class="mb-3 col-4">
+                <label for="tipoPublicacion" class="form-label d-block">Definir como destacada?</label>
+                <select class="form-select" id="destacada" aria-label="destacada">
+                  <option selected value="1">Si</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-4">
+                <h5>Ambientes</h5>
+                <?php foreach ($ambientes as $ambiente) : ?>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="ambientes" value="<?php echo $ambiente['id']; ?>" id="<?php echo 'ambiente' . $ambiente['id']; ?>">
+                    <label class="form-check-label" for="<?php echo 'ambiente' . $ambiente['id'] ?>">
+                      <?php echo $ambiente['descripcion']; ?>
+                    </label>
+                  </div>
+                <?php endforeach; ?>
+              </div>
+              <div class="col-4">
+                <h5>Servicios</h5>
+                <?php foreach ($servicios as $servicio) : ?>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="servicios" value="<?php echo $servicio['id']; ?>" id="<?php echo 'servicio' . $servicio['id']; ?>">
+                    <label class="form-check-label" for="<?php echo 'servicio' . $servicio['id'] ?>">
+                      <?php echo $servicio['descripcion']; ?>
+                    </label>
+                  </div>
+                <?php endforeach; ?>
+              </div>
+              <div class="col-4">
+                <h5>Comodidades</h5>
+                <?php foreach ($comodidades as $comodidad) : ?>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="comodidades" value="<?php echo $comodidad['id']; ?>" id="<?php echo 'comodidad' . $comodidad['id']; ?>">
+                    <label class="form-check-label" for="<?php echo 'comodidad' . $comodidad['id']; ?>">
+                      <?php echo $comodidad['descripcion']; ?>
+                    </label>
+                  </div>
+                <?php endforeach; ?>
+              </div>
+            </div>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="tipoPublicacion" value="alquiler" id="alquilerCheck">
-            <label class="form-check-label" for="flexCheckDefault">
-              Alquiler
-            </label>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#imagenesAccordion" aria-expanded="false" aria-controls="collapseTwo">
+            Imágenes
+          </button>
+        </h2>
+        <div id="imagenesAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="row">
+              <!-- <div class="mb-3 col-4 d-none" id="previsualizacionPortadaDiv">
+                <label for="prevPortada" class="form-label">Previsualizacion...</label>
+                <img src="" id="previsualizacion" alt="" class="img-fluid">
+              </div> -->
+              <div class="mb-3 col-4">
+                <label for="imagenes" class="form-label">Seleccione las imagenes para la galeria...</label>
+                <input class="form-control" accept="image/*" type="file" id="imagenes" multiple>
+              </div>
+              <div class="gallery"></div>
+            </div>
           </div>
         </div>
-        <div class="mb-3 col-2 d-none" id="precioVentaDiv">
-          <label for="precioVenta" class="form-label">Precio de venta</label>
-          <input type="number" min="0" class="form-control" id="precioVenta">
-        </div>
-        <div class="mb-3 col-2 d-none" id="precioAlquilerDiv">
-          <label for="precioAlquiler" class="form-label">Precio de alquiler</label>
-          <input type="number" min="0" class="form-control" id="precioAlquiler">
-        </div>
       </div>
-      <hr>
-      <div class="row">
-        <div class="col-4">
-          <h5>Ambientes</h5>
-          <?php foreach ($ambientes as $ambiente) : ?>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="ambientes" value="<?php echo $ambiente['id']; ?>" id="<?php echo 'ambiente' . $ambiente['id']; ?>">
-              <label class="form-check-label" for="<?php echo 'ambiente' . $ambiente['id'] ?>">
-                <?php echo $ambiente['descripcion']; ?>
-              </label>
-            </div>
-          <?php endforeach; ?>
-        </div>
-        <div class="col-4">
-          <h5>Servicios</h5>
-          <?php foreach ($servicios as $servicio) : ?>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="servicios" value="<?php echo $servicio['id']; ?>" id="<?php echo 'servicio' . $servicio['id']; ?>">
-              <label class="form-check-label" for="<?php echo 'servicio' . $servicio['id'] ?>">
-                <?php echo $servicio['descripcion']; ?>
-              </label>
-            </div>
-          <?php endforeach; ?>
-        </div>
-        <div class="col-4">
-          <h5>Comodidades</h5>
-          <?php foreach ($comodidades as $comodidad) : ?>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="comodidades" value="<?php echo $comodidad['id']; ?>" id="<?php echo 'comodidad' . $comodidad['id']; ?>">
-              <label class="form-check-label" for="<?php echo 'comodidad' . $comodidad['id']; ?>">
-                <?php echo $comodidad['descripcion']; ?>
-              </label>
-            </div>
-          <?php endforeach; ?>
-        </div>
+    </div>
+    <div class="row mt-4 pb-4">
+      <div class="col-4 text-end offset-8">
+        <button type="button" id="guardarPropiedad" class="btn btn-lg btn-success">Guardar</button>
       </div>
-      <div class="row mt-4">
-        <div class="col-4 text-end offset-8">
-          <button type="button" id="guardarPropiedad" class="btn btn-lg btn-success">Guardar</button>
-        </div>
-      </div>
-    </form>
-
+    </div>
   </div>
+
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -243,6 +283,13 @@ $comodidades = $comodidadesModel->getComodidades(false);
       let precioVenta = $('#precioVenta').val();
       let precioAlquiler = $('#precioAlquiler').val();
       let imgPortada = $('#imgPortada')[0].files[0];
+
+      $.each($("#imagenes"), function(i, obj) {
+        $.each(obj.files, function(j, file) {
+          fd.append('imagenes[' + j + ']', file);
+        })
+      });
+
       let ambientes = $('input[name="ambientes"]:checked').map(function() {
         return this.value;
       }).get();
@@ -286,17 +333,38 @@ $comodidades = $comodidadesModel->getComodidades(false);
         contentType: false,
         processData: false,
         success: function(result) {
-         /*  if (!result) {
+          if (!result) {
             window.alert('Ocurrio un error.');
             return;
           }
           if (result) {
             window.alert('Propiedad guardada correctamente!');
             window.location.reload();
-          } */
+          }
         },
       });
 
+    });
+
+    $(function() {
+      var imagesPreview = function(input, placeToInsertImagePreview) {
+
+        if (input.files) {
+          var filesAmount = input.files.length;
+          for (i = 0; i < filesAmount; i++) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+              $($.parseHTML('<img class="w-25">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+            }
+            reader.readAsDataURL(input.files[i]);
+          }
+        }
+      };
+
+      $('#imagenes').on('change', function() {
+        $('.gallery').html('');
+        imagesPreview(this, 'div.gallery');
+      });
     });
   });
 </script>
