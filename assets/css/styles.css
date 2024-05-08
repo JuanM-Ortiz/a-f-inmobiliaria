@@ -6,6 +6,10 @@
     --orange-color: #E38241;
 }
 
+.bg-secondary-coral-color {
+    background-color: var(--secondary-coral-color) !important;
+}
+
 .bg-grays-color {
     background-color: #ACACAC !important;
 }
@@ -478,22 +482,30 @@ table td {
     display: flex;
     flex-direction: column;
     height: 100%;
-  }
-  
-  .bg-coral-color h2 {
-    margin: 0; 
-  }
-  
-  .details-table {
+}
+
+.bg-coral-color h2 {
+    margin: 0;
+}
+
+.details-table {
     flex-grow: 1;
-    width: 100%; 
-  }
-  
-  .details-table .table {
+    width: 100%;
+}
+
+.details-table .table {
     margin-bottom: 0;
+}
+
+.tabla-detalles {
+    border: #555555 !important
+}
+
+.titulo-caracteristicas {
+    border-bottom: 1px solid #999999;
+    padding-bottom: 10px;
   }
 
-  .tabla-detalles {
-    border:#555555 !important
-  }
-  
+.caja-venta-alquiler {
+    max-width: 20% !important;
+}
