@@ -170,4 +170,14 @@ class Propiedades
     $resultado = $this->conexion->prepare($query);
     $resultado->execute();
   }
+
+  public function getImagenesByPropiedadId($idPropiedad)
+  {
+    $query = "SELECT imagen
+    FROM propiedades_imagenes
+    WHERE id_propiedad = $idPropiedad";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    return $resultado->fetchAll(PDO::FETCH_ASSOC);
+  }
 }

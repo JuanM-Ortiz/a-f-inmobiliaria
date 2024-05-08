@@ -15,6 +15,7 @@ $comodidadesModelo = new Comodidades($conexion);
 $localidadesModelo = new Localidades($conexion);
 $idPropiedad = $_GET['id'];
 $propiedades = $modeloPropiedad->getFrontDataById($idPropiedad);
+$imagenes = $modeloPropiedad->getImagenesByPropiedadId($idPropiedad);
 $ambientesPropiedad = $ambientesModelo->getAmbientesByPropiedadId($idPropiedad);
 $serviciosPropiedad = $serviciosModelo->getServiciosByPropiedadId($idPropiedad);
 $comodidadesPropiedad = $comodidadesModelo->getComodidadesByPropiedadId($idPropiedad);
@@ -51,8 +52,8 @@ $localidadesPropiedad = $localidadesModelo->getLocalidadByPropiedadId($idPropied
 
         <div class="caja-venta-alquiler bg-orange-color ">
             <?php
-            foreach($propiedades as $propiedad) {
-                echo '<h4 class="text-center fw-bold text-white py-2">' . $propiedad[''] .'</h4>';
+            foreach ($propiedades as $propiedad) {
+                echo '<h4 class="text-center fw-bold text-white py-2">' . $propiedad[''] . '</h4>';
             }
             ?>
         </div>';
@@ -69,10 +70,10 @@ $localidadesPropiedad = $localidadesModelo->getLocalidadByPropiedadId($idPropied
 
                 <div class="glider-contain">
                     <div class="glider">
-                        <div><img src="assets/img/casa1.jpg" class="w-100" alt="..."></div>
-                        <div><img src="assets/img/casa1.jpg" class="w-100" alt="..."></div>
-                        <div><img src="assets/img/casa1.jpg" class="w-100" alt="..."></div>
-                        <div><img src="assets/img/casa1.jpg" class="w-100" alt="..."></div>
+                        <?php foreach ($imagenes as $imagen) {
+                            $link = 'assets/img/propiedades/' . $idPropiedad . '/' . $imagen['imagen'];
+                            echo '<div><img src="' . $link . '" class="w-100" alt="..."></div>';
+                        } ?>
                     </div>
 
                     <button aria-label="Previous" class="glider-prev">«</button>
