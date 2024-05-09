@@ -5,8 +5,6 @@ include_once '../../src/models/propiedades.php';
 
 if ($_POST['crear'] && $_POST['crear'] == 1) {
 
-
-
   $conexion = Conexion::conectar();
 
   $propiedadesModel = new Propiedades($conexion);
@@ -106,7 +104,25 @@ if ($_POST['crear'] && $_POST['crear'] == 1) {
 if ($_POST['loadDatatable'] == 1) {
   $conexion = Conexion::conectar();
   $propiedadesModel = new Propiedades($conexion);
-  $propiedades = $propiedadesModel->getPropiedades(true);
+  $propiedades = $propiedadesModel->getPropiedades(false);
   echo json_encode($propiedades);
+  $conexion = null;
+}
+
+
+if ($_POST['eliminar'] && $_POST['eliminar'] != '') {
+
+  $conexion = Conexion::conectar();
+
+  $propiedadesModel = new Propiedades($conexion);
+  $imagenes = $propiedadesModel->getImagenesByPropiedadId($_POST['eliminar']);
+  if ($propiedadesModel->eliminarPorId($_POST['eliminar'])) {
+    foreach ($imagenes as $imagen) {
+      unlink(dirname(dirname(__DIR__)) . "/assets/img/propiedades/" . $_POST['eliminar'] . "/" . $imagen['imagen']);
+    }
+    rmdir(dirname(dirname(__DIR__)) . "/assets/img/propiedades/" . $_POST['eliminar']);
+    echo 1;
+  }
+
   $conexion = null;
 }

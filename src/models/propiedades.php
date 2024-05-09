@@ -45,6 +45,22 @@ class Propiedades
     $query = "UPDATE propiedades SET deleted_at = now() WHERE id = $idPropiedad";
     $resultado = $this->conexion->prepare($query);
     $resultado->execute();
+    $query = "DELETE FROM propiedades_ambientes WHERE id_propiedad = $idPropiedad";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    $query = "DELETE FROM propiedades_servicios WHERE id_propiedad = $idPropiedad";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    $query = "DELETE FROM propiedades_comodidades WHERE id_propiedad = $idPropiedad";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    $query = "DELETE FROM propiedades_tipo_publicaciones WHERE id_propiedad = $idPropiedad";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    $query = "DELETE FROM propiedades_imagenes WHERE id_propiedad = $idPropiedad";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+
     return true;
   }
   public function restaurarPorId($idPropiedad)

@@ -145,36 +145,21 @@ $propiedades = $propiedadesModel->getPropiedades(true);
     fila = element.closest("tr");
     var data = $('#datatable').DataTable().row(fila).data();
     idPropiedad = data['id'];
-    $.post("controllers/propiedad.php", {
-      eliminar: idPropiedad
-    }, function(result) {
-      if (!result) {
-        window.alert('Ocurrio un error.');
-        return;
-      }
-      if (result) {
-        window.alert('Propiedad eliminada correctamente!');
-        window.location.reload();
-      }
-    });
-  }
+    if (confirm("¿Está seguro que desea eliminar la propiedad?") == true) {
+      $.post("controllers/propiedad.php", {
+        eliminar: idPropiedad
+      }, function(result) {
+        if (!result) {
+          window.alert('Ocurrio un error.');
+          return;
+        }
+        /* if (result) {
+          window.alert('Propiedad eliminada correctamente!');
+          window.location.reload();
+        } */
+      });
+    }
 
-  function restaurarPropiedad() {
-    fila = element.closest("tr");
-    var data = $('#datatable').DataTable().row(fila).data();
-    idPropiedad = data['id'];
-    $.post("controllers/propiedad.php", {
-      restaurar: idPropiedad
-    }, function(result) {
-      if (!result) {
-        window.alert('Ocurrio un error.');
-        return;
-      }
-      if (result) {
-        window.alert('Propiedad restaurada correctamente!');
-        window.location.reload();
-      }
-    });
   }
 </script>
 
