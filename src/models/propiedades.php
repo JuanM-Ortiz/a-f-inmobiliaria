@@ -196,4 +196,35 @@ class Propiedades
     $resultado->execute();
     return $resultado->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  public function getPropiedadByZonaLocalidad($zona = null, $localidad = null)
+  {
+    $and = '';
+    if ($zona) {
+      $getZona = "SELECT id FROM zonas WHERE descripcion LIKE '%$zona%'";
+      $resultado = $this->conexion->prepare($getZona);
+      $resultado->execute();
+      $zonas = $resultado->fetchAll(PDO::FETCH_COLUMN);
+      $and .= ' AND id_zona IN (' . implode(',', $zonas) . ')';
+    }
+
+    if ($localidad) {
+      $getZona = "SELECT id FROM localidades WHERE descripcion LIKE '%$localidad%'";
+      $resultado = $this->conexion->prepare($getZona);
+      $resultado->execute();
+      $localidades = $resultado->fetchAll(PDO::FETCH_COLUMN);
+      $and .= ' AND id_localidad IN (' . implode(',', $localidades) . ')';
+    }
+
+    $query = "SELECT p.*, pt.precio, pt.moneda, tp.descripcion AS 'tipo_publicacion'
+    FROM propiedades p
+    JOIN propiedades_tipo_publicaciones pt ON p.id = pt.id_propiedad
+    JOIN tipo_publicaciones tp ON pt.id_tipo_publicacion = tp.id
+    WHERE p.deleted_at IS NULL";
+    $query .= $and;
+
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    return $resultado->fetchAll(PDO::FETCH_ASSOC);
+  }
 }

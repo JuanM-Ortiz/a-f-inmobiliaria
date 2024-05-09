@@ -2,11 +2,16 @@
 
 include_once 'src/db/conn.php';
 include_once 'src/models/propiedades.php';
-
 $conexion = Conexion::conectar();
 $modeloPropiedad = new Propiedades($conexion);
-/* $propiedades = $modeloPropiedad->getPropiedades(); */
-$propiedades = $modeloPropiedad->getPropiedadesConPrecio();
+
+if ($_POST['localidad'] || $_POST['zona']) {
+    $propiedades = $modeloPropiedad->getPropiedadByZonaLocalidad($_POST['localidad'], $_POST['zona']);
+} else {
+    $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
+}
+
+
 
 ?>
 
@@ -52,7 +57,7 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
                 
                         <div class="col-12 col-lg-3 col-md-6 d-flex justify-content-center mb-4">
                             <div class="card" style="width: 18rem;">
-                            <img src="'. $imagePath . '" class="card-img-top" alt="...">
+                            <img src="' . $imagePath . '" class="card-img-top" alt="...">
 
                                 <div class="card-body text-white px-0 pb-0">
                                     <h5 class="card-title bg-secondary-coral-color text-center fw-bold py-1">' . strtoupper($propiedad['tipo_publicacion']) . '</h5>
@@ -62,7 +67,7 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
                                     <div class="card-footer text-white">
                                         <div class="row align-items-center">
                                             <div class="col-6">
-                                                <p class="mt-3 fs-5">'. $moneda .' ' . number_format($propiedad['precio']) . '</p>
+                                                <p class="mt-3 fs-5">' . $moneda . ' ' . number_format($propiedad['precio']) . '</p>
                                             </div>
                                             <div class="col-6">
                                                 <a href="detalle-propiedad.php?id=' . $propiedad['id'] . '" class="btn btn-primary mx-auto">Ver más</a>

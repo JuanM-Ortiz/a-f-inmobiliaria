@@ -5,7 +5,7 @@ include_once 'src/models/propiedades.php';
 
 $conexion = Conexion::conectar();
 $modeloPropiedad = new Propiedades($conexion);
-$propiedades = $modeloPropiedad->getPropiedades(); 
+$propiedades = $modeloPropiedad->getPropiedades();
 $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
 
 ?>
@@ -35,9 +35,9 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
             <div class="overlay-text">La oportunidad de disfrutar de la tranquilidad y la belleza de</div>
             <div class="location-tag fw-bold bg-coral-color">Merlo</div>
             <div class="search-bar py-3">
-                <form class="search-form" action="">
-                    <input class="bg-dark mx-3 my-2 my-md-1" type="text" name="search" placeholder="Localidad">
-                    <input class="bg-dark mx-3 my-2 my-md-1" type="text" name="search" placeholder="Zona">
+                <form class="search-form" action="propiedades.php">
+                    <input class="bg-dark mx-3 my-2 my-md-1" type="text" name="localidad" placeholder="Localidad">
+                    <input class="bg-dark mx-3 my-2 my-md-1" type="text" name="zona" placeholder="Zona">
                     <button class="fw-bold fs-5" type="submit">Buscar</button>
                 </form>
             </div>
@@ -55,9 +55,9 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
             <div class="row ">
 
                 <?php
-                
-                    foreach ($propiedades as $propiedad) :
-                        if ($propiedad['es_destacada'] == 1) :
+
+                foreach ($propiedades as $propiedad) :
+                    if ($propiedad['es_destacada'] == 1) :
                         $src = $propiedad['imagen_portada'];
                         $carpetaId = $propiedad['id'];
                         $imagePath = "assets/img/propiedades/" . $carpetaId . '/' . $src;
@@ -87,10 +87,10 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
                             </div>
                         </div>';
                     endif;
-                    endforeach;
-                
+                endforeach;
+
                 ?>
-                
+
             </div>
         </div>
 
