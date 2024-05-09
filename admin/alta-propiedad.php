@@ -283,6 +283,7 @@ $comodidades = $comodidadesModel->getComodidades(false);
       let precioVenta = $('#precioVenta').val();
       let precioAlquiler = $('#precioAlquiler').val();
       let imgPortada = $('#imgPortada')[0].files[0];
+      let destacada = $('#destacada').val();
 
       $.each($("#imagenes"), function(i, obj) {
         $.each(obj.files, function(j, file) {
@@ -325,6 +326,7 @@ $comodidades = $comodidadesModel->getComodidades(false);
       fd.append('tipoPublicacion', tipoPublicacion);
       fd.append('precioVenta', precioVenta ?? null);
       fd.append('precioAlquiler', precioAlquiler ?? null);
+      fd.append('destacada', destacada);
 
       $.ajax({
         url: 'controllers/propiedad.php',

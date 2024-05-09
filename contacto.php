@@ -18,8 +18,10 @@
     <?php include_once 'modules/mobile-navbar.html'; ?>
 
     <section>
-        <div class="bg-gray row mt-4 py-4">
-            <h2 class="text-center text-white">CONTACTO</h2>
+        <div class="banner-titulo bg-gray row mt-4 py-4 ">
+            <div class="featured-box-propiedades bg-orange-color col-md-2 col-6 offset-md-5 offset-3 text-center ">
+                <h2 class="featured text-white my-auto py-2 fw-bold">Contacto</h2>
+            </div>
         </div>
 
         <div class="container my-5">

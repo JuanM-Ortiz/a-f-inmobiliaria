@@ -17,11 +17,13 @@
 
     <?php include_once 'modules/mobile-navbar.html'; ?>
 
-    <section>
-        <h2 class="text-center text-white">NOSOTROS</h2>
-    </section>
+    <div class="banner-titulo bg-gray row mt-4 py-4 ">
+        <div class="featured-box-propiedades bg-orange-color col-md-2 col-6 offset-md-5 offset-3 text-center ">
+            <h2 class="featured text-white my-auto py-2 fw-bold">Nosotros</h2>
+        </div>
+    </div>
 
-
+    <hr class="linea-divisoria">
 
     <?php include_once 'modules/footer-copyright.html' ?>
 

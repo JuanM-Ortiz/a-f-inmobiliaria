@@ -31,8 +31,8 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
     <?php include_once 'modules/mobile-navbar.html'; ?>
 
     <section class="featured bg-main">
-        <div class="bg-gray row mt-4 py-4">
-            <div class="featured-box bg-coral-color col-md-2 col-6 offset-md-5 offset-3 text-center">
+        <div class="banner-titulo bg-gray row mt-4 py-4 ">
+            <div class="featured-box-propiedades bg-orange-color col-md-2 col-6 offset-md-5 offset-3 text-center ">
                 <h2 class="featured text-white my-auto py-2 fw-bold">Propiedades</h2>
             </div>
         </div>
@@ -55,8 +55,10 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
                             <img src="'. $imagePath . '" class="card-img-top" alt="...">
 
                                 <div class="card-body text-white px-0 pb-0">
-                                    <h5 class="card-title bg-coral-color text-center fw-bold py-1">' . strtoupper($propiedad['tipo_publicacion']) . '</h5>
-                                    <p class="card-text ps-3 fs-5">' . $propiedad['descripcion'] . '</p>
+                                    <h5 class="card-title bg-secondary-coral-color text-center fw-bold py-1">' . strtoupper($propiedad['tipo_publicacion']) . '</h5>
+                                    <div class="titulo-container">
+                                    <p class="card-text ps-3 ">' . $propiedad['titulo'] . '</p>
+                                    </div>
                                     <div class="card-footer text-white">
                                         <div class="row align-items-center">
                                             <div class="col-6">
@@ -76,14 +78,11 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
             </div>
         </div>
 
-
-
     </section>
 
-
+    <hr class="linea-divisoria">
 
     <?php include_once 'modules/footer-copyright.html' ?>
-
 
     <script src="assets/js/main.js?ver=<?php echo $date; ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
