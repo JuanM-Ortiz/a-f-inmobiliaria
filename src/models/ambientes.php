@@ -37,6 +37,16 @@ class Ambientes
     $resultado->execute();
     return $resultado->fetchAll(PDO::FETCH_ASSOC);
   }
+  public function getAmbientesIdByPropiedadId($id)
+  {
+    $query = "SELECT a.id 
+    FROM ambientes a
+    JOIN propiedades_ambientes pa ON a.id = pa.id_ambiente
+    WHERE pa.id_propiedad = $id";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    return $resultado->fetchAll(PDO::FETCH_COLUMN);
+  }
 
   public function eliminarPorId($idAmbiente)
   {

@@ -29,6 +29,19 @@ $ambientes = $ambientesModel->getAmbientes(false);
 $servicios = $serviciosModel->getServicios(false);
 $comodidades = $comodidadesModel->getComodidades(false);
 
+if (!empty($_GET['id'])) {
+
+  include_once '../src/models/propiedades.php';
+  include_once 'src/models/tiposPropiedad.php';
+  $propiedadModel = new Propiedades($conexion);
+  $idPropiedad = $_GET['id'];
+  $tipoPropiedadModel = new TiposPropiedad($conexion);
+  $dataPropiedad = $propiedadModel->getPropiedadById($idPropiedad);
+  $imagenes = $propiedadModel->getImagenesByPropiedadId($idPropiedad);
+  $ambientesPropiedad = $ambientesModel->getAmbientesIdByPropiedadId($idPropiedad);
+  $serviciosPropiedad = $serviciosModel->getServiciosByPropiedadId($idPropiedad);
+  $comodidadesPropiedad = $comodidadesModel->getComodidadesByPropiedadId($idPropiedad);
+}
 
 ?>
 
@@ -78,55 +91,55 @@ $comodidades = $comodidadesModel->getComodidades(false);
             <div class="row">
               <div class="mb-3 col-4">
                 <label for="titulo" class="form-label">Título</label>
-                <input type="text" class="form-control" id="titulo">
-              </div>
-              <div class="mb-3 col-4 d-none" id="previsualizacionPortadaDiv">
-                <label for="imgPortada" class="form-label">Previsualizacion...</label>
-                <img src="" id="previsualizacion" alt="" class="img-fluid">
+                <input type="text" class="form-control" id="titulo" value="<?= $dataPropiedad[0]['titulo']; ?>">
               </div>
               <div class="mb-3 col-4">
                 <label for="imgPortada" class="form-label">Imagen de portada</label>
                 <input class="form-control" accept="image/*" type="file" id="imgPortada">
               </div>
+              <div class="mb-3 col-4 d-none" id="previsualizacionPortadaDiv">
+                <label for="imgPortada" class="form-label">Vista previa:</label>
+                <img src="" id="previsualizacion" alt="" class="w-50 d-block mx-auto">
+              </div>
               <div class="mb-3 col-12">
                 <label for="descripcion" class="form-label">Información general</label>
-                <textarea class="form-control" id="descripcion" rows="3" maxlength="3000"></textarea>
+                <textarea class="form-control" id="descripcion" rows="3" maxlength="3000"><?= $dataPropiedad[0]['descripcion']; ?></textarea>
               </div>
               <div class="mb-3 col-4">
                 <label for="descripcion" class="form-label">Tipo de propiedad</label>
                 <select class="form-select" id="tipoPropiedad" aria-label="Default select example">
                   <option selected disabled>Seleccione un tipo de propiedad...</option>
                   <?php foreach ($tiposPropiedad as $tipoPropiedad) : ?>
-                    <option value="<?php echo $tipoPropiedad['id']; ?>"><?php echo $tipoPropiedad['descripcion']; ?></option>
+                    <option value="<?php echo $tipoPropiedad['id']; ?>" <?= $dataPropiedad[0]['id_tipo_propiedad'] == $tipoPropiedad['id'] ? 'selected' : '' ?>><?php echo $tipoPropiedad['descripcion']; ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>
               <div class="mb-3 col-4">
                 <label for="superficie" class="form-label">Superficie (m2)</label>
-                <input type="number" placeholder="0" class="form-control" id="superficie" min="0" step="1">
+                <input type="number" placeholder="0" class="form-control" id="superficie" min="0" step="1" value="<?= $dataPropiedad[0]['superficie']; ?>">
               </div>
               <div class="mb-3 col-4">
                 <label for="superficieCubierta" class="form-label">Superficie cubierta (m2)</label>
-                <input type="number" placeholder="0" class="form-control" id="superficieCubierta" min="0" step="1">
+                <input type="number" placeholder="0" class="form-control" id="superficieCubierta" min="0" step="1" value="<?= $dataPropiedad[0]['superficie_cubierta']; ?>">
               </div>
               <div class="mb-3 col-4">
                 <label for="pisos" class="form-label">Pisos</label>
-                <input type="number" placeholder="0" class="form-control" id="pisos" min="0" step="1">
+                <input type="number" placeholder="0" class="form-control" id="pisos" min="0" step="1" value="<?= $dataPropiedad[0]['pisos']; ?>">
               </div>
               <div class="mb-3 col-4">
                 <label for="dormitorios" class="form-label">Dormitorios</label>
-                <input type="number" placeholder="0" class="form-control" id="dormitorios" min="0" step="1">
+                <input type="number" placeholder="0" class="form-control" id="dormitorios" min="0" step="1" value="<?= $dataPropiedad[0]['dormitorios']; ?>">
               </div>
               <div class="mb-3 col-4">
                 <label for="baños" class="form-label">Baños</label>
-                <input type="number" placeholder="0" class="form-control" id="baños" min="0" step="1">
+                <input type="number" placeholder="0" class="form-control" id="baños" min="0" step="1" value="<?= $dataPropiedad[0]['baños']; ?>">
               </div>
               <div class="mb-3 col-4">
                 <label for="localidad" class="form-label">Localidad</label>
                 <select class="form-select" id="localidad" aria-label="localidad">
                   <option selected disabled>Seleccione la localidad...</option>
                   <?php foreach ($localidades as $localidad) : ?>
-                    <option value="<?php echo $localidad['id']; ?>"><?php echo $localidad['descripcion']; ?></option>
+                    <option value="<?php echo $localidad['id']; ?>" <?= $dataPropiedad[0]['id_localidad'] == $localidad['id'] ? 'selected' : '' ?>><?php echo $localidad['descripcion']; ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>
@@ -135,13 +148,13 @@ $comodidades = $comodidadesModel->getComodidades(false);
                 <select class="form-select" id="zona" aria-label="zona">
                   <option selected disabled>Seleccione la zona...</option>
                   <?php foreach ($zonas as $zona) : ?>
-                    <option value="<?php echo $zona['id']; ?>"><?php echo $zona['descripcion']; ?></option>
+                    <option value="<?php echo $zona['id']; ?>" <?= $dataPropiedad[0]['id_zona'] == $zona['id'] ? 'selected' : '' ?>><?php echo $zona['descripcion']; ?></option>
                   <?php endforeach; ?>
                 </select>
               </div>
               <div class="mb-3 col-4">
                 <label for="mapsUrl" class="form-label">URL Google Maps</label>
-                <input type="text" class="form-control" id="mapsUrl">
+                <input type="text" class="form-control" id="mapsUrl" value="<?= $dataPropiedad[0]['maps_url']; ?>">
               </div>
               <div class="mb-3 col-4">
                 <label for="tipoPublicacion" class="form-label d-block">Tipo de publicación</label>
@@ -180,7 +193,7 @@ $comodidades = $comodidadesModel->getComodidades(false);
                 <h5>Ambientes</h5>
                 <?php foreach ($ambientes as $ambiente) : ?>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="ambientes" value="<?php echo $ambiente['id']; ?>" id="<?php echo 'ambiente' . $ambiente['id']; ?>">
+                    <input class="form-check-input" type="checkbox" name="ambientes" value="<?php echo $ambiente['id']; ?>" id="<?php echo 'ambiente' . $ambiente['id']; ?>" <?= in_array($ambiente['id'], $ambientesPropiedad) ? 'checked' : '' ?>>
                     <label class="form-check-label" for="<?php echo 'ambiente' . $ambiente['id'] ?>">
                       <?php echo $ambiente['descripcion']; ?>
                     </label>
@@ -222,10 +235,6 @@ $comodidades = $comodidadesModel->getComodidades(false);
         <div id="imagenesAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <div class="row">
-              <!-- <div class="mb-3 col-4 d-none" id="previsualizacionPortadaDiv">
-                <label for="prevPortada" class="form-label">Previsualizacion...</label>
-                <img src="" id="previsualizacion" alt="" class="img-fluid">
-              </div> -->
               <div class="mb-3 col-4">
                 <label for="imagenes" class="form-label">Seleccione las imagenes para la galeria...</label>
                 <input class="form-control" accept="image/*" type="file" id="imagenes" multiple>
@@ -248,125 +257,4 @@ $comodidades = $comodidadesModel->getComodidades(false);
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="../assets/js/jquery.min.js"></script>
 
-<script>
-  $(document).ready(function() {
-    imgPortada.onchange = evt => {
-      const [file] = imgPortada.files
-      if (file) {
-        previsualizacionPortadaDiv.classList.remove('d-none')
-        previsualizacion.src = URL.createObjectURL(file)
-      }
-    }
-
-    $("#ventaCheck").change(function() {
-      $("#precioVentaDiv").toggleClass("d-none");
-    });
-
-    $("#alquilerCheck").change(function() {
-      $("#precioAlquilerDiv").toggleClass("d-none");
-    });
-
-    //alta de propiedad
-    $("#guardarPropiedad").on("click", function() {
-      var fd = new FormData();
-      let titulo = $('#titulo').val();
-      let descripcion = $('#descripcion').val();
-      let tipoPropiedad = $('#tipoPropiedad').val();
-      let superficie = $('#superficie').val();
-      let superficieCubierta = $('#superficieCubierta').val();
-      let pisos = $('#pisos').val();
-      let dormitorios = $('#dormitorios').val();
-      let baños = $('#baños').val();
-      let zona = $('#zona').val();
-      let mapsUrl = $('#mapsUrl').val();
-      let localidad = $('#localidad').val();
-      let precioVenta = $('#precioVenta').val();
-      let precioAlquiler = $('#precioAlquiler').val();
-      let imgPortada = $('#imgPortada')[0].files[0];
-      let destacada = $('#destacada').val();
-
-      $.each($("#imagenes"), function(i, obj) {
-        $.each(obj.files, function(j, file) {
-          fd.append('imagenes[' + j + ']', file);
-        })
-      });
-
-      let ambientes = $('input[name="ambientes"]:checked').map(function() {
-        return this.value;
-      }).get();
-      let servicios = $('input[name="servicios"]:checked').map(function() {
-        return this.value;
-      }).get();
-      let comodidades = $('input[name="comodidades"]:checked').map(function() {
-        return this.value;
-      }).get();
-      let tipoPublicacion = $('input[name="tipoPublicacion"]:checked').map(function() {
-        return this.value;
-      }).get();
-      ambientes = JSON.stringify(ambientes);
-      servicios = JSON.stringify(servicios);
-      comodidades = JSON.stringify(comodidades);
-      tipoPublicacion = JSON.stringify(tipoPublicacion);
-      fd.append('crear', 1);
-      fd.append('titulo', titulo);
-      fd.append('descripcion', descripcion);
-      fd.append('tipoPropiedad', tipoPropiedad);
-      fd.append('superficie', superficie);
-      fd.append('superficieCubierta', superficieCubierta);
-      fd.append('pisos', pisos);
-      fd.append('dormitorios', dormitorios);
-      fd.append('baños', baños);
-      fd.append('localidad', localidad);
-      fd.append('zona', zona);
-      fd.append('mapsUrl', mapsUrl);
-      fd.append('imgPortada', imgPortada);
-      fd.append('ambientes', ambientes);
-      fd.append('servicios', servicios);
-      fd.append('comodidades', comodidades);
-      fd.append('tipoPublicacion', tipoPublicacion);
-      fd.append('precioVenta', precioVenta ?? null);
-      fd.append('precioAlquiler', precioAlquiler ?? null);
-      fd.append('destacada', destacada);
-
-      $.ajax({
-        url: 'controllers/propiedad.php',
-        type: 'post',
-        data: fd,
-        contentType: false,
-        processData: false,
-        success: function(result) {
-          if (!result) {
-            window.alert('Ocurrio un error.');
-            return;
-          }
-          if (result) {
-            window.alert('Propiedad guardada correctamente!');
-            window.location.reload();
-          }
-        },
-      });
-
-    });
-
-    $(function() {
-      var imagesPreview = function(input, placeToInsertImagePreview) {
-
-        if (input.files) {
-          var filesAmount = input.files.length;
-          for (i = 0; i < filesAmount; i++) {
-            var reader = new FileReader();
-            reader.onload = function(event) {
-              $($.parseHTML('<img class="w-25">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-            }
-            reader.readAsDataURL(input.files[i]);
-          }
-        }
-      };
-
-      $('#imagenes').on('change', function() {
-        $('.gallery').html('');
-        imagesPreview(this, 'div.gallery');
-      });
-    });
-  });
-</script>
+<script src="assets/js/alta-propiedad.js"></script>

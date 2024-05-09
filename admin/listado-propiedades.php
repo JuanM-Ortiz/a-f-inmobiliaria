@@ -128,7 +128,7 @@ $propiedades = $propiedadesModel->getPropiedades(true);
           "data": "descripcion"
         },
         {
-          "defaultContent": "<div class='text-center d-flex'> <button class='btn btn-warning me-2' title='Editar' type='button' id='editarPropiedad'><i class='fa fa-pencil'></i></button><button class='btn btn-danger' title='Eliminar' type='button' onclick='borrarPropiedad($(this))'><i class='fa fa-trash'></i></button></div>"
+          "defaultContent": "<div class='text-center d-flex'> <button class='btn btn-warning me-2' title='Editar' type='button' onclick='editarPropiedad($(this))'><i class='fa fa-pencil'></i></button><button class='btn btn-danger' title='Eliminar' type='button' onclick='borrarPropiedad($(this))'><i class='fa fa-trash'></i></button></div>"
         }
       ],
       "pageLength": 15,
@@ -153,13 +153,19 @@ $propiedades = $propiedadesModel->getPropiedades(true);
           window.alert('Ocurrio un error.');
           return;
         }
-        /* if (result) {
+        if (result) {
           window.alert('Propiedad eliminada correctamente!');
           window.location.reload();
-        } */
+        }
       });
     }
+  }
 
+  function editarPropiedad(element) {
+    fila = element.closest("tr");
+    var data = $('#datatable').DataTable().row(fila).data();
+    idPropiedad = data['id'];
+    window.location.href = 'alta-propiedad.php?id=' + idPropiedad;
   }
 </script>
 
