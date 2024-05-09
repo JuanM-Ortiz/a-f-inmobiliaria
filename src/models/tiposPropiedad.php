@@ -61,4 +61,19 @@ class TiposPropiedad
     return true;
   }
 
+  public function obtenerTipos() {
+    $query = "SELECT id, descripcion FROM tipos_propiedad";
+    $stmt = $this->conexion->prepare($query);
+    $stmt->execute();
+    
+    $tiposPropiedad = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $tiposPropiedad[$row['id']] = $row['descripcion'];
+    }
+    return $tiposPropiedad;
 }
+
+
+}
+
+
