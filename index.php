@@ -72,14 +72,16 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
 
                                 <div class="card-body text-white px-0 pb-0">
                                     <h5 class="card-title bg-coral-color text-center fw-bold py-1">' . strtoupper($propiedad['tipo_publicacion']) . '</h5>
-                                    <p class="card-text ps-3">' . $propiedad['titulo'] . '</p>
+                                    <div class="titulo-container">
+                                        <p class="card-text ps-3">' . $propiedad['titulo'] . '</p>
+                                    </div>
                                     <div class="card-footer borde-footer-destacada text-white">
                                         <div class="row align-items-center">
                                             <div class="col-6">
                                                 <p class="mt-3 fs-5">' . $moneda . ' ' . number_format($propiedad['precio']) . '</p>
                                             </div>
                                             <div class="col-6">
-                                                <a href="detalle-propiedad.php?id=' . $propiedad['id'] . '" class="btn btn-primary mx-auto">Ver más</a>
+                                                <a href="detalle-propiedad.php?id=' . $propiedad['id'] . '" class="btn btn-primary mx-auto ">Ver más</a>
                                             </div>
                                         </div>
                                     </div>

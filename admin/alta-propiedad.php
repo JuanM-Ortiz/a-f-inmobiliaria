@@ -154,7 +154,7 @@ if (!empty($_GET['id'])) {
               </div>
               <div class="mb-3 col-4">
                 <label for="mapsUrl" class="form-label">URL Google Maps</label>
-                <input type="text" class="form-control" id="mapsUrl" value="<?= $dataPropiedad[0]['maps_url']; ?>">
+                <input type="text" class="form-control" id="mapsUrl" value="<?= $dataPropiedad[0]['maps_url']; ?>" />
               </div>
               <div class="mb-3 col-4">
                 <label for="tipoPublicacion" class="form-label d-block">Tipo de publicación</label>
@@ -191,7 +191,11 @@ if (!empty($_GET['id'])) {
             <div class="row">
               <div class="col-4">
                 <h5>Ambientes</h5>
-                <?php foreach ($ambientes as $ambiente) : ?>
+                <?php
+                if (!is_array($ambientesPropiedad)) {
+                  $ambientesPropiedad = [];
+                }
+                foreach ($ambientes as $ambiente) : ?>
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="ambientes" value="<?php echo $ambiente['id']; ?>" id="<?php echo 'ambiente' . $ambiente['id']; ?>" <?= in_array($ambiente['id'], $ambientesPropiedad) ? 'checked' : '' ?>>
                     <label class="form-check-label" for="<?php echo 'ambiente' . $ambiente['id'] ?>">

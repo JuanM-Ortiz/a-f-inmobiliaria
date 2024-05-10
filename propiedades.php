@@ -62,7 +62,7 @@ if ($_POST['localidad'] || $_POST['zona']) {
                                 <div class="card-body text-white px-0 pb-0">
                                     <h5 class="card-title bg-secondary-coral-color text-center fw-bold py-1">' . strtoupper($propiedad['tipo_publicacion']) . '</h5>
                                     <div class="titulo-container">
-                                    <p class="card-text ps-3 ">' . $propiedad['titulo'] . '</p>
+                                        <p class="card-text ps-3 ">' . $propiedad['titulo'] . '</p>
                                     </div>
                                     <div class="card-footer text-white">
                                         <div class="row align-items-center">

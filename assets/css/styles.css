@@ -297,6 +297,7 @@ body {
 
 .borde-footer-destacada {
     border-color: #B13B3C !important;
+    max-height: 80px !important;
 }
 
 .btn-primary {
