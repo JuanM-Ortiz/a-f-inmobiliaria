@@ -66,9 +66,9 @@ body {
     background-color: #f8f8f8;
 }
 
-.nav-item:hover {
+/* .nav-item:hover {
     background-color: #dbc2b2;
-}
+} */
 
 .nav-movil {
     background-color: var(--main-gray-color) !important;

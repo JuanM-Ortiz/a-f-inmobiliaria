@@ -5,14 +5,11 @@ include_once 'src/models/propiedades.php';
 $conexion = Conexion::conectar();
 $modeloPropiedad = new Propiedades($conexion);
 
-if ($_POST['localidad'] || $_POST['zona']) {
-    $propiedades = $modeloPropiedad->getPropiedadByZonaLocalidad($_POST['localidad'], $_POST['zona']);
+if ($_GET['localidad'] || $_GET['zona'] || $_GET['tipo']) {
+    $propiedades = $modeloPropiedad->getPropiedadesFiltered($_GET['zona'], $_GET['localidad'], $_GET['tipo']);
 } else {
     $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
 }
-
-
-
 ?>
 
 

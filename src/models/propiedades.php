@@ -197,7 +197,7 @@ class Propiedades
     return $resultado->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function getPropiedadByZonaLocalidad($zona = null, $localidad = null)
+  public function getPropiedadesFiltered($zona = null, $localidad = null, $tipoPublicacion = null)
   {
     $and = '';
     if ($zona) {
@@ -205,7 +205,8 @@ class Propiedades
       $resultado = $this->conexion->prepare($getZona);
       $resultado->execute();
       $zonas = $resultado->fetchAll(PDO::FETCH_COLUMN);
-      $and .= ' AND id_zona IN (' . implode(',', $zonas) . ')';
+      if (!empty($zonas))
+        $and .= ' AND id_zona IN (' . implode(',', $zonas) . ')';
     }
 
     if ($localidad) {
@@ -213,7 +214,12 @@ class Propiedades
       $resultado = $this->conexion->prepare($getZona);
       $resultado->execute();
       $localidades = $resultado->fetchAll(PDO::FETCH_COLUMN);
-      $and .= ' AND id_localidad IN (' . implode(',', $localidades) . ')';
+      if (!empty($localidades))
+        $and .= ' AND id_localidad IN (' . implode(',', $localidades) . ')';
+    }
+
+    if ($tipoPublicacion) {
+      $and .= " AND pt.id_tipo_publicacion = {$tipoPublicacion}";
     }
 
     $query = "SELECT p.*, pt.precio, pt.moneda, tp.descripcion AS 'tipo_publicacion'
