@@ -5,11 +5,25 @@ include_once 'src/models/propiedades.php';
 $conexion = Conexion::conectar();
 $modeloPropiedad = new Propiedades($conexion);
 
+if (isset($_GET['pagina'])) {
+    $paginaActual = $_GET['pagina'];
+} else {
+    $paginaActual = 1;
+}
+
+$resultadosPorPagina = 12;
+$inicio = ($paginaActual - 1) * $resultadosPorPagina;
+
+
 if ($_GET['localidad'] || $_GET['zona'] || $_GET['tipo']) {
-    $propiedades = $modeloPropiedad->getPropiedadesFiltered($_GET['zona'], $_GET['localidad'], $_GET['tipo']);
+    $propiedades = $modeloPropiedad->getPropiedadesFiltered($_GET['zona'], $_GET['localidad'], $_GET['tipo'], $inicio, $resultadosPorPagina);
 } else {
     $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
 }
+
+$totalRegistros = count($propiedades);
+$totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
+
 ?>
 
 
@@ -77,6 +91,14 @@ if ($_GET['localidad'] || $_GET['zona'] || $_GET['tipo']) {
 
                 endforeach;
                 ?>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <?php for ($i = 1; $i <= $totalPaginas; $i++) {
+                            echo '<li class="page-item"><a class="page-link" href="propiedades.php?pagina=' . $i . '">' . $i . '</a></li>';
+                        } ?>
+                    </ul>
+                </nav>
+
             </div>
         </div>
 

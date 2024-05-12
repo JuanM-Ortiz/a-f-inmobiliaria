@@ -197,7 +197,7 @@ class Propiedades
     return $resultado->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function getPropiedadesFiltered($zona = null, $localidad = null, $tipoPublicacion = null)
+  public function getPropiedadesFiltered($zona = null, $localidad = null, $tipoPublicacion = null, $inicio, $resultadosPorPagina)
   {
     $and = '';
     if ($zona) {
@@ -228,6 +228,8 @@ class Propiedades
     JOIN tipo_publicaciones tp ON pt.id_tipo_publicacion = tp.id
     WHERE p.deleted_at IS NULL";
     $query .= $and;
+
+    $query .= " LIMIT $inicio, $resultadosPorPagina";
 
     $resultado = $this->conexion->prepare($query);
     $resultado->execute();
