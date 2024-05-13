@@ -19,7 +19,7 @@
 
     <section>
         <div class="banner-titulo bg-gray row mt-4 py-4 ">
-            <div class="featured-box-propiedades bg-orange-color col-md-2 col-6 offset-md-5 offset-3 text-center ">
+            <div class="featured-box-propiedades bg-secondary-coral-color col-md-2 col-6 offset-md-5 offset-3 text-center ">
                 <h2 class="featured text-white my-auto py-2 fw-bold">Contacto</h2>
             </div>
         </div>

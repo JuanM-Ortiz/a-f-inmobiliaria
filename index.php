@@ -45,7 +45,7 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
     </section>
 
     <section class="featured bg-main">
-        <div class="banner-titulo-destacadas bg-gray row mt-4 py-4">
+        <div class="banner-titulo-destacadas bg-gray row py-4 mt-4">
             <div class=" featured-box bg-coral-color col-md-2 col-6 offset-md-5 offset-3 text-center">
                 <h2 class="featured text-white my-auto py-2 fw-bold">Destacadas</h2>
             </div>

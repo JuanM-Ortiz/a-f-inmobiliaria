@@ -11,7 +11,7 @@ if (isset($_GET['pagina'])) {
     $paginaActual = 1;
 }
 
-$resultadosPorPagina = 12;
+$resultadosPorPagina = 1;
 $inicio = ($paginaActual - 1) * $resultadosPorPagina;
 
 
@@ -48,8 +48,8 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
 
     <section class="featured bg-main">
         <div class="banner-titulo bg-gray row mt-4 py-4 ">
-            <div class="featured-box-propiedades bg-orange-color col-md-2 col-6 offset-md-5 offset-3 text-center ">
-                <h2 class="featured text-white my-auto py-2 fw-bold">Propiedades</h2>
+            <div class="featured-box-propiedades bg-secondary-coral-color col-md-2 col-6 offset-md-5 offset-3 text-center ">
+                <h2 class="featured text-white my-auto py-2 fw-bold bg-secondary-coral-color">Propiedades</h2>
             </div>
         </div>
 
