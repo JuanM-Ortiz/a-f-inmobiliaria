@@ -11,7 +11,7 @@ if (isset($_GET['pagina'])) {
     $paginaActual = 1;
 }
 
-$resultadosPorPagina = 1;
+$resultadosPorPagina = 2;
 $inicio = ($paginaActual - 1) * $resultadosPorPagina;
 
 
@@ -21,7 +21,7 @@ if ($_GET['localidad'] || $_GET['zona'] || $_GET['tipo']) {
     $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
 }
 
-$totalRegistros = count($propiedades);
+$totalRegistros =  $modeloPropiedad->getCantidadPropiedades($_GET['tipo']);
 $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
 
 ?>
@@ -94,7 +94,7 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
                         <?php for ($i = 1; $i <= $totalPaginas; $i++) {
-                            echo '<li class="page-item"><a class="page-link" href="propiedades.php?pagina=' . $i . '">' . $i . '</a></li>';
+                            echo '<li class="page-item"><a class="page-link" href="propiedades.php?pagina=' . $i . '&tipo=' . $_GET['tipo'] . '&localidad=' . $_GET['localidad'] . '&zona=' . $_GET['zona'] . '">' . $i . '</a></li>';
                         } ?>
                     </ul>
                 </nav>

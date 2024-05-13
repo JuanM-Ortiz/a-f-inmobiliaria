@@ -230,9 +230,25 @@ class Propiedades
     $query .= $and;
 
     $query .= " LIMIT $inicio, $resultadosPorPagina";
-
+    /* echo $query;
+    die; */
     $resultado = $this->conexion->prepare($query);
     $resultado->execute();
     return $resultado->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function getCantidadPropiedades($tipo = null)
+  {
+    $query = "SELECT COUNT(p.id) AS total 
+              FROM propiedades p
+              JOIN propiedades_tipo_publicaciones pt ON p.id = pt.id_propiedad
+              WHERE p.deleted_at IS NULL";
+    if ($tipo) {
+      $query .= " AND pt.id_tipo_publicacion = $tipo GROUP BY pt.id_tipo_publicacion";
+    }
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    $count = $resultado->fetchAll(PDO::FETCH_ASSOC);
+    return $count[0]['total'];
   }
 }
