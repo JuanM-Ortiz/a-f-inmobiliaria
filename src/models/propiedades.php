@@ -167,13 +167,14 @@ class Propiedades
     return true;
   }
 
-  public function getPropiedadesConPrecio()
+  public function getPropiedadesConPrecio($inicio, $resultadosPorPagina)
   {
     $query = "SELECT p.*, pt.precio, pt.moneda, tp.descripcion AS 'tipo_publicacion'
               FROM propiedades p
               JOIN propiedades_tipo_publicaciones pt ON p.id = pt.id_propiedad
               JOIN tipo_publicaciones tp ON pt.id_tipo_publicacion = tp.id
-              WHERE p.deleted_at IS NULL";
+              WHERE p.deleted_at IS NULL
+              LIMIT $inicio, $resultadosPorPagina";
     $resultado = $this->conexion->prepare($query);
     $resultado->execute();
     return $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -230,8 +231,6 @@ class Propiedades
     $query .= $and;
 
     $query .= " LIMIT $inicio, $resultadosPorPagina";
-    /* echo $query;
-    die; */
     $resultado = $this->conexion->prepare($query);
     $resultado->execute();
     return $resultado->fetchAll(PDO::FETCH_ASSOC);

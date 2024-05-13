@@ -18,7 +18,7 @@ $inicio = ($paginaActual - 1) * $resultadosPorPagina;
 if ($_GET['localidad'] || $_GET['zona'] || $_GET['tipo']) {
     $propiedades = $modeloPropiedad->getPropiedadesFiltered($_GET['zona'], $_GET['localidad'], $_GET['tipo'], $inicio, $resultadosPorPagina);
 } else {
-    $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
+    $propiedades = $modeloPropiedad->getPropiedadesConPrecio($inicio, $resultadosPorPagina);
 }
 
 $totalRegistros =  $modeloPropiedad->getCantidadPropiedades($_GET['tipo']);
