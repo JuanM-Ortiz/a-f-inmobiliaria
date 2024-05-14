@@ -39,8 +39,8 @@ if (!empty($_GET['id'])) {
   $dataPropiedad = $propiedadModel->getPropiedadById($idPropiedad);
   $imagenes = $propiedadModel->getImagenesByPropiedadId($idPropiedad);
   $ambientesPropiedad = $ambientesModel->getAmbientesIdByPropiedadId($idPropiedad);
-  $serviciosPropiedad = $serviciosModel->getServiciosByPropiedadId($idPropiedad);
-  $comodidadesPropiedad = $comodidadesModel->getComodidadesByPropiedadId($idPropiedad);
+  $serviciosPropiedad = $serviciosModel->getServiciosIdByPropiedadId($idPropiedad);
+  $comodidadesPropiedad = $comodidadesModel->getComodidadesIdByPropiedadId($idPropiedad);
 }
 
 ?>
@@ -208,7 +208,7 @@ if (!empty($_GET['id'])) {
                 <h5>Servicios</h5>
                 <?php foreach ($servicios as $servicio) : ?>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="servicios" value="<?php echo $servicio['id']; ?>" id="<?php echo 'servicio' . $servicio['id']; ?>">
+                    <input class="form-check-input" type="checkbox" name="servicios" value="<?php echo $servicio['id']; ?>" id="<?php echo 'servicio' . $servicio['id']; ?>" <?= in_array($servicio['id'], $serviciosPropiedad) ? 'checked' : '' ?>>
                     <label class="form-check-label" for="<?php echo 'servicio' . $servicio['id'] ?>">
                       <?php echo $servicio['descripcion']; ?>
                     </label>
@@ -219,7 +219,7 @@ if (!empty($_GET['id'])) {
                 <h5>Comodidades</h5>
                 <?php foreach ($comodidades as $comodidad) : ?>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="comodidades" value="<?php echo $comodidad['id']; ?>" id="<?php echo 'comodidad' . $comodidad['id']; ?>">
+                    <input class="form-check-input" type="checkbox" name="comodidades" value="<?php echo $comodidad['id']; ?>" id="<?php echo 'comodidad' . $comodidad['id']; ?>" <?= in_array($comodidad['id'], $comodidadesPropiedad) ? 'checked' : '' ?>>
                     <label class="form-check-label" for="<?php echo 'comodidad' . $comodidad['id']; ?>">
                       <?php echo $comodidad['descripcion']; ?>
                     </label>

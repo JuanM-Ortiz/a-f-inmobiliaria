@@ -39,6 +39,17 @@ class Comodidades
     return $resultado->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  public function getComodidadesIdByPropiedadId($id)
+  {
+    $query = "SELECT c.id 
+    FROM comodidades c
+    JOIN propiedades_comodidades pc ON c.id = pc.id_comodidad
+    WHERE pc.id_propiedad = $id";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    return $resultado->fetchAll(PDO::FETCH_COLUMN);
+  }
+
   public function eliminarPorId($idComodidad)
   {
     $query = "UPDATE comodidades SET deleted_at = now() WHERE id = $idComodidad";

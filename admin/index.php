@@ -13,7 +13,7 @@ if ($_POST['userName'] && $_POST['password']) {
     header("Location: index.php?e=1");
     die;
   }
-  header("Location: comodidades.php");
+  header("Location: listado-propiedades.php");
   die;
 }
 

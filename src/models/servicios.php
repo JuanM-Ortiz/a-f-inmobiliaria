@@ -38,6 +38,17 @@ class Servicios
     $resultado->execute();
     return $resultado->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  public function getServiciosIdByPropiedadId($id)
+  {
+    $query = "SELECT s.id 
+    FROM servicios s
+    JOIN propiedades_servicios ps ON s.id = ps.id_servicio
+    WHERE ps.id_propiedad = $id";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    return $resultado->fetchAll(PDO::FETCH_COLUMN);
+  }
   public function eliminarPorId($idServicio)
   {
     $query = "UPDATE servicios SET deleted_at = now() WHERE id = $idServicio";
