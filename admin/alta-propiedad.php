@@ -21,6 +21,9 @@ $zonasModel = new Zonas($conexion);
 $ambientesModel = new Ambientes($conexion);
 $serviciosModel = new Servicios($conexion);
 $comodidadesModel = new Comodidades($conexion);
+$ambientesPropiedad = [];
+$serviciosPropiedad = [];
+$comodidadesPropiedad = [];
 
 $tiposPropiedad = $tiposPropiedadModel->getTiposPropiedad(false);
 $localidades = $localidadesModel->getLocalidades(false);
@@ -29,8 +32,8 @@ $ambientes = $ambientesModel->getAmbientes(false);
 $servicios = $serviciosModel->getServicios(false);
 $comodidades = $comodidadesModel->getComodidades(false);
 
-if (!empty($_GET['id'])) {
 
+if (!empty($_GET['id'])) {
   include_once '../src/models/propiedades.php';
   include_once 'src/models/tiposPropiedad.php';
   $propiedadModel = new Propiedades($conexion);
@@ -97,9 +100,9 @@ if (!empty($_GET['id'])) {
                 <label for="imgPortada" class="form-label">Imagen de portada</label>
                 <input class="form-control" accept="image/*" type="file" id="imgPortada">
               </div>
-              <div class="mb-3 col-4 d-none" id="previsualizacionPortadaDiv">
+              <div class="mb-3 col-4 <?= $idPropiedad ? 'd-block' : 'd-none' ?>" id="previsualizacionPortadaDiv">
                 <label for="imgPortada" class="form-label">Vista previa:</label>
-                <img src="" id="previsualizacion" alt="" class="w-50 d-block mx-auto">
+                <img src="<?= '../assets/img/propiedades/' . $idPropiedad . '/' . $dataPropiedad[0]['imagen_portada'] ?>" id="previsualizacion" alt="" class="w-50 d-block mx-auto">
               </div>
               <div class="mb-3 col-12">
                 <label for="descripcion" class="form-label">Información general</label>
@@ -192,9 +195,7 @@ if (!empty($_GET['id'])) {
               <div class="col-4">
                 <h5>Ambientes</h5>
                 <?php
-                if (!is_array($ambientesPropiedad)) {
-                  $ambientesPropiedad = [];
-                }
+
                 foreach ($ambientes as $ambiente) : ?>
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="ambientes" value="<?php echo $ambiente['id']; ?>" id="<?php echo 'ambiente' . $ambiente['id']; ?>" <?= in_array($ambiente['id'], $ambientesPropiedad) ? 'checked' : '' ?>>
@@ -239,12 +240,21 @@ if (!empty($_GET['id'])) {
         <div id="imagenesAccordion" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
           <div class="accordion-body">
             <div class="row">
-              <div class="mb-3 col-4">
-                <label for="imagenes" class="form-label">Seleccione las imagenes para la galeria...</label>
+              <div class="mb-3 col-6">
+                <label for="imagenes" class="form-label">Seleccione las imagenes para agregar a la galeria...</label>
                 <input class="form-control" accept="image/*" type="file" id="imagenes" multiple>
               </div>
               <div class="gallery"></div>
             </div>
+            <?php if ($imagenes && !empty($imagenes)) { ?>
+              <div class="row">
+                <?php foreach ($imagenes as $imagen) : ?>
+                  <div class="col-4">
+                    <img src="<?php echo "../assets/img/propiedades/" . $_GET['id'] . "/" . $imagen['imagen']; ?>" class="img-fluid">
+                  </div>
+                <?php endforeach; ?>
+              </div>
+            <?php } ?>
           </div>
         </div>
       </div>
