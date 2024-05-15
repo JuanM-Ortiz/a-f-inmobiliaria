@@ -55,6 +55,14 @@ $tiposPropiedad = $tipoPropiedadModel->obtenerTipos();
         ?>
     </div>
 
+    <div class="row text-center mt-5">
+        <div class="col-lg-12 link-videoMapa fs-5">
+            <a class="px-3" href="#video-section"><i class="fas fa-video"></i> Video</a>
+            <a class="px-3" href="#map-section"><i class="fas fa-map"></i> Mapa</a>
+        </div>
+    </div>
+
+
     <div class="container-fluid">
 
         <div class="row">
@@ -88,7 +96,7 @@ $tiposPropiedad = $tipoPropiedadModel->obtenerTipos();
                                 echo ' <td class="text-end bg-gray text-white">' . $propiedad['superficie'] . ' m2 </td>';
                             } ?>
                         </tr>
-                        <?php if ($tiposPropiedad[$propiedad['id_tipo_propiedad']] != 'Lote'): ?>
+                        <?php if ($tiposPropiedad[$propiedad['id_tipo_propiedad']] != 'Lote') : ?>
                             <tr class="text-white ">
                                 <td class="bg-gray text-white"><span class="dot">•</span> Sup. Cubierta</td>
                                 <?php foreach ($propiedades as $propiedad) {
@@ -220,9 +228,16 @@ $tiposPropiedad = $tipoPropiedadModel->obtenerTipos();
             </div>
 
 
+            <div class="col-md-8 col-12 offset-md-2 mt-5">
+                <h3 class="text-white text-center mb-5" id="video-section">Video de la propiedad</h3>
+                <div class="ratio ratio-21x9 h-75">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/LipQ7m8bQL4" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+
 
             <div class="col-md-8 col-12 offset-md-2 mt-5">
-                <h3 class="text-white text-center mb-5">Ubicación de la propiedad</h3>
+                <h3 class="text-white text-center mb-5" id="map-section">Ubicación de la propiedad</h3>
                 <div class="ratio ratio-21x9 h-75">
                     <?php
                     foreach ($propiedades as $propiedad) {

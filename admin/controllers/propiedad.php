@@ -13,7 +13,7 @@ if ($_POST['crear'] && $_POST['crear'] == 1) {
     'titulo' => $_POST['titulo'],
     'id_tipo_propiedad' => $_POST['tipoPropiedad'],
     'descripcion' => $_POST['descripcion'],
-    'superficie_cubierta' => !empty($_POST['superficie']) ? $_POST['superficie'] : 0,
+    'superficie_cubierta' => !empty($_POST['superficieCubierta']) ? $_POST['superficieCubierta'] : 0,
     'superficie' => !empty($_POST['superficie']) ? $_POST['superficie'] : 0,
     'pisos' => !empty($_POST['pisos']) ? $_POST['pisos'] : 0,
     'dormitorios' => !empty($_POST['dormitorios']) ? $_POST['dormitorios'] : 0,

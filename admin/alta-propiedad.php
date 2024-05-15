@@ -207,7 +207,11 @@ if (!empty($_GET['id'])) {
               </div>
               <div class="col-4">
                 <h5>Servicios</h5>
-                <?php foreach ($servicios as $servicio) : ?>
+                <?php
+                if (!is_array($serviciosPropiedad)) {
+                  $serviciosPropiedad = [];
+                }
+                foreach ($servicios as $servicio) : ?>
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="servicios" value="<?php echo $servicio['id']; ?>" id="<?php echo 'servicio' . $servicio['id']; ?>" <?= in_array($servicio['id'], $serviciosPropiedad) ? 'checked' : '' ?>>
                     <label class="form-check-label" for="<?php echo 'servicio' . $servicio['id'] ?>">
@@ -218,7 +222,11 @@ if (!empty($_GET['id'])) {
               </div>
               <div class="col-4">
                 <h5>Comodidades</h5>
-                <?php foreach ($comodidades as $comodidad) : ?>
+                <?php 
+                if (!is_array($comodidadesPropiedad)) {
+                  $comodidadesPropiedad = [];
+                }
+                foreach ($comodidades as $comodidad) : ?>
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="comodidades" value="<?php echo $comodidad['id']; ?>" id="<?php echo 'comodidad' . $comodidad['id']; ?>" <?= in_array($comodidad['id'], $comodidadesPropiedad) ? 'checked' : '' ?>>
                     <label class="form-check-label" for="<?php echo 'comodidad' . $comodidad['id']; ?>">

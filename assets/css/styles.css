@@ -601,3 +601,22 @@ table td {
     color: #323232 !important;
     background-color: var(--secondary-coral-color) !important;
 }
+
+.text-data {
+    color: #d4d4d4 !important;
+}
+
+.link-videoMapa a {
+    color: var(--orange-color) !important;
+    text-decoration: none;
+}
+
+#video-section {
+    margin-top: -160px;
+    padding-top: 160px;
+}
+
+#map-section {
+    margin-top: -160px;
+    padding-top: 160px;
+}
