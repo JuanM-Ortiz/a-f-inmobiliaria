@@ -44,6 +44,8 @@ if (!empty($_GET['id'])) {
   $ambientesPropiedad = $ambientesModel->getAmbientesIdByPropiedadId($idPropiedad);
   $serviciosPropiedad = $serviciosModel->getServiciosIdByPropiedadId($idPropiedad);
   $comodidadesPropiedad = $comodidadesModel->getComodidadesIdByPropiedadId($idPropiedad);
+  $mapsUrl = str_replace('"', "'", $dataPropiedad[0]['maps_url']);
+  $video = str_replace('"', "'", $dataPropiedad[0]['video']);
 }
 
 ?>
@@ -108,7 +110,7 @@ if (!empty($_GET['id'])) {
                 <label for="descripcion" class="form-label">Información general</label>
                 <textarea class="form-control" id="descripcion" rows="3" maxlength="3000"><?= $dataPropiedad[0]['descripcion']; ?></textarea>
               </div>
-              <div class="mb-3 col-4">
+              <div class="mb-3 col-2">
                 <label for="descripcion" class="form-label">Tipo de propiedad</label>
                 <select class="form-select" id="tipoPropiedad" aria-label="Default select example">
                   <option selected disabled>Seleccione un tipo de propiedad...</option>
@@ -117,23 +119,23 @@ if (!empty($_GET['id'])) {
                   <?php endforeach; ?>
                 </select>
               </div>
-              <div class="mb-3 col-4">
-                <label for="superficie" class="form-label">Superficie (m2)</label>
-                <input type="number" placeholder="0" class="form-control" id="superficie" min="0" step="1" value="<?= $dataPropiedad[0]['superficie']; ?>">
+              <div class="mb-3 col-2">
+                <label for="superficie" class="form-label">Superficie</label>
+                <input type="number" placeholder="en m2" class="form-control" id="superficie" min="0" step="1" value="<?= $dataPropiedad[0]['superficie']; ?>">
               </div>
-              <div class="mb-3 col-4">
-                <label for="superficieCubierta" class="form-label">Superficie cubierta (m2)</label>
-                <input type="number" placeholder="0" class="form-control" id="superficieCubierta" min="0" step="1" value="<?= $dataPropiedad[0]['superficie_cubierta']; ?>">
+              <div class="mb-3 col-2">
+                <label for="superficieCubierta" class="form-label">Superficie cubierta</label>
+                <input type="number" placeholder="en m2" class="form-control" id="superficieCubierta" min="0" step="1" value="<?= $dataPropiedad[0]['superficie_cubierta']; ?>">
               </div>
-              <div class="mb-3 col-4">
+              <div class="mb-3 col-2">
                 <label for="pisos" class="form-label">Pisos</label>
                 <input type="number" placeholder="0" class="form-control" id="pisos" min="0" step="1" value="<?= $dataPropiedad[0]['pisos']; ?>">
               </div>
-              <div class="mb-3 col-4">
+              <div class="mb-3 col-2">
                 <label for="dormitorios" class="form-label">Dormitorios</label>
                 <input type="number" placeholder="0" class="form-control" id="dormitorios" min="0" step="1" value="<?= $dataPropiedad[0]['dormitorios']; ?>">
               </div>
-              <div class="mb-3 col-4">
+              <div class="mb-3 col-2">
                 <label for="baños" class="form-label">Baños</label>
                 <input type="number" placeholder="0" class="form-control" id="baños" min="0" step="1" value="<?= $dataPropiedad[0]['baños']; ?>">
               </div>
@@ -157,7 +159,11 @@ if (!empty($_GET['id'])) {
               </div>
               <div class="mb-3 col-4">
                 <label for="mapsUrl" class="form-label">URL Google Maps</label>
-                <input type="text" class="form-control" id="mapsUrl" value="<?= $dataPropiedad[0]['maps_url']; ?>" />
+                <input type="text" class="form-control" id="mapsUrl" value="<?= $mapsUrl; ?>" />
+              </div>
+              <div class="mb-3 col-4">
+                <label for="video" class="form-label">Video</label>
+                <input type="text" class="form-control" id="video" value="<?= $video; ?>" />
               </div>
               <div class="mb-3 col-4">
                 <label for="tipoPublicacion" class="form-label d-block">Tipo de publicación</label>
@@ -222,7 +228,7 @@ if (!empty($_GET['id'])) {
               </div>
               <div class="col-4">
                 <h5>Comodidades</h5>
-                <?php 
+                <?php
                 if (!is_array($comodidadesPropiedad)) {
                   $comodidadesPropiedad = [];
                 }

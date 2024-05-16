@@ -17,6 +17,7 @@ $localidadesModelo = new Localidades($conexion);
 $tipoPropiedadModel = new TiposPropiedad($conexion);
 $idPropiedad = $_GET['id'];
 $propiedades = $modeloPropiedad->getFrontDataById($idPropiedad);
+
 $imagenes = $modeloPropiedad->getImagenesByPropiedadId($idPropiedad);
 $ambientesPropiedad = $ambientesModelo->getAmbientesByPropiedadId($idPropiedad);
 $serviciosPropiedad = $serviciosModelo->getServiciosByPropiedadId($idPropiedad);
@@ -58,7 +59,7 @@ $tiposPropiedad = $tipoPropiedadModel->obtenerTipos();
     <div class="row text-center mt-5">
         <div class="col-lg-12 link-videoMapa fs-5">
             <a class="px-3" href="#video-section"><i class="fas fa-video"></i> Video</a>
-            <a class="px-3" href="#map-section"><i class="fas fa-map"></i> Mapa</a>
+            <a class="px-3" href="#map-section"><i class="fas fa-map"></i> Ubicación</a>
         </div>
     </div>
 
@@ -227,27 +228,29 @@ $tiposPropiedad = $tipoPropiedadModel->obtenerTipos();
                 </div>
             </div>
 
-
-            <div class="col-md-8 col-12 offset-md-2 mt-5">
-                <h3 class="text-white text-center mb-5" id="video-section">Video de la propiedad</h3>
-                <div class="ratio ratio-21x9 h-75">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/LipQ7m8bQL4" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+            <?php if ($propiedades[0]['video']) : ?>
+                <div class="col-md-8 col-12 offset-md-2 mt-5">
+                    <h3 class="text-white text-center mb-5" id="video-section">Video de la propiedad</h3>
+                    <div class="ratio ratio-21x9 h-75">
+                        <?= str_replace("'", '"', $propiedades[0]['video']); ?>
+                    </div>
                 </div>
-            </div>
+            <?php endif; ?>
 
+            <?php
+            if ($propiedades[0]['maps_url']) : ?>
+                <div class="col-md-8 col-12 offset-md-2 mt-5">
+                    <h3 class="text-white text-center mb-5" id="map-section">Ubicación de la propiedad</h3>
+                    <div class="ratio ratio-21x9 h-75">
+                        <?php
+                        foreach ($propiedades as $propiedad) {
+                            echo $propiedad['maps_url'];
+                        }
+                        ?>
 
-            <div class="col-md-8 col-12 offset-md-2 mt-5">
-                <h3 class="text-white text-center mb-5" id="map-section">Ubicación de la propiedad</h3>
-                <div class="ratio ratio-21x9 h-75">
-                    <?php
-                    foreach ($propiedades as $propiedad) {
-                        echo $propiedad['maps_url'];
-                    }
-                    ?>
-                    <!-- <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" title="YouTube video" allowfullscreen></iframe> -->
+                    </div>
                 </div>
-            </div>
-
+            <?php endif; ?>
         </div>
     </div>
 

@@ -96,13 +96,13 @@ class Propiedades
       $query = "INSERT INTO propiedades (titulo, id_tipo_propiedad, 
       descripcion, superficie_cubierta, superficie,
       pisos, dormitorios, 
-      baños, id_localidad, id_zona, maps_url,
+      baños, id_localidad, id_zona, maps_url, video,
       codigo,es_destacada)
        VALUES ('{$params['titulo']}', '{$params['id_tipo_propiedad']}', '{$params['descripcion']}',
        {$params['superficie_cubierta']}, {$params['superficie']},
        {$params['pisos']}, {$params['dormitorios']}, 
        {$params['baños']}, {$params['id_localidad']},
-       {$params['id_zona']},'{$params['maps_url']}', '{$codigo}', '{$params['es_destacada']}')";
+       {$params['id_zona']},'{$params['maps_url']}', '{$params['video']}', '{$codigo}', '{$params['es_destacada']}')";
       $resultado = $this->conexion->prepare($query);
       $resultado->execute();
       return $this->conexion->lastInsertId();

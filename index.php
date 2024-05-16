@@ -67,7 +67,7 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
                         echo '
                 
                         <div class="col-12 col-lg-3 col-md-6 d-flex justify-content-center mb-4">
-                            <div class="card card-destacada" style="width: 18rem;">
+                            <div class="card card-destacada" style="width: 18rem;" onclick="redirectPropiedad(' . $propiedad['id'] . ')">
                             <img src="' . $imagePath . '" class="card-img-top" alt="...">
 
                                 <div class="card-body text-white px-0 pb-0">

@@ -28,6 +28,7 @@ $(document).ready(function() {
     let baños = $('#baños').val();
     let zona = $('#zona').val();
     let mapsUrl = $('#mapsUrl').val();
+    let video = $('#video').val();
     let localidad = $('#localidad').val();
     let precioVenta = $('#precioVenta').val();
     let precioAlquiler = $('#precioAlquiler').val();
@@ -68,6 +69,7 @@ $(document).ready(function() {
     fd.append('localidad', localidad);
     fd.append('zona', zona);
     fd.append('mapsUrl', mapsUrl);
+    fd.append('video', video);
     fd.append('imgPortada', imgPortada);
     fd.append('ambientes', ambientes);
     fd.append('servicios', servicios);

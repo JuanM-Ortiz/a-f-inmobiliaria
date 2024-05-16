@@ -5,7 +5,7 @@ window.onload = function() {
 };
 
 
-new Glider(document.querySelector('.glider'), {
+  new Glider(document.querySelector('.glider'), {
     slidesToShow: 1,
     dots: '#dots',
     draggable: true,
@@ -14,3 +14,9 @@ new Glider(document.querySelector('.glider'), {
       next: '.glider-next'
     }
   });
+
+
+
+  function redirectPropiedad(idPropiedad) {
+    window.location.href = 'detalle-propiedad.php?id=' + idPropiedad;
+  }

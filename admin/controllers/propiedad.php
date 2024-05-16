@@ -21,6 +21,7 @@ if ($_POST['crear'] && $_POST['crear'] == 1) {
     'id_localidad' => $_POST['localidad'],
     'id_zona' => $_POST['zona'],
     'maps_url' => $_POST['mapsUrl'],
+    'video' => $_POST['video'],
     'es_destacada' => $_POST['destacada'] ?? 0,
   ];
 
