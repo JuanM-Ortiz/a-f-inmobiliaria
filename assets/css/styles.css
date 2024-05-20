@@ -656,3 +656,8 @@ table td {
     background-color: var(--secondary-coral-color) !important;
     border-radius: 2px !important;
 }
+
+.form-select{
+    color: #818181 !important;
+    border-color: #dee2e6 !important;
+}

@@ -2,8 +2,12 @@
 
 include_once 'src/db/conn.php';
 include_once 'src/models/propiedades.php';
+include_once 'src/models/tiposPropiedad.php';
 $conexion = Conexion::conectar();
 $modeloPropiedad = new Propiedades($conexion);
+$tipoPropiedadModel = new TiposPropiedad($conexion);
+
+$tiposPropiedad= $tipoPropiedadModel->obtenerTipos();
 
 if (isset($_GET['pagina'])) {
     $paginaActual = $_GET['pagina'];
@@ -55,6 +59,13 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
 
         <div class="container-fluid mt-5">
             <div class="row">
+                <?php
+                if (empty($propiedades)) :
+                    echo '
+                            <h4 class="text-white text-center">No hay resultados</h4>
+                        ';
+                endif;
+                ?>
 
                 <div class="col-lg-9">
                     <div class="row justify-content-between">
@@ -109,31 +120,35 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
                         endforeach; ?>
                     </div>
 
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination justify-content-center">
-                            <?php for ($i = 1; $i <= $totalPaginas; $i++) {
-                                echo '<li class="page-item"><a class="page-link" href="propiedades.php?pagina=' . $i . '&tipo=' . $_GET['tipo'] . '&localidad=' . $_GET['localidad'] . '&zona=' . $_GET['zona'] . '">' . $i . '</a></li>';
-                            } ?>
-                        </ul>
-                    </nav>
+                    <?php if (!empty($propiedades)) : ?>
+
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <?php for ($i = 1; $i <= $totalPaginas; $i++) {
+                                    echo '<li class="page-item"><a class="page-link bg-dark text-white" href="propiedades.php?pagina=' . $i . '&tipo=' . $_GET['tipo'] . '&localidad=' . $_GET['localidad'] . '&zona=' . $_GET['zona'] . '">' . $i . '</a></li>';
+                                } ?>
+                            </ul>
+                        </nav>
+                    <?php endif; ?>
                 </div>
 
                 <div class="col-lg-3">
                     <div class="buscador-propiedades bg-gray p-4">
                         <h3 class="text-white text-center">Búsqueda</h3>
-                        <form>
+                        <form action="propiedades.php">
                             <div class="mb-3">
                                 <label for="tipo_propiedad" class="form-label text-white">Tipo de Propiedad</label>
-                                <select class="form-select" id="tipo_propiedad">
-                                    <option selected>Lote</option>
-                                    <option>Casa</option>
+                                <select class="form-select bg-dark" name="tipoPropiedad" id="tipo_propiedad">
+                                    <?php foreach($tiposPropiedad as $tipo): ?>
+                                        <option value="<?= $tipo['id'] ?>"> <?= $tipo['descripcion'] ?></option>
+                                    <?php endforeach ?>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="tipo_publicacion" class="form-label text-white">Tipo de Publicación</label>
-                                <select class="form-select" id="tipo_publicacion">
-                                    <option selected>Alquiler</option>
-                                    <option>Venta</option>
+                                <select class="form-select bg-dark" name="tipoPublicacion" id="tipo_publicacion">
+                                    <option value="" selected>Venta</option>
+                                    <option value="">Alquiler</option>
                                 </select>
                             </div>
                             <button type="submit" class="boton-buscador btn btn-primary">Buscar</button>
