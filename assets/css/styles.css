@@ -621,3 +621,38 @@ table td {
     margin-top: -160px;
     padding-top: 160px;
 }
+
+.parallax-section {
+    background-image: url('../img/main1-transformed.jpeg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    color: white;
+    text-align: center;
+}
+
+.parallax-content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.btn-body {
+    background-color: var(--orange-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.buscador-propiedades {
+    max-width: 350px; 
+    margin: auto;
+}
+
+.boton-buscador {
+    background-color: var(--secondary-coral-color) !important;
+    border-radius: 2px !important;
+}

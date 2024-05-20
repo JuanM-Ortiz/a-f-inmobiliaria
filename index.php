@@ -98,19 +98,16 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
 
     </section>
 
-    <section class="py-2 bg-gray my-5">
+    <section class="parallax-section">
         <div class="container">
-            <div class="row">
-                <div class="col-xl-4 col-lg-6 d-flex justify-content-center py-5">
-                    <img class="img-body" src="assets/img/contrato.jpg" alt="" style="max-width: 100%; height: auto;">
-                </div>
-                <div class="col-xl-8 col-lg-6 d-flex flex-column justify-content-center px-5">
-                    <div>
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-10">
+                    <div class="parallax-content">
                         <p class="fs-3 text-white">
                             Nuestra Misión: brindar un servicio de asesoramiento e intermediación en la compra-venta y alquiler de inmuebles, escuchando e identificando las necesidades de cada cliente y aportando valor a las inversiones.
                         </p>
                         <div class="d-flex justify-content-center">
-                            <a class="btn-body bg-orange-color py-2 px-4" href="contacto.php">Contáctenos</a>
+                            <a class="btn-body" href="contacto.php">Contáctenos</a>
                         </div>
                     </div>
                 </div>

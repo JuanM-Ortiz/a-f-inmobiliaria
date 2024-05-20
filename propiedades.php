@@ -56,68 +56,94 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
         <div class="container-fluid mt-5">
             <div class="row">
 
-                <?php
-                foreach ($propiedades as $propiedad) :
-                    $src = $propiedad['imagen_portada'];
-                    $carpetaId = $propiedad['id'];
-                    $imagePath = "assets/img/propiedades/" . $carpetaId . '/' . $src;
+                <div class="col-lg-9">
+                    <div class="row justify-content-between">
+                        <?php foreach ($propiedades as $propiedad) :
+                            $src = $propiedad['imagen_portada'];
+                            $carpetaId = $propiedad['id'];
+                            $imagePath = "assets/img/propiedades/" . $carpetaId . '/' . $src;
 
-                    $moneda = $propiedad['moneda'] == 2 ? 'USD' : '$';
+                            $moneda = $propiedad['moneda'] == 2 ? 'USD' : '$';
 
-                    echo '
-        <div class="col-12 col-lg-3 col-md-6 d-flex justify-content-center mb-4">
-            <div class="card" style="width: 18rem;" onclick="redirectPropiedad(' . $propiedad['id'] . ')">
-                <img src="' . $imagePath . '" class="card-img-top" alt="...">
-
-                <div class="card-body text-white px-0 pb-0 d-flex flex-column justify-content-between">
-                    <h5 class="card-title bg-secondary-coral-color text-center fw-bold py-1">' . strtoupper($propiedad['tipo_publicacion']) . '</h5>
-
-                    <div class="titulo-container">
-                        <p class="card-text ms-3">' . $propiedad['titulo'] . '</p>
+                            echo '
+                    <div class="col-12 col-lg-3 col-md-6 d-flex justify-content-center mb-4">
+                        <div class="card" style="width: 18rem;" onclick="redirectPropiedad(' . $propiedad['id'] . ')">
+                            <img src="' . $imagePath . '" class="card-img-top" alt="...">
+            
+                            <div class="card-body text-white px-0 pb-0 d-flex flex-column justify-content-between">
+                                <h5 class="card-title bg-secondary-coral-color text-center fw-bold py-1">' . strtoupper($propiedad['tipo_publicacion']) . '</h5>
+            
+                                <div class="titulo-container">
+                                    <p class="card-text ms-3">' . $propiedad['titulo'] . '</p>
+                                </div>
+            
+                                <div class="row mb-3">
+                                    <div class="text-data col-4 px-0 d-flex flex-column align-items-center">
+                                        <i class="fa-solid fa-up-down-left-right"></i>
+                                        <span class="mt-1">' . $propiedad['superficie'] . 'm²</span>
+                                    </div>
+                                    <div class="text-data col-4 px-0 d-flex flex-column align-items-center border-start border-1 border-gray">
+                                        <i class="fa-solid fa-up-down-left-right"></i>
+                                        <span class="mt-1">' . $propiedad['superficie_cubierta'] . 'm²C</span>
+                                    </div>
+                                    <div class="text-data col-4 px-0 d-flex flex-column align-items-center border-start border-1 border-gray">
+                                        <i class="fa-solid fa-bed"></i>
+                                        <span class="mt-1">' . $propiedad['dormitorios'] . '</span>
+                                    </div>
+                                </div>
+            
+            
+                                <div class="card-footer text-white px-2">
+                                    <div class="row align-items-center">
+                                        <div class="col-6 text-center">
+                                            <p class="mt-3 fs-5">' . $moneda . ' ' . number_format($propiedad['precio'], 0, '.', ',') . '</p>
+                                        </div>
+                                        <div class="col-6 text-center">
+                                            <a href="detalle-propiedad.php?id=' . $propiedad['id'] . '" class="btn btn-primary">Ver más</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+                        endforeach; ?>
                     </div>
 
-                    <div class="row mb-3">
-                        <div class="text-data col-4 px-0 d-flex flex-column align-items-center">
-                            <i class="fa-solid fa-up-down-left-right"></i>
-                            <span class="mt-1">' . $propiedad['superficie'] . 'm²</span>
-                        </div>
-                        <div class="text-data col-4 px-0 d-flex flex-column align-items-center border-start border-1 border-gray">
-                            <i class="fa-solid fa-up-down-left-right"></i>
-                            <span class="mt-1">' . $propiedad['superficie_cubierta'] . 'm²C</span>
-                        </div>
-                        <div class="text-data col-4 px-0 d-flex flex-column align-items-center border-start border-1 border-gray">
-                            <i class="fa-solid fa-bed"></i>
-                            <span class="mt-1">' . $propiedad['dormitorios'] . '</span>
-                        </div>
-                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <?php for ($i = 1; $i <= $totalPaginas; $i++) {
+                                echo '<li class="page-item"><a class="page-link" href="propiedades.php?pagina=' . $i . '&tipo=' . $_GET['tipo'] . '&localidad=' . $_GET['localidad'] . '&zona=' . $_GET['zona'] . '">' . $i . '</a></li>';
+                            } ?>
+                        </ul>
+                    </nav>
+                </div>
 
-
-                    <div class="card-footer text-white px-2">
-                        <div class="row align-items-center">
-                            <div class="col-6 text-center">
-                                <p class="mt-3 fs-5">' . $moneda . number_format($propiedad['precio'], 0, '.', ',') . '</p>
+                <div class="col-lg-3">
+                    <div class="buscador-propiedades bg-gray p-4">
+                        <h3 class="text-white text-center">Búsqueda</h3>
+                        <form>
+                            <div class="mb-3">
+                                <label for="tipo_propiedad" class="form-label text-white">Tipo de Propiedad</label>
+                                <select class="form-select" id="tipo_propiedad">
+                                    <option selected>Lote</option>
+                                    <option>Casa</option>
+                                </select>
                             </div>
-                            <div class="col-6 text-center">
-                                <a href="detalle-propiedad.php?id=' . $propiedad['id'] . '" class="btn btn-primary">Ver más</a>
+                            <div class="mb-3">
+                                <label for="tipo_publicacion" class="form-label text-white">Tipo de Publicación</label>
+                                <select class="form-select" id="tipo_publicacion">
+                                    <option selected>Alquiler</option>
+                                    <option>Venta</option>
+                                </select>
                             </div>
-                        </div>
+                            <button type="submit" class="boton-buscador btn btn-primary">Buscar</button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>';
-                endforeach;
-                ?>
-
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                        <?php for ($i = 1; $i <= $totalPaginas; $i++) {
-                            echo '<li class="page-item"><a class="page-link" href="propiedades.php?pagina=' . $i . '&tipo=' . $_GET['tipo'] . '&localidad=' . $_GET['localidad'] . '&zona=' . $_GET['zona'] . '">' . $i . '</a></li>';
-                        } ?>
-                    </ul>
-                </nav>
-
-            </div>
         </div>
+
+
 
     </section>
 
