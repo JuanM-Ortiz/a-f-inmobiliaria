@@ -73,8 +73,6 @@ class Propiedades
 
   public function editar($idPropiedad, $params)
   {
-    $mapsUrl = '"' . $params['maps_url'] . '"';
-    $video = '"' . $params['video'] . '"';
     $query = "UPDATE propiedades SET 
     titulo = '{$params['titulo']}',
     descripcion = '{$params['descripcion']}',
@@ -85,8 +83,8 @@ class Propiedades
     baños = '{$params['baños']}',
     id_localidad = '{$params['id_localidad']}',
     id_zona = '{$params['id_zona']}',
-    maps_url = $mapsUrl,
-    video = $video,
+    maps_url = '{$params['maps_url']}',
+    video = '{$params['video']}',
     es_destacada = '{$params['es_destacada']}'";
 
     $query .= " WHERE id = $idPropiedad";
