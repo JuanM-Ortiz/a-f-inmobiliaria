@@ -7,7 +7,7 @@ $conexion = Conexion::conectar();
 $modeloPropiedad = new Propiedades($conexion);
 $tipoPropiedadModel = new TiposPropiedad($conexion);
 
-$tiposPropiedad= $tipoPropiedadModel->obtenerTipos();
+$tiposPropiedad= $tipoPropiedadModel->getTiposPropiedad();
 
 if (isset($_GET['pagina'])) {
     $paginaActual = $_GET['pagina'];
@@ -141,7 +141,7 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
                                 <select class="form-select bg-dark" name="tipoPropiedad" id="tipo_propiedad">
                                     <?php foreach($tiposPropiedad as $tipo): ?>
                                         <option value="<?= $tipo['id'] ?>"> <?= $tipo['descripcion'] ?></option>
-                                    <?php endforeach ?>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="mb-3">
