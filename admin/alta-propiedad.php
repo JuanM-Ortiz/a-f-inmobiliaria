@@ -44,6 +44,8 @@ if (!empty($_GET['id'])) {
   $ambientesPropiedad = $ambientesModel->getAmbientesIdByPropiedadId($idPropiedad);
   $serviciosPropiedad = $serviciosModel->getServiciosIdByPropiedadId($idPropiedad);
   $comodidadesPropiedad = $comodidadesModel->getComodidadesIdByPropiedadId($idPropiedad);
+  $precioVenta = $propiedadModel->getPrecioVentaById($idPropiedad);
+  $precioAlquiler = $propiedadModel->getPrecioAlquilerById($idPropiedad);
   $mapsUrl = str_replace('"', "'", $dataPropiedad[0]['maps_url']);
   $video = str_replace('"', "'", $dataPropiedad[0]['video']);
 }
@@ -95,6 +97,7 @@ if (!empty($_GET['id'])) {
           <div class="accordion-body">
             <div class="row">
               <div class="mb-3 col-4">
+                <input type="hidden" name="" id="idPropiedad" value="<?php echo $_GET['id']; ?>">
                 <label for="titulo" class="form-label">Título</label>
                 <input type="text" class="form-control" id="titulo" value="<?= $dataPropiedad[0]['titulo']; ?>">
               </div>
@@ -168,25 +171,25 @@ if (!empty($_GET['id'])) {
               <div class="mb-3 col-4">
                 <label for="tipoPublicacion" class="form-label d-block">Tipo de publicación</label>
                 <div class="form-check form-check-inline mt-1">
-                  <input class="form-check-input" type="checkbox" name="tipoPublicacion" value="venta" id="ventaCheck">
+                  <input class="form-check-input" type="checkbox" name="tipoPublicacion" value="venta" id="ventaCheck" <?= $precioVenta[0]['precio'] != null ? 'checked' : '' ?>>
                   <label class="form-check-label" for="flexCheckDefault">
                     Venta
                   </label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="tipoPublicacion" value="alquiler" id="alquilerCheck">
+                  <input class="form-check-input" type="checkbox" name="tipoPublicacion" value="alquiler" id="alquilerCheck" <?= $precioAlquiler[0]['precio'] != null ? 'checked' : '' ?>>
                   <label class="form-check-label" for="flexCheckDefault">
                     Alquiler
                   </label>
                 </div>
               </div>
-              <div class="mb-3 col-2 d-none" id="precioVentaDiv">
+              <div class="mb-3 col-2 <?= $precioVenta[0]['precio'] != null ? '' : 'd-none' ?>" id="precioVentaDiv">
                 <label for="precioVenta" class="form-label">Precio de venta</label>
-                <input type="number" min="0" class="form-control" id="precioVenta">
+                <input type="number" min="0" class="form-control" id="precioVenta" value="<?= $precioVenta[0]['precio'] ?>">
               </div>
-              <div class="mb-3 col-2 d-none" id="precioAlquilerDiv">
+              <div class="mb-3 col-2 <?= $precioAlquiler[0]['precio'] != null ? '' : 'd-none' ?>" id="precioAlquilerDiv">
                 <label for="precioAlquiler" class="form-label">Precio de alquiler</label>
-                <input type="number" min="0" class="form-control" id="precioAlquiler">
+                <input type="number" min="0" class="form-control" id="precioAlquiler" value="<?= $precioAlquiler[0]['precio'] ?>">
               </div>
               <div class="mb-3 col-4">
                 <label for="tipoPublicacion" class="form-label d-block">Definir como destacada?</label>
@@ -258,13 +261,16 @@ if (!empty($_GET['id'])) {
                 <label for="imagenes" class="form-label">Seleccione las imagenes para agregar a la galeria...</label>
                 <input class="form-control" accept="image/*" type="file" id="imagenes" multiple>
               </div>
-              <div class="gallery"></div>
+              <div class="gallery mb-3"></div>
             </div>
             <?php if ($imagenes && !empty($imagenes)) { ?>
+              <hr>
+              <h5>Imagenes actuales</h5>
               <div class="row">
                 <?php foreach ($imagenes as $imagen) : ?>
                   <div class="col-4">
                     <img src="<?php echo "../assets/img/propiedades/" . $_GET['id'] . "/" . $imagen['imagen']; ?>" class="img-fluid">
+                    <button class="btn btn-danger ms-2" onclick="eliminarImagen('<?= $imagen['imagen'] ?>')"><i class="fa fa-trash"></i></button>
                   </div>
                 <?php endforeach; ?>
               </div>

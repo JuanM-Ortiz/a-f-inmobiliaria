@@ -7,17 +7,27 @@ $(document).ready(function() {
     }
   }
 
+  if($('#idPropiedad').val()){
+    $("#ventaCheck").trigger('change')
+    $("#alquilerCheck").trigger('change')
+  }
+
   $("#ventaCheck").change(function() {
     $("#precioVentaDiv").toggleClass("d-none");
+    $("#precioVenta").val('');
   });
 
   $("#alquilerCheck").change(function() {
     $("#precioAlquilerDiv").toggleClass("d-none");
+    $("#precioAlquiler").val('');
   });
+
+
 
   //alta de propiedad
   $("#guardarPropiedad").on("click", function() {
     var fd = new FormData();
+    let idPropiedad = $('#idPropiedad').val();
     let titulo = $('#titulo').val();
     let descripcion = $('#descripcion').val();
     let tipoPropiedad = $('#tipoPropiedad').val();
@@ -57,7 +67,8 @@ $(document).ready(function() {
     servicios = JSON.stringify(servicios);
     comodidades = JSON.stringify(comodidades);
     tipoPublicacion = JSON.stringify(tipoPublicacion);
-    fd.append('crear', 1);
+    fd.append('alta', 1);
+    fd.append('idPropiedad', idPropiedad ?? null);
     fd.append('titulo', titulo);
     fd.append('descripcion', descripcion);
     fd.append('tipoPropiedad', tipoPropiedad);
@@ -86,14 +97,14 @@ $(document).ready(function() {
       contentType: false,
       processData: false,
       success: function(result) {
-        if (!result) {
+        /* if (!result) {
           window.alert('Ocurrio un error.');
           return;
         }
         if (result) {
           window.alert('Propiedad guardada correctamente!');
           window.location.reload();
-        }
+        } */
       },
     });
 
@@ -120,3 +131,22 @@ $(document).ready(function() {
     });
   });
 });
+
+function eliminarImagen(imagen) {
+  if (confirm("¿Está seguro que desea eliminar la imagen?") == true) {
+    let idPropiedad = $('#idPropiedad').val();
+    $.post("controllers/propiedad.php", {
+      eliminarImagen: idPropiedad,
+      imagenBorrar: imagen
+    }, function(result) {
+      if (!result) {
+        window.alert('Ocurrio un error.');
+        return;
+      }
+      if (result) {
+        window.alert('Imagen eliminada correctamente!');
+        window.location.reload();
+      }
+    });
+  }
+}

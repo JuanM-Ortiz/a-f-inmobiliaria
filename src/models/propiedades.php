@@ -71,9 +71,23 @@ class Propiedades
     return true;
   }
 
-  public function editar($idPropiedad, $descripcion)
+  public function editar($idPropiedad, $params)
   {
-    $query = "UPDATE propiedades SET descripcion = '{$descripcion}'";
+    $mapsUrl = '"' . $params['maps_url'] . '"';
+    $video = '"' . $params['video'] . '"';
+    $query = "UPDATE propiedades SET 
+    titulo = '{$params['titulo']}',
+    descripcion = '{$params['descripcion']}',
+    superficie_cubierta = '{$params['superficie_cubierta']}',
+    superficie = '{$params['superficie']}',
+    pisos = '{$params['pisos']}',
+    dormitorios = '{$params['dormitorios']}',
+    baños = '{$params['baños']}',
+    id_localidad = '{$params['id_localidad']}',
+    id_zona = '{$params['id_zona']}',
+    maps_url = $mapsUrl,
+    video = $video,
+    es_destacada = '{$params['es_destacada']}'";
 
     $query .= " WHERE id = $idPropiedad";
     $resultado = $this->conexion->prepare($query);
@@ -149,6 +163,9 @@ class Propiedades
   }
   public function crearVentaPropiedad($idPropiedad, $precio)
   {
+    $query = "DELETE FROM propiedades_tipo_publicaciones WHERE id_propiedad = $idPropiedad AND id_tipo_publicacion = 2";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
     $query = "INSERT INTO propiedades_tipo_publicaciones (id_propiedad, id_tipo_publicacion, precio, moneda)
     VALUES ($idPropiedad, 2, $precio, 2)";
     $resultado = $this->conexion->prepare($query);
@@ -159,6 +176,9 @@ class Propiedades
 
   public function crearAlquilerPropiedad($idPropiedad, $precio)
   {
+    $query = "DELETE FROM propiedades_tipo_publicaciones WHERE id_propiedad = $idPropiedad AND id_tipo_publicacion = 1";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
     $query = "INSERT INTO propiedades_tipo_publicaciones (id_propiedad, id_tipo_publicacion, precio, moneda)
     VALUES ($idPropiedad, 1, $precio, 1)";
     $resultado = $this->conexion->prepare($query);
@@ -251,5 +271,48 @@ class Propiedades
     $resultado->execute();
     $count = $resultado->fetchAll(PDO::FETCH_ASSOC);
     return $count[0]['total'];
+  }
+
+  public function esLaMismaImagenDePortada($idPropiedad, $imagen)
+  {
+    $query = "SELECT imagen_portada
+              FROM propiedades 
+              WHERE imagen_portada = '{$imagen}'
+              AND id = $idPropiedad";
+
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    $res = $resultado->fetchAll(PDO::FETCH_ASSOC);
+    return count($res) > 0;
+  }
+
+  public function getPrecioVentaById($idPropiedad)
+  {
+    $query = "SELECT precio
+              FROM propiedades_tipo_publicaciones
+              WHERE id_propiedad = $idPropiedad
+              AND id_tipo_publicacion = 2";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    return $resultado->fetchAll(PDO::FETCH_ASSOC);
+  }
+  public function getPrecioAlquilerById($idPropiedad)
+  {
+    $query = "SELECT precio
+              FROM propiedades_tipo_publicaciones
+              WHERE id_propiedad = $idPropiedad
+              AND id_tipo_publicacion = 1";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    return $resultado->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function eliminarImagen($idPropiedad, $imagen)
+  {
+    if (unlink(dirname(dirname(__DIR__)) . "/assets/img/propiedades/" . $idPropiedad . "/" . $imagen)) {
+      $query = "DELETE FROM propiedades_imagenes WHERE id_propiedad = $idPropiedad AND imagen = '$imagen'";
+      $resultado = $this->conexion->prepare($query);
+      $resultado->execute();
+    }
   }
 }
