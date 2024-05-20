@@ -26,11 +26,25 @@ $(document).ready(function() {
 
   //alta de propiedad
   $("#guardarPropiedad").on("click", function() {
+    let precioVenta = $('#precioVenta').val();
+    let precioAlquiler = $('#precioAlquiler').val();
+    
+    if(!precioVenta && !precioAlquiler){
+      alert('Debe ingresar un precio de venta o alquiler');
+      return false;
+    }
+
     var fd = new FormData();
     let idPropiedad = $('#idPropiedad').val();
     let titulo = $('#titulo').val();
     let descripcion = $('#descripcion').val();
     let tipoPropiedad = $('#tipoPropiedad').val();
+
+    if(!titulo || !descripcion || !tipoPropiedad){
+      alert('Debe ingresar un titulo, descripcion y tipo de propiedad');
+      return false;
+    }
+    
     let superficie = $('#superficie').val();
     let superficieCubierta = $('#superficieCubierta').val();
     let pisos = $('#pisos').val();
@@ -40,8 +54,12 @@ $(document).ready(function() {
     let mapsUrl = $('#mapsUrl').val();
     let video = $('#video').val();
     let localidad = $('#localidad').val();
-    let precioVenta = $('#precioVenta').val();
-    let precioAlquiler = $('#precioAlquiler').val();
+    
+    if(!localidad || !zona){
+      alert('Debe asignar la propiedad a una localidad-zona');
+      return false;
+    }
+
     let imgPortada = $('#imgPortada')[0].files[0];
     let destacada = $('#destacada').val();
 
