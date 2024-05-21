@@ -153,7 +153,7 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
                                 </select>
                             </div>
                             <button type="submit" class="boton-buscador btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                            <a href="propiedades.php" class="boton-buscador btn btn-primary float-end"><i class="fa fa-times"></i> Limipar filtros</a>
+                            <a href="propiedades.php" class="boton-buscador btn btn-primary float-end"><i class="fa fa-times"></i> Limpiar filtros</a>
                         </form>
                     </div>
                 </div>
