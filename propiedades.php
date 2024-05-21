@@ -139,6 +139,7 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
                             <div class="mb-3">
                                 <label for="tipo_propiedad" class="form-label text-white">Tipo de Propiedad</label>
                                 <select class="form-select bg-dark" name="tipoPropiedad" id="tipo_propiedad">
+                                    <option value="" selected disabled>Seleccione una opción</option>
                                     <?php foreach ($tiposPropiedad as $tipo) : ?>
                                         <option value="<?= $tipo['id'] ?>" <?= $_GET['tipoPropiedad'] == $tipo['id'] ? 'selected' : '' ?>> <?= $tipo['descripcion'] ?></option>
                                     <?php endforeach; ?>

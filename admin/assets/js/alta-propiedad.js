@@ -115,15 +115,15 @@ $(document).ready(function() {
       contentType: false,
       processData: false,
       success: function(result) {
-        /* if (!result) {
+        if (!result) {
           window.alert('Ocurrio un error.');
           return;
         }
         if (result) {
           window.alert('Propiedad guardada correctamente!');
           window.location.reload();
-        } */
-      },
+        } 
+      }, 
     });
 
   });

@@ -10,7 +10,7 @@ if ($_POST['alta'] == 1) {
   $propiedadesModel = new Propiedades($conexion);
   if ($_POST['idPropiedad'] && !empty($_POST['idPropiedad'])) {
     editarPropiedad($conexion, $propiedadesModel, $_POST['idPropiedad']);
-    return 1;
+    echo 1;
   }
   $params = [
     'titulo' => $_POST['titulo'],
