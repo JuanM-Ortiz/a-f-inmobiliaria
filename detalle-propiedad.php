@@ -68,7 +68,7 @@ $tiposPropiedad = $tipoPropiedadModel->obtenerTipos();
 
         <div class="row">
 
-            <div class="col-lg-4 col-md-12 offset-lg-2 mt-5 px-5">
+            <div class="col-xl-4 col-md-12 offset-xl-2 col-lg-6 mt-5 px-5">
 
                 <div class="glider-contain">
                     <div class="glider">
@@ -84,7 +84,7 @@ $tiposPropiedad = $tipoPropiedadModel->obtenerTipos();
             </div>
 
 
-            <div class="col-lg-4 col-md-12 mb-5 px-5 mt-5 h-100 ms-lg-5">
+            <div class="col-xl-4 col-md-12 mb-5 px-5 mt-5 h-100 ms-xl-5 col-lg-6">
 
                 <div class="details-table bg-gray px-0 table-container">
                     <div class="bg-secondary-coral-color">
@@ -133,17 +133,14 @@ $tiposPropiedad = $tipoPropiedadModel->obtenerTipos();
                             <td class="bg-gray text-white"><span class="dot">•</span> Zona</td>
                             <td class="text-end bg-gray text-white">Centro</td>
                         </tr>
-
                     </table>
-
                 </div>
-
             </div>
 
 
 
 
-            <div class="col-lg-4 col-md-12 col-12 offset-lg-2 px-md-5 mt-5">
+            <div class="col-xl-4 col-md-12 col-12 offset-xl-2 px-md-5 mt-5 col-lg-6">
 
                 <h4 class="fs-3 color-gray ps-5 ps-md-0">Informacion general</h4>
 
@@ -193,7 +190,7 @@ $tiposPropiedad = $tipoPropiedadModel->obtenerTipos();
                 </div>
             </div>
 
-            <div class="col-md-12 col-lg-4 col-12 mb-5 px-md-5 mt-5 h-100 ms-lg-5 px-1">
+            <div class="col-md-12 col-xl-4 col-12 mb-5 px-md-5 mt-5 h-100 ms-xl-5 px-1 col-lg-6">
                 <div class="details-form bg-gray px-0 table-container">
                     <div class="bg-secondary-coral-color">
                         <h3 class="text-center fw-bold text-white py-2">Formulario de Contacto</h3>
@@ -228,7 +225,7 @@ $tiposPropiedad = $tipoPropiedadModel->obtenerTipos();
             </div>
 
             <?php if ($propiedades[0]['video']) : ?>
-                <div class="col-md-12 col-lg-8 col-12 offset-lg-2 mt-5">
+                <div class="col-md-12 col-xl-8 col-lg-12 col-12 offset-xl-2 px-lg-3 mt-5">
                     <h3 class="text-white text-center mb-5" id="video-section">Video de la propiedad</h3>
                     <div class="ratio ratio-21x9 h-75">
                         <?= str_replace("'", '"', $propiedades[0]['video']); ?>
@@ -238,7 +235,7 @@ $tiposPropiedad = $tipoPropiedadModel->obtenerTipos();
 
             <?php
             if ($propiedades[0]['maps_url']) : ?>
-                <div class="col-md-12 col-lg-8 offset-lg-2 mt-5">
+                <div class="col-md-12 col-xl-8 offset-xl-2 col-lg-12 mt-5 px-lg-3">
                     <h3 class="text-white text-center mb-5" id="map-section">Ubicación de la propiedad</h3>
                     <div class="ratio ratio-21x9 h-75">
                         <?php

@@ -7,7 +7,7 @@ $conexion = Conexion::conectar();
 $modeloPropiedad = new Propiedades($conexion);
 $tipoPropiedadModel = new TiposPropiedad($conexion);
 
-$tiposPropiedad= $tipoPropiedadModel->getTiposPropiedad();
+$tiposPropiedad = $tipoPropiedadModel->getTiposPropiedad();
 
 if (isset($_GET['pagina'])) {
     $paginaActual = $_GET['pagina'];
@@ -19,8 +19,8 @@ $resultadosPorPagina = 8;
 $inicio = ($paginaActual - 1) * $resultadosPorPagina;
 
 
-if ($_GET['localidad'] || $_GET['zona'] || $_GET['tipo']) {
-    $propiedades = $modeloPropiedad->getPropiedadesFiltered($_GET['zona'], $_GET['localidad'], $_GET['tipo'], $inicio, $resultadosPorPagina);
+if ($_GET['localidad'] || $_GET['zona'] || $_GET['tipo'] || $_GET['tipoPropiedad']) {
+    $propiedades = $modeloPropiedad->getPropiedadesFiltered($_GET['zona'], $_GET['localidad'], $_GET['tipo'], $_GET['tipoPropiedad'], $inicio, $resultadosPorPagina);
 } else {
     $propiedades = $modeloPropiedad->getPropiedadesConPrecio($inicio, $resultadosPorPagina);
 }
@@ -139,8 +139,8 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
                             <div class="mb-3">
                                 <label for="tipo_propiedad" class="form-label text-white">Tipo de Propiedad</label>
                                 <select class="form-select bg-dark" name="tipoPropiedad" id="tipo_propiedad">
-                                    <?php foreach($tiposPropiedad as $tipo): ?>
-                                        <option value="<?= $tipo['id'] ?>"  <?= $_GET['tipoPropiedad'] == $tipo['id'] ? 'selected' : '' ?>> <?= $tipo['descripcion'] ?></option>
+                                    <?php foreach ($tiposPropiedad as $tipo) : ?>
+                                        <option value="<?= $tipo['id'] ?>" <?= $_GET['tipoPropiedad'] == $tipo['id'] ? 'selected' : '' ?>> <?= $tipo['descripcion'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -148,11 +148,12 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
                                 <label for="tipo_publicacion" class="form-label text-white">Tipo de Publicación</label>
                                 <select class="form-select bg-dark" name="tipo" id="tipo_publicacion">
                                     <option value="" selected disabled>Seleccione una opción</option>
-                                    <option value="2" <?= $_GET['tipo'] == 2 ? 'selected' : '' ?> >Venta</option>
-                                    <option value="1" <?= $_GET['tipo'] == 1 ? 'selected' : '' ?> >Alquiler</option>
+                                    <option value="2" <?= $_GET['tipo'] == 2 ? 'selected' : '' ?>>Venta</option>
+                                    <option value="1" <?= $_GET['tipo'] == 1 ? 'selected' : '' ?>>Alquiler</option>
                                 </select>
                             </div>
-                            <button type="submit" class="boton-buscador btn btn-primary">Buscar</button>
+                            <button type="submit" class="boton-buscador btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                            <a href="propiedades.php" class="boton-buscador btn btn-primary float-end"><i class="fa fa-times"></i> Limipar filtros</a>
                         </form>
                     </div>
                 </div>

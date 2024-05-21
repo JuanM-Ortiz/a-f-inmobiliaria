@@ -192,7 +192,7 @@ class Propiedades
               JOIN propiedades_tipo_publicaciones pt ON p.id = pt.id_propiedad
               JOIN tipo_publicaciones tp ON pt.id_tipo_publicacion = tp.id
               WHERE p.deleted_at IS NULL";
-    if ($inicio && $resultadosPorPagina) {
+    if ($inicio || $resultadosPorPagina) {
       $query .= " LIMIT $inicio, $resultadosPorPagina";
     }
     $resultado = $this->conexion->prepare($query);
@@ -218,7 +218,7 @@ class Propiedades
     return $resultado->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function getPropiedadesFiltered($zona = null, $localidad = null, $tipoPublicacion = null, $inicio, $resultadosPorPagina)
+  public function getPropiedadesFiltered($zona = null, $localidad = null, $tipoPublicacion = null, $tipoPropiedad = null, $inicio, $resultadosPorPagina)
   {
     $and = '';
     if ($zona) {
@@ -243,6 +243,10 @@ class Propiedades
       $and .= " AND pt.id_tipo_publicacion = {$tipoPublicacion}";
     }
 
+    if ($tipoPropiedad) {
+      $and .= " AND p.id_tipo_propiedad = {$tipoPropiedad}";
+    }
+
     $query = "SELECT p.*, pt.precio, pt.moneda, tp.descripcion AS 'tipo_publicacion'
     FROM propiedades p
     JOIN propiedades_tipo_publicaciones pt ON p.id = pt.id_propiedad
@@ -256,7 +260,7 @@ class Propiedades
     return $resultado->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function getCantidadPropiedades($tipo = null)
+  public function getCantidadPropiedades($tipo = null, $destacada = false)
   {
     $query = "SELECT COUNT(p.id) AS total 
               FROM propiedades p
@@ -264,6 +268,9 @@ class Propiedades
               WHERE p.deleted_at IS NULL";
     if ($tipo) {
       $query .= " AND pt.id_tipo_publicacion = $tipo GROUP BY pt.id_tipo_publicacion";
+    }
+    if ($destacada) {
+      $query .= " AND p.es_destacada = 1";
     }
     $resultado = $this->conexion->prepare($query);
     $resultado->execute();

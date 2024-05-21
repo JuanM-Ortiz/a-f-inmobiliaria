@@ -5,8 +5,17 @@ include_once 'src/models/propiedades.php';
 
 $conexion = Conexion::conectar();
 $modeloPropiedad = new Propiedades($conexion);
-$propiedades = $modeloPropiedad->getPropiedades();
-$propiedades = $modeloPropiedad->getPropiedadesConPrecio();
+//$propiedades = $modeloPropiedad->getPropiedades();
+if (isset($_GET['pagina'])) {
+    $paginaActual = $_GET['pagina'];
+} else {
+    $paginaActual = 1;
+}
+$resultadosPorPagina = 8;
+$inicio = ($paginaActual - 1) * $resultadosPorPagina;
+$propiedades = $modeloPropiedad->getPropiedadesConPrecio($inicio, $resultadosPorPagina);
+$totalRegistros =  $modeloPropiedad->getCantidadPropiedades($_GET['tipo'], true);
+$totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
 
 ?>
 
@@ -108,7 +117,19 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
                 endforeach;
 
                 ?>
+                <?php if (!empty($propiedades)) : ?>
 
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <?php
+                            if ($totalPaginas > 1) {
+                                for ($i = 1; $i <= $totalPaginas; $i++) {
+                                    echo '<li class="page-item"><a class="page-link bg-dark text-white" href="index.php?pagina=' . $i . '">' . $i . '</a></li>';
+                                }
+                            } ?>
+                        </ul>
+                    </nav>
+                <?php endif; ?>
             </div>
         </div>
 
