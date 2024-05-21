@@ -66,21 +66,37 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
 
                         echo '
                 
-                        <div class="col-12 col-lg-3 col-md-6 d-flex justify-content-center mb-4">
+                        <div class="col-12 col-xxl-3 col-lg-6 col-md-6 d-flex justify-content-center mb-4">
                             <div class="card card-destacada" style="width: 18rem;" onclick="redirectPropiedad(' . $propiedad['id'] . ')">
                             <img src="' . $imagePath . '" class="card-img-top" alt="...">
 
-                                <div class="card-body text-white px-0 pb-0">
+                                <div class="card-body d-flex flex-column justify-content-between text-white px-0 pb-0">
                                     <h5 class="card-title bg-coral-color text-center fw-bold py-1">' . strtoupper($propiedad['tipo_publicacion']) . '</h5>
                                     <div class="titulo-container">
                                         <p class="card-text ps-3">' . $propiedad['titulo'] . '</p>
                                     </div>
-                                    <div class="card-footer borde-footer-destacada text-white">
+
+                                        <div class="row mb-3">
+                                        <div class="text-data col-4 px-0 d-flex flex-column align-items-center">
+                                            <i class="fa-solid fa-up-down-left-right"></i>
+                                            <span class="mt-1">' . $propiedad['superficie'] . 'm²</span>
+                                        </div>
+                                        <div class="text-data col-4 px-0 d-flex flex-column align-items-center border-start border-1 border-gray">
+                                            <i class="fa-solid fa-up-down-left-right"></i>
+                                            <span class="mt-1">' . $propiedad['superficie_cubierta'] . 'm²C</span>
+                                        </div>
+                                        <div class="text-data col-4 px-0 d-flex flex-column align-items-center border-start border-1 border-gray">
+                                            <i class="fa-solid fa-bed"></i>
+                                            <span class="mt-1">' . $propiedad['dormitorios'] . '</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="card-footer borde-footer-destacada text-white px-2">
                                         <div class="row align-items-center">
-                                            <div class="col-6">
+                                            <div class="col-6 text-center">
                                                 <p class="mt-3 fs-5">' . $moneda . ' ' . number_format($propiedad['precio']) . '</p>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-6 text-center">
                                                 <a href="detalle-propiedad.php?id=' . $propiedad['id'] . '" class="btn btn-primary mx-auto ">Ver más</a>
                                             </div>
                                         </div>
