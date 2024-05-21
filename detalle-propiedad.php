@@ -184,8 +184,8 @@ $tiposPropiedad = $tipoPropiedadModel->obtenerTipos();
                 <?php endif; ?>
 
                 <div>
-                    <div class="row mt-5">
-                        <?php echo '<div class="col-4 text-danger text-uppercase fw-bold">Codigo: ' . $propiedad['codigo'] . '</div>'; ?>
+                    <div class="row mt-5 position-sticky div-codigo">
+                        <?php echo '<div class="col-4 text-danger text-uppercase fw-bold" onclick="copiarCodigo()" title="Copiar codigo">Codigo: <span id="codigoPropiedad">' . $propiedad['codigo'] . '</span></div>'; ?>
                     </div>
                 </div>
             </div>
@@ -256,9 +256,10 @@ $tiposPropiedad = $tipoPropiedadModel->obtenerTipos();
     <?php include_once 'modules/footer-copyright.html' ?>
 
     <script src="assets/js/glider.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/main.js?ver=<?php echo $date; ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
 </body>
 
 </html>

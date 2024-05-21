@@ -673,11 +673,19 @@ table td {
     border-radius: 2px !important;
 }
 
-.form-select{
+.form-select, .codigo-search{
     color: #818181 !important;
-    border-color: #dee2e6 !important;
+    border: 1px solid #dee2e6 !important;
 }
 
 .borde-gris {
     border-left: 1px solid #747474 !important ;
+}
+
+.div-codigo:hover{
+    cursor: pointer;
+}
+
+.codigo-search::placeholder{
+    color: #818181 !important;
 }

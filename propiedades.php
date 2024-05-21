@@ -25,6 +25,11 @@ if ($_GET['localidad'] || $_GET['zona'] || $_GET['tipo'] || $_GET['tipoPropiedad
     $propiedades = $modeloPropiedad->getPropiedadesConPrecio($inicio, $resultadosPorPagina);
 }
 
+if ($_GET['codigo']) {
+    $propiedad = $modeloPropiedad->getPropiedadByCodigo($_GET['codigo']);
+    header("Location: detalle-propiedad.php?id=" . $propiedad[0]['id']);
+}
+
 $totalRegistros =  $modeloPropiedad->getCantidadPropiedades($_GET['tipo']);
 $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
 
@@ -152,6 +157,10 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
                                     <option value="2" <?= $_GET['tipo'] == 2 ? 'selected' : '' ?>>Venta</option>
                                     <option value="1" <?= $_GET['tipo'] == 1 ? 'selected' : '' ?>>Alquiler</option>
                                 </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="codigo" class="form-label text-white">Código</label>
+                                <input class="form-control bg-dark codigo-search" type="text" name="codigo" id="codigo" value="" placeholder="Ingrese un código de propiedad">
                             </div>
                             <button type="submit" class="boton-buscador btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                             <a href="propiedades.php" class="boton-buscador btn btn-primary float-end"><i class="fa fa-times"></i> Limpiar filtros</a>

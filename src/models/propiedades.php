@@ -320,4 +320,12 @@ class Propiedades
       $resultado->execute();
     }
   }
+
+  public function getPropiedadByCodigo($codigo)
+  {
+    $query = "SELECT id FROM propiedades WHERE codigo = '$codigo'";
+    $resultado = $this->conexion->prepare($query);
+    $resultado->execute();
+    return $resultado->fetchAll(PDO::FETCH_ASSOC);
+  }
 }
