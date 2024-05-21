@@ -69,11 +69,11 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-md-6 contact-img px-5">
+                    <div class="text-center col-md-12 col-xl-6 contact-img px-5">
                         <img src="assets/img/main1.jpg" alt="Descripción de la imagen" class="img-fluid">
                     </div>
 
-                    <div class="col-md-6 text-white fw-bold fs-5 px-5">
+                    <div class="text-center col-md-12 col-xl-6 mt-3 text-white fw-bold fs-5 px-5">
                         <h3 class="text-center fw-bold">Contacto</h3>
                         <p class="text-white fs-5 fw-bold">El formulario que presentamos ha sido diseñado para asegurar un vínculo efectivo con nuestros clientes. Nuestro equipo de soporte al cliente se encargará de procesar sus consultas o requerimientos de forma diligente. Por favor, llene los siguientes campos con su información. Apreciamos mucho su colaboración.</p>
                     </div>

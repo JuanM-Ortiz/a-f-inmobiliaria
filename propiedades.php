@@ -52,7 +52,7 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
 
     <section class="featured bg-main">
         <div class="banner-titulo bg-gray row mt-4 py-4 ">
-            <div class="featured-box-propiedades bg-secondary-coral-color col-md-2 col-6 offset-md-5 offset-3 text-center ">
+            <div class="featured-box-propiedades bg-secondary-coral-color col-md-4 col-6 offset-md-4 col-lg-2 offset-lg-5 offset-3 text-center ">
                 <h2 class="featured text-white my-auto py-2 fw-bold bg-secondary-coral-color">Propiedades</h2>
             </div>
         </div>
@@ -67,8 +67,8 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
                 endif;
                 ?>
 
-                <div class="col-lg-9">
-                    <div class="row justify-content-between">
+                <div class="col-lg-12 col-xl-9">
+                    <div class="row ">
                         <?php foreach ($propiedades as $propiedad) :
                             $src = $propiedad['imagen_portada'];
                             $carpetaId = $propiedad['id'];
@@ -77,7 +77,7 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
                             $moneda = $propiedad['moneda'] == 2 ? 'USD' : '$';
 
                             echo '
-                    <div class="col-12 col-lg-3 col-md-6 d-flex justify-content-center mb-4">
+                    <div class="col-12 col-xxl-3 col-lg-6 col-md-6 d-flex justify-content-center mb-4">
                         <div class="card" style="width: 18rem;" onclick="redirectPropiedad(' . $propiedad['id'] . ')">
                             <img src="' . $imagePath . '" class="card-img-top" alt="...">
             
@@ -107,7 +107,7 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
                                 <div class="card-footer text-white px-2">
                                     <div class="row align-items-center">
                                         <div class="col-6 text-center">
-                                            <p class="mt-3 fs-5">' . $moneda . ' ' . number_format($propiedad['precio'], 0, '.', ',') . '</p>
+                                            <p class=" fw-bold">' . $moneda . ' ' . number_format($propiedad['precio'], 0, '.', ',') . '</p>
                                         </div>
                                         <div class="col-6 text-center">
                                             <a href="detalle-propiedad.php?id=' . $propiedad['id'] . '" class="btn btn-primary">Ver más</a>
@@ -132,7 +132,7 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
                     <?php endif; ?>
                 </div>
 
-                <div class="col-lg-3">
+                <div class="col-xl-3 col-lg-12 borde-gris ">
                     <div class="buscador-propiedades bg-gray p-4">
                         <h3 class="text-white text-center">Búsqueda</h3>
                         <form action="propiedades.php">
@@ -140,15 +140,16 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
                                 <label for="tipo_propiedad" class="form-label text-white">Tipo de Propiedad</label>
                                 <select class="form-select bg-dark" name="tipoPropiedad" id="tipo_propiedad">
                                     <?php foreach($tiposPropiedad as $tipo): ?>
-                                        <option value="<?= $tipo['id'] ?>"> <?= $tipo['descripcion'] ?></option>
+                                        <option value="<?= $tipo['id'] ?>"  <?= $_GET['tipoPropiedad'] == $tipo['id'] ? 'selected' : '' ?>> <?= $tipo['descripcion'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="tipo_publicacion" class="form-label text-white">Tipo de Publicación</label>
-                                <select class="form-select bg-dark" name="tipoPublicacion" id="tipo_publicacion">
-                                    <option value="" selected>Venta</option>
-                                    <option value="">Alquiler</option>
+                                <select class="form-select bg-dark" name="tipo" id="tipo_publicacion">
+                                    <option value="" selected disabled>Seleccione una opción</option>
+                                    <option value="2" <?= $_GET['tipo'] == 2 ? 'selected' : '' ?> >Venta</option>
+                                    <option value="1" <?= $_GET['tipo'] == 1 ? 'selected' : '' ?> >Alquiler</option>
                                 </select>
                             </div>
                             <button type="submit" class="boton-buscador btn btn-primary">Buscar</button>

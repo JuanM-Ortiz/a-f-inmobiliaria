@@ -34,7 +34,7 @@ $propiedades = $modeloPropiedad->getPropiedadesConPrecio();
             <img class="img-main" src="assets/img/main.jpg" alt="">
             <div class="overlay-text">La oportunidad de disfrutar de la tranquilidad y la belleza de</div>
             <div class="location-tag fw-bold bg-coral-color">Merlo</div>
-            <div class="search-bar py-3">
+            <div class="search-bar py-md-3 py-0 mt-md-0 mt-2 pb-2">
                 <form class="search-form" action="propiedades.php">
                     <input class="bg-dark mx-3 my-2 my-md-1" type="text" name="localidad" placeholder="Localidad">
                     <input class="bg-dark mx-3 my-2 my-md-1" type="text" name="zona" placeholder="Zona">
