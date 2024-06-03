@@ -129,9 +129,13 @@ $totalPaginas = ceil($totalRegistros / $resultadosPorPagina);
 
                         <nav aria-label="Page navigation">
                             <ul class="pagination justify-content-center">
-                                <?php for ($i = 1; $i <= $totalPaginas; $i++) {
-                                    echo '<li class="page-item"><a class="page-link bg-dark text-white" href="propiedades.php?pagina=' . $i . '&tipo=' . $_GET['tipo'] . '&localidad=' . $_GET['localidad'] . '&zona=' . $_GET['zona'] . '">' . $i . '</a></li>';
-                                } ?>
+                                <?php
+                                    if ($totalPaginas > 1) {
+                                        for ($i = 1; $i <= $totalPaginas; $i++) {
+                                            echo '<li class="page-item"><a class="page-link bg-dark text-white" href="propiedades.php?pagina=' . $i . '&tipo=' . $_GET['tipo'] . '&localidad=' . $_GET['localidad'] . '&zona=' . $_GET['zona'] . '">' . $i . '</a></li>';
+                                        }
+                                    }
+                                ?>
                             </ul>
                         </nav>
                     <?php endif; ?>

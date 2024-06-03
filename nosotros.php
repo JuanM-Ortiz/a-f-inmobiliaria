@@ -23,6 +23,20 @@
         </div>
     </div>
 
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12 text-white fs-5">
+                <p class="text-center"><strong class="orange-color">𝙎𝙊𝙈𝙊𝙎 𝘼 & 𝙁 Antonella y Federico.</strong> Martilleros y Corredores Públicos de la Provincia de San Luis (M.P: 998 CMCPSL).</p>
+                <p>Con nosotros encontrarás el asesoramiento inmobiliario que buscabas, vamos a gestionar tu búsqueda para que puedas cumplir el sueño de tener tu propiedad o de hacer la inversión que estabas esperando hace mucho tiempo.</p>
+                <p><strong class="orange-color">NOSOTROS</strong> sabemos ajustarnos a las necesidades de cada cliente, acompañándolos y ofreciéndoles la mejor opción en cada situación.</p>
+                <p><strong class="orange-color">COMERCIALIZAMOS</strong> lotes, campos, departamentos, complejos de cabañas, casas en barrios abiertos y cerrados de toda la zona. Todas las propiedades que adquirimos cuentan con sus títulos perfectos.</p>
+                <p><strong class="orange-color">SAN LUIS</strong> en estos últimos años ha sido uno de los lugares más elegidos a la hora de invertir, ya que se encuentra en la zona con mayor crecimiento. La <strong>VILLA DE MERLO</strong> es reconocida por ser uno de los microclimas del mundo, además de su imponente Sierra de los Comechingones.</p>
+                <p class="text-center fw-bold">¿QUÉ ESTÁS ESPERANDO PARA COMUNICARTE CON NOSOTROS?</p>
+                <p class="text-center">Nos encontramos en #MerloSanLuis y estamos proyectando juntos y para vos.</p>
+            </div>
+        </div>
+    </div>
+
     <hr class="linea-divisoria">
 
     <?php include_once 'modules/footer-copyright.html' ?>
